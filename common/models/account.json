@@ -1,0 +1,35 @@
+{
+  "name": "account",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "job": {
+      "type": "string",
+      "required": true
+    },
+    "picture": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": []
+}
