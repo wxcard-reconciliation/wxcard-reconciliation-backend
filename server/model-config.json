@@ -36,5 +36,9 @@
   "account": {
     "dataSource": "mysql",
     "public": true
+  },
+  "wechatuser": {
+    "dataSource": null,
+    "public": true
   }
 }

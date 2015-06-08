@@ -1013,6 +1013,85 @@ module.factory(
     return R;
   }]);
 
+/**
+ * @ngdoc object
+ * @name lbServices.Wechatuser
+ * @header lbServices.Wechatuser
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `Wechatuser` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+module.factory(
+  "Wechatuser",
+  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
+    var R = Resource(
+      urlBase + "/wechatusers/:id",
+      { 'id': '@id' },
+      {
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Wechatuser#find
+         * @methodOf lbServices.Wechatuser
+         *
+         * @description
+         *
+         * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Wechatuser` object.)
+         * </em>
+         */
+        "find": {
+          url: urlBase + "/wechatusers",
+          method: "GET"
+        },
+      }
+    );
+
+
+
+
+    /**
+    * @ngdoc property
+    * @name lbServices.Wechatuser#modelName
+    * @propertyOf lbServices.Wechatuser
+    * @description
+    * The name of the model represented by this $resource,
+    * i.e. `Wechatuser`.
+    */
+    R.modelName = "Wechatuser";
+
+
+    return R;
+  }]);
+
 
 module
   .factory('LoopBackAuth', function() {
