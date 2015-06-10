@@ -7,7 +7,7 @@ var app = require('../server/server.js');
 var querystring = require('querystring')
 
 
-describe.only('Wechat API', function() {
+describe('Wechat API', function() {
   lt.beforeEach.withApp(app);
   
   describe.skip('#User', function() {

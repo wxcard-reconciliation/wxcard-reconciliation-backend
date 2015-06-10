@@ -1,0 +1,22 @@
+{
+  "name": "couponRecord",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "mysql": {
+      "table": "tp_member_card_coupon_record"
+    },
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "coupon": {
+      "type": "belongsTo",
+      "model": "coupon",
+      "foreignKey": "coupon_id"
+    }
+  },
+  "acls": [],
+  "methods": []
+}
