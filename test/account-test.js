@@ -9,16 +9,16 @@ describe('# Account', function() {
   lt.beforeEach.withApp(app);
   lt.beforeEach.givenLoggedInUser(loggedInUser);
   
-  describe.only('## Update', function() {
+  describe('## Update', function() {
     lt.describe.whenCalledRemotely('PUT', '/api/accounts/'+loggedInUser.id,{
       id: loggedInUser.id,
       name: "update name "+Date.now()
     }, function () {
       it('should have successCode 200', function() {
-        // assert.equal(this.res.statusCode, 200);
-        console.log(this.res.body);
+        assert.equal(this.res.statusCode, 200);
+        // console.log(this.res.body);
       });
-    })
+    });
   });
   
 });

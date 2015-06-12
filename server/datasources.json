@@ -8,5 +8,13 @@
     "username": "root",
     "name": "mysql",
     "connector": "mysql"
+  },
+  "beewx": {
+    "host": "122.114.37.143",
+    "database": "beewx",
+    "username": "beewx",
+    "password": "beewx8088",
+    "name": "beewx",
+    "connector": "mysql"
   }
 }

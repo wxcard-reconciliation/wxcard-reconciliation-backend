@@ -42,11 +42,11 @@
     "public": true
   },
   "couponRecord": {
-    "dataSource": "mysql",
+    "dataSource": "beewx",
     "public": true
   },
   "coupon": {
-    "dataSource": "mysql",
+    "dataSource": "beewx",
     "public": true
   },
   "reconciliation": {

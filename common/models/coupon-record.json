@@ -8,15 +8,47 @@
     },
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "wecha_id": {
+      "type": "string"
+    },
+    "is_use": {
+      "type": "number"
+    },
+    "add_time": {
+      "type": "string"
+    },
+    "use_time": {
+      "type": "string"
+    },
+    "card_id": {
+      "type": "string"
+    },
+    "cancel_code": {
+      "type": "string"
+    },
+    "company_id": {
+      "type": "number"
+    },
+    "staff_id": {
+      "type": "number"
+    }
+  },
   "validations": [],
   "relations": {
     "coupon": {
       "type": "belongsTo",
       "model": "coupon",
-      "foreignKey": "coupon_id"
+      "foreignKey": "card_id"
     }
   },
-  "acls": [],
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    }
+  ],
   "methods": []
 }

@@ -1117,12 +1117,6 @@ module.factory(
       { 'id': '@id' },
       {
 
-        // INTERNAL. Use CouponRecord.coupon() instead.
-        "prototype$__get__coupon": {
-          url: urlBase + "/couponRecords/:id/coupon",
-          method: "GET"
-        },
-
         /**
          * @ngdoc method
          * @name lbServices.CouponRecord#create
@@ -1602,42 +1596,6 @@ module.factory(
     R.modelName = "CouponRecord";
 
 
-        /**
-         * @ngdoc method
-         * @name lbServices.CouponRecord#coupon
-         * @methodOf lbServices.CouponRecord
-         *
-         * @description
-         *
-         * Fetches belongsTo relation coupon.
-         *
-         * @param {Object=} parameters Request parameters.
-         *
-         *  - `id` – `{*}` - PersistedModel id
-         *
-         *  - `refresh` – `{boolean=}` - 
-         *
-         * @param {function(Object,Object)=} successCb
-         *   Success callback with two arguments: `value`, `responseHeaders`.
-         *
-         * @param {function(Object)=} errorCb Error callback with one argument:
-         *   `httpResponse`.
-         *
-         * @returns {Object} An empty reference that will be
-         *   populated with the actual data once the response is returned
-         *   from the server.
-         *
-         * <em>
-         * (The remote method definition does not provide any description.
-         * This usually means the response is a `Coupon` object.)
-         * </em>
-         */
-        R.coupon = function() {
-          var TargetResource = $injector.get("Coupon");
-          var action = TargetResource["::get::couponRecord::coupon"];
-          return action.apply(R, arguments);
-        };
-
     return R;
   }]);
 
@@ -2007,12 +1965,6 @@ module.factory(
         "prototype$updateAttributes": {
           url: urlBase + "/coupons/:id",
           method: "PUT"
-        },
-
-        // INTERNAL. Use CouponRecord.coupon() instead.
-        "::get::couponRecord::coupon": {
-          url: urlBase + "/couponRecords/:id/coupon",
-          method: "GET"
         },
       }
     );
