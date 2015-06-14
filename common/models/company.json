@@ -1,0 +1,83 @@
+{
+  "name": "company",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "mysql": {
+      "table": "tp_company"
+    },
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "shortname": {
+      "type": "string"
+    },
+    "mp": {
+      "type": "string"
+    },
+    "tel": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "number"
+    },
+    "longitude": {
+      "type": "number"
+    },
+    "intro": {
+      "type": "string"
+    },
+    "catid": {
+      "type": "number"
+    },
+    "taxis": {
+      "type": "number"
+    },
+    "isbranch": {
+      "type": "number"
+    },
+    "logourl": {
+      "type": "string"
+    },
+    "area_id": {
+      "type": "number"
+    },
+    "cate_id": {
+      "type": "number"
+    },
+    "market_id": {
+      "type": "number"
+    },
+    "mark_url": {
+      "type": "string"
+    },
+    "add_time": {
+      "type": "string"
+    },
+    "province": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "district": {
+      "type": "string"
+    },
+    "location_id": {
+      "type": "number"
+    },
+    "cat_name": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

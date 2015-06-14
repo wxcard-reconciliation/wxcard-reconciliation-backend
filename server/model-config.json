@@ -52,5 +52,9 @@
   "reconciliation": {
     "dataSource": "mysql",
     "public": true
+  },
+  "company": {
+    "dataSource": "mysql",
+    "public": true
   }
 }

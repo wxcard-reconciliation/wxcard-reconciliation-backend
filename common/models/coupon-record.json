@@ -40,6 +40,11 @@
       "type": "belongsTo",
       "model": "coupon",
       "foreignKey": "card_id"
+    },
+    "company": {
+      "type": "belongsTo",
+      "model": "company",
+      "foreignKey": "company_id"
     }
   },
   "acls": [

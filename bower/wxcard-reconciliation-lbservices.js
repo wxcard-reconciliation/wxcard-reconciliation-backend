@@ -1,7 +1,6 @@
 (function(window, angular, undefined) {'use strict';
 
 var urlBase = "http://0.0.0.0:3000/api";
-// var urlBase = "http://120.26.66.200:3000/api";
 var authHeader = 'authorization';
 
 /**
@@ -1117,6 +1116,12 @@ module.factory(
       { 'id': '@id' },
       {
 
+        // INTERNAL. Use CouponRecord.coupon() instead.
+        "prototype$__get__coupon": {
+          url: urlBase + "/couponRecords/:id/coupon",
+          method: "GET"
+        },
+
         /**
          * @ngdoc method
          * @name lbServices.CouponRecord#create
@@ -1459,6 +1464,41 @@ module.factory(
           url: urlBase + "/couponRecords/:id",
           method: "PUT"
         },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.CouponRecord#countUser
+         * @methodOf lbServices.CouponRecord
+         *
+         * @description
+         *
+         * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `CouponRecord` object.)
+         * </em>
+         */
+        "countUser": {
+          url: urlBase + "/couponRecords/countUser",
+          method: "GET"
+        },
       }
     );
 
@@ -1595,6 +1635,42 @@ module.factory(
     */
     R.modelName = "CouponRecord";
 
+
+        /**
+         * @ngdoc method
+         * @name lbServices.CouponRecord#coupon
+         * @methodOf lbServices.CouponRecord
+         *
+         * @description
+         *
+         * Fetches belongsTo relation coupon.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Coupon` object.)
+         * </em>
+         */
+        R.coupon = function() {
+          var TargetResource = $injector.get("Coupon");
+          var action = TargetResource["::get::couponRecord::coupon"];
+          return action.apply(R, arguments);
+        };
 
     return R;
   }]);
@@ -1965,6 +2041,12 @@ module.factory(
         "prototype$updateAttributes": {
           url: urlBase + "/coupons/:id",
           method: "PUT"
+        },
+
+        // INTERNAL. Use CouponRecord.coupon() instead.
+        "::get::couponRecord::coupon": {
+          url: urlBase + "/couponRecords/:id/coupon",
+          method: "GET"
         },
       }
     );
