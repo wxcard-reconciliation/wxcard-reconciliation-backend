@@ -26,4 +26,23 @@ module.exports = function(CouponRecord) {
       next();
     }
   });
+  
+  CouponRecord.countUser = function (filter, next) {
+    CouponRecord.getDataSource().connector.query('SELECT count(distinct wecha_id) FROM tp_member_card_coupon_record;', function (err, result) {
+      if(err) {
+        next(err);
+      } else {
+        next(err, { count:result[0]['count(distinct wecha_id)'] });
+      }
+    })
+  };
+  
+  CouponRecord.remoteMethod(
+    'countUser',
+    {
+      accepts: {arg: 'filter', type: 'object', http: { source: 'form' }},
+      returns: {arg: 'data', type: 'object', root: true},
+      http: {path: '/countUser', verb: 'GET'}
+    }
+  );
 };

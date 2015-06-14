@@ -27,9 +27,16 @@ describe.only('Coupon', function() {
     var qs = querystring.stringify({filter: JSON.stringify(filter)})
     lt.describe.whenCalledRemotely('GET', '/api/couponRecords?'+qs, function () {
       it('should success get coupon records', function() {
-        console.log(this.res.body)
-        // assert.equal(this.res.statusCode, 200);
+        assert.equal(this.res.statusCode, 200);
       });
     });
+  });
+  
+  describe('#Count count User', function() {
+    lt.describe.whenCalledRemotely('GET', '/api/couponRecords/countUser', function () {
+      it('should success get count user', function() {
+        console.log(this.res.body)
+      });
+    })
   });
 });
