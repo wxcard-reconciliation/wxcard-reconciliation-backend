@@ -45,6 +45,11 @@
       "type": "belongsTo",
       "model": "company",
       "foreignKey": "company_id"
+    },
+    "wxuser": {
+      "type": "belongsTo",
+      "model": "wxuser",
+      "foreignKey": "wecha_id"
     }
   },
   "acls": [

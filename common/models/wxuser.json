@@ -1,0 +1,68 @@
+{
+  "name": "wxuser",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "mysql": {
+      "table": "tp_userinfo"
+    },
+    "validateUpsert": true
+  },
+  "properties": {
+    "headimgurl": {
+      "type": "string",
+      "mysql": {
+        "columnName": "portrait"
+      }
+    },
+    "id": {
+      "type": "string",
+      "id": true,
+      "generated": false,
+      "mysql": {
+        "columnName": "wecha_id"
+      }
+    },
+    "nickname": {
+      "type": "string",
+      "mysql": {
+        "columnName": "wechaname"
+      }
+    },
+    "remark": {
+      "type": "string",
+      "mysql": {
+        "columnName": "truename"
+      }
+    },
+    "sex": {
+      "type": "number"
+    },
+    "city": {
+      "type": "string"
+    },
+    "province": {
+      "type": "string"
+    },
+    "token": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": []
+}

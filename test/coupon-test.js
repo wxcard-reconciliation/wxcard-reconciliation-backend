@@ -5,7 +5,7 @@ var querystring = require('querystring')
 
 var loggedInUser = {email:"gbo2@example.com", password: "123456", id: 233}
 
-describe.only('Coupon', function() {
+describe.skip('Coupon', function() {
   // this.timeout(10000)
   lt.beforeEach.withApp(app);
   lt.beforeEach.givenLoggedInUser(loggedInUser);
@@ -13,16 +13,16 @@ describe.only('Coupon', function() {
   describe.skip('#Find Coupon', function() {
     lt.describe.whenCalledRemotely('GET', '/api/coupons', function () {
       it('should success get coupon', function() {
-        console.log(this.res.body)
+        // console.log(this.res.body)
+        assert.equal(this.res.statusCode, 200);
       });
-    })
+    });
   });
   
   describe('#Find Coupon Record', function() {
     var filter = {
-      // where:{use_time:{between:[1433956235, Date.now()/1000]}},
-      includeWechatuser: true,
-      include: ['coupon', 'company'],
+      where:{use_time:{between:[1433956235, Date.now()/1000]}},
+      include: ['coupon', 'company', 'wxuser'],
       limit: 25,
       skip: 0
     }
@@ -30,7 +30,6 @@ describe.only('Coupon', function() {
     lt.describe.whenCalledRemotely('GET', '/api/couponRecords?'+qs, function () {
       it('should success get coupon records', function() {
         console.log(this.res.body)
-        // assert.equal(this.res.statusCode, 200);
       });
     });
   });

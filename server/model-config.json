@@ -39,7 +39,7 @@
   },
   "wechatuser": {
     "dataSource": null,
-    "public": true
+    "public": false
   },
   "couponRecord": {
     "dataSource": "mysql",
@@ -54,6 +54,10 @@
     "public": true
   },
   "company": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "wxuser": {
     "dataSource": "mysql",
     "public": true
   }

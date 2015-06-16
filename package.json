@@ -4,6 +4,7 @@
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
+    "debug": "DEBUG=loopback:connector:* ./node_modules/loopback-testing/node_modules/mocha/bin/mocha test",
     "test": "./node_modules/loopback-testing/node_modules/mocha/bin/mocha test"
   },
   "dependencies": {
