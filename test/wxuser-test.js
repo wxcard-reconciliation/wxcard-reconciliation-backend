@@ -5,7 +5,7 @@ var querystring = require('querystring')
 
 var loggedInUser = {email:"gbo2@example.com", password: "123456", id: 233}
 
-describe.only('WXUser', function() {
+describe('WXUser', function() {
   lt.beforeEach.withApp(app);
   lt.beforeEach.givenLoggedInUser(loggedInUser);
     

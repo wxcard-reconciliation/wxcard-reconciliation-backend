@@ -60,5 +60,9 @@
   "wxuser": {
     "dataSource": "mysql",
     "public": true
+  },
+  "share": {
+    "dataSource": "mysql",
+    "public": true
   }
 }

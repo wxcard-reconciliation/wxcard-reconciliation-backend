@@ -5,7 +5,7 @@ var querystring = require('querystring')
 
 var loggedInUser = {email:"gbo2@example.com", password: "123456", id: 233}
 
-describe.skip('Coupon', function() {
+describe('Coupon', function() {
   // this.timeout(10000)
   lt.beforeEach.withApp(app);
   lt.beforeEach.givenLoggedInUser(loggedInUser);
