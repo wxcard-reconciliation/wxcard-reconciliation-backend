@@ -3,7 +3,7 @@ var assert = require('assert');
 var app = require('../server/server.js'); 
 var querystring = require('querystring')
 
-describe.only('Share', function() {
+describe('Share', function() {
   lt.beforeEach.withApp(app);
   
   describe('##Stat', function() {
