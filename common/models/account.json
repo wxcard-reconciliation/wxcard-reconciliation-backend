@@ -1,33 +1,42 @@
 {
-  "name": "account",
-  "base": "User",
-  "idInjection": true,
-  "options": {
-    "validateUpsert": true
-  },
-  "properties": {
-    "name": {
-      "type": "string"
+    "acls": [
+        {
+            "accessType": "*",
+            "permission": "ALLOW",
+            "principalId": "$authenticated",
+            "principalType": "ROLE"
+        }
+    ],
+    "base": "User",
+    "idInjection": true,
+    "methods": [],
+    "name": "account",
+    "options": {
+        "validateUpsert": true
     },
-    "job": {
-      "type": "string"
+    "properties": {
+        "companyId": {
+            "type": "number"
+        },
+        "job": {
+            "type": "string"
+        },
+        "name": {
+            "type": "string"
+        },
+        "phone": {
+            "type": "string"
+        },
+        "picture": {
+            "type": "string"
+        }
     },
-    "picture": {
-      "type": "string"
+    "relations": {
+        "company": {
+            "foreignKey": "",
+            "model": "company",
+            "type": "belongsTo"
+        }
     },
-    "phone": {
-      "type": "string"
-    }
-  },
-  "validations": [],
-  "relations": {},
-  "acls": [
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "ALLOW"
-    }
-  ],
-  "methods": []
+    "validations": []
 }

@@ -3,7 +3,7 @@ var assert = require('assert');
 var app = require('../server/server.js'); 
 var querystring = require('querystring')
 
-var loggedInUser = {email:"gbo2@example.com", password: "123456", id: 123456}
+var loggedInUser = {email:"gbo2@example.com", password: "123456", id: 123456, companyId:4}
 
 describe('# Account', function() {
   lt.beforeEach.withApp(app);
@@ -16,9 +16,22 @@ describe('# Account', function() {
     }, function () {
       it('should have successCode 200', function() {
         assert.equal(this.res.statusCode, 200);
-        // console.log(this.res.body);
       });
     });
+  });
+  
+  describe.only('## Find', function() {
+    var filter = {
+      include: ['company'],
+      limit: 25,
+      skip: 0
+    }
+    var qs = querystring.stringify({filter: JSON.stringify(filter)})
+    lt.describe.whenCalledRemotely('GET', '/api/accounts?'+qs, function () {
+      it('should have successCode 200', function() {
+        console.log(this.res.body);
+      });
+    })
   });
   
 });
