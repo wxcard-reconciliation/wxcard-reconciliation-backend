@@ -1,4 +1,18 @@
 {
+    "_meta": {
+        "mixins": [
+            "loopback/common/mixins",
+            "loopback/server/mixins",
+            "../common/mixins",
+            "./mixins"
+        ],
+        "sources": [
+            "loopback/common/models",
+            "loopback/server/models",
+            "../common/models",
+            "./models"
+        ]
+    },
     "ACL": {
         "dataSource": "db",
         "public": false
@@ -18,20 +32,6 @@
     "User": {
         "dataSource": "db",
         "public": false
-    },
-    "_meta": {
-        "mixins": [
-            "loopback/common/mixins",
-            "loopback/server/mixins",
-            "../common/mixins",
-            "./mixins"
-        ],
-        "sources": [
-            "loopback/common/models",
-            "loopback/server/models",
-            "../common/models",
-            "./models"
-        ]
     },
     "account": {
         "dataSource": "mysql",

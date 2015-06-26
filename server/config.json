@@ -1,1 +1,27 @@
-{"restApiRoot":"/api","host":"0.0.0.0","port":3000,"remoting":{"context":{"enableHttpContext":false},"rest":{"normalizeHttpPath":false,"xml":false},"json":{"strict":false,"limit":"100kb"},"urlencoded":{"extended":true,"limit":"100kb"},"cors":false,"errorHandler":{"disableStackTrace":false}},"legacyExplorer":false}
+{
+    "host": "0.0.0.0",
+    "legacyExplorer": false,
+    "port": 3000,
+    "remoting": {
+        "context": {
+            "enableHttpContext": false
+        },
+        "cors": false,
+        "errorHandler": {
+            "disableStackTrace": false
+        },
+        "json": {
+            "limit": "100kb",
+            "strict": false
+        },
+        "rest": {
+            "normalizeHttpPath": false,
+            "xml": false
+        },
+        "urlencoded": {
+            "extended": true,
+            "limit": "100kb"
+        }
+    },
+    "restApiRoot": "/api"
+}
