@@ -1,1 +1,64 @@
-{"name":"couponRecord","base":"PersistedModel","idInjection":true,"options":{"mysql":{"table":"tp_member_card_coupon_record"},"validateUpsert":true},"properties":{"add_time":{"type":"string"},"cancel_code":{"type":"string"},"card_id":{"type":"string"},"company_id":{"type":"number"},"is_use":{"type":"number"},"staff_id":{"type":"number"},"use_time":{"type":"string"},"wecha_id":{"type":"string"}},"validations":[],"relations":{"company":{"type":"belongsTo","model":"company","foreignKey":"company_id"},"coupon":{"type":"belongsTo","model":"coupon","foreignKey":"card_id"},"wxuser":{"type":"belongsTo","model":"wxuser","foreignKey":"wecha_id"}},"acls":[{"accessType":"*","principalType":"ROLE","principalId":"$unauthenticated","permission":"DENY"}],"methods":[]}
+{
+    "acls": [
+        {
+            "accessType": "*",
+            "permission": "DENY",
+            "principalId": "$unauthenticated",
+            "principalType": "ROLE"
+        }
+    ],
+    "base": "PersistedModel",
+    "idInjection": true,
+    "methods": [],
+    "name": "couponRecord",
+    "options": {
+        "mysql": {
+            "table": "tp_member_card_coupon_record"
+        },
+        "validateUpsert": true
+    },
+    "properties": {
+        "add_time": {
+            "type": "string"
+        },
+        "cancel_code": {
+            "type": "string"
+        },
+        "card_id": {
+            "type": "string"
+        },
+        "company_id": {
+            "type": "number"
+        },
+        "is_use": {
+            "type": "number"
+        },
+        "staff_id": {
+            "type": "number"
+        },
+        "use_time": {
+            "type": "string"
+        },
+        "wecha_id": {
+            "type": "string"
+        }
+    },
+    "relations": {
+        "company": {
+            "foreignKey": "company_id",
+            "model": "company",
+            "type": "belongsTo"
+        },
+        "coupon": {
+            "foreignKey": "card_id",
+            "model": "coupon",
+            "type": "belongsTo"
+        },
+        "wxuser": {
+            "foreignKey": "wecha_id",
+            "model": "wxuser",
+            "type": "belongsTo"
+        }
+    },
+    "validations": []
+}

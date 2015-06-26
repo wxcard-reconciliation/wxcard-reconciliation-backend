@@ -8,7 +8,7 @@ var querystring = require('querystring')
 
 var loggedInUser = {email:"gbo2@example.com", password: "123456", id: 123456}
 
-describe.skip('Wechat API', function() {
+describe('Wechat API', function() {
   describe('#User', function() {
     var users = []
     it('should success get user list', function(done) {
@@ -45,5 +45,30 @@ describe('#Wechatuse', function() {
       assert.equal(this.res.statusCode, 200);
       // console.log(this.res.body.data.users)
     });
+  });
+});
+
+describe('# Coupon', function() {
+  it('should success issue', function(done) {
+    api.createQRCode({
+      card_id: 'p2sNkuPxb3PR_vZGJGb32lipWtHI',
+      expire_seconds: '60',
+      is_unique_code: true,
+      out_id: 1
+    }, function (err, result) {
+      var url = api.showQRCodeURL(result.ticket)
+      console.log(url)
+      done()
+    })
+  });
+});
+
+describe.only('# Short Url', function() {
+  it('should success convert long2short', function(done) {
+   var longurl =  'http://fusion.qq.com/app_download?appid=1104658877&platform=qzone&via=QZ.MOBILEDETAIL.QRCODE'
+   api.shorturl(longurl, function (err, result) {
+     console.log(result);
+     done();
+   })
   });
 });

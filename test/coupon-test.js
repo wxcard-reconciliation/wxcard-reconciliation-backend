@@ -10,7 +10,7 @@ describe('Coupon', function() {
   lt.beforeEach.withApp(app);
   lt.beforeEach.givenLoggedInUser(loggedInUser);
   
-  describe.skip('#Find Coupon', function() {
+  describe('#Find Coupon', function() {
     lt.describe.whenCalledRemotely('GET', '/api/coupons', function () {
       it('should success get coupon', function() {
         // console.log(this.res.body)

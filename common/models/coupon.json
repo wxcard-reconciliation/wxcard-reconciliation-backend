@@ -1,1 +1,82 @@
-{"name":"coupon","base":"PersistedModel","idInjection":true,"options":{"mysql":{"table":"tp_member_card_coupon"},"validateUpsert":true},"properties":{"title":{"type":"string"},"type":{"type":"number"},"people":{"type":"number"},"statdate":{"type":"number"},"enddate":{"type":"number"},"info":{"type":"string"},"create_time":{"type":"number"},"total":{"type":"number"},"company_id":{"type":"number"},"id":{"type":"string","id":true,"generated":false,"mysql":{"columnName":"card_id"}},"is_weixin":{"type":"number"},"color":{"type":"string"},"is_check":{"type":"number"},"least_cost":{"type":"number"},"reduce_cost":{"type":"number"},"gift_name":{"type":"string"},"integral":{"type":"number"},"brand_name":{"type":"string"},"logourl":{"type":"string"},"is_delete":{"type":"number"}},"validations":[],"relations":{},"acls":[],"methods":[]}
+{
+    "acls": [],
+    "base": "PersistedModel",
+    "idInjection": true,
+    "methods": [],
+    "name": "coupon",
+    "options": {
+        "mysql": {
+            "table": "tp_member_card_coupon"
+        },
+        "validateUpsert": true
+    },
+    "properties": {
+        "brand_name": {
+            "type": "string"
+        },
+        "color": {
+            "type": "string"
+        },
+        "company_id": {
+            "type": "number"
+        },
+        "create_time": {
+            "type": "number"
+        },
+        "enddate": {
+            "type": "number"
+        },
+        "gift_name": {
+            "type": "string"
+        },
+        "id": {
+            "generated": false,
+            "id": true,
+            "mysql": {
+                "columnName": "card_id"
+            },
+            "type": "string"
+        },
+        "info": {
+            "type": "string"
+        },
+        "integral": {
+            "type": "number"
+        },
+        "is_check": {
+            "type": "number"
+        },
+        "is_delete": {
+            "type": "number"
+        },
+        "is_weixin": {
+            "type": "number"
+        },
+        "least_cost": {
+            "type": "number"
+        },
+        "logourl": {
+            "type": "string"
+        },
+        "people": {
+            "type": "number"
+        },
+        "reduce_cost": {
+            "type": "number"
+        },
+        "statdate": {
+            "type": "number"
+        },
+        "title": {
+            "type": "string"
+        },
+        "total": {
+            "type": "number"
+        },
+        "type": {
+            "type": "number"
+        }
+    },
+    "relations": {},
+    "validations": []
+}
