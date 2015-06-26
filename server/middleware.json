@@ -5,23 +5,18 @@
   "initial": {
     "compression": {},
     "cors": {
-        "params": {
-            "credentials": true,
-            "maxAge": 86400,
-            "origin": true
-        }
+      "params": {
+        "credentials": true,
+        "maxAge": 86400,
+        "origin": true
+      }
     }
   },
-  "session": {
-  },
-  "auth": {
-  },
-  "parse": {
-  },
-  "routes": {
-  },
-  "files": {
-  },
+  "session": {},
+  "auth": {},
+  "parse": {},
+  "routes": {},
+  "files": {},
   "final": {
     "loopback#urlNotFound": {}
   },

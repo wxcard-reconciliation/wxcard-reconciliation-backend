@@ -1,68 +1,68 @@
 {
-    "_meta": {
-        "mixins": [
-            "loopback/common/mixins",
-            "loopback/server/mixins",
-            "../common/mixins",
-            "./mixins"
-        ],
-        "sources": [
-            "loopback/common/models",
-            "loopback/server/models",
-            "../common/models",
-            "./models"
-        ]
-    },
-    "ACL": {
-        "dataSource": "db",
-        "public": false
-    },
-    "AccessToken": {
-        "dataSource": "db",
-        "public": false
-    },
-    "Role": {
-        "dataSource": "db",
-        "public": false
-    },
-    "RoleMapping": {
-        "dataSource": "db",
-        "public": false
-    },
-    "User": {
-        "dataSource": "db",
-        "public": false
-    },
-    "account": {
-        "dataSource": "mysql",
-        "public": true
-    },
-    "company": {
-        "dataSource": "mysql",
-        "public": true
-    },
-    "coupon": {
-        "dataSource": "mysql",
-        "public": true
-    },
-    "couponRecord": {
-        "dataSource": "mysql",
-        "public": true
-    },
-    "reconciliation": {
-        "dataSource": "mysql",
-        "public": true
-    },
-    "share": {
-        "dataSource": "mysql",
-        "public": true
-    },
-    "wechatuser": {
-        "dataSource": null,
-        "public": false
-    },
-    "wxuser": {
-        "dataSource": "mysql",
-        "public": true
-    }
+  "_meta": {
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ],
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ]
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false
+  },
+  "User": {
+    "dataSource": "db",
+    "public": false
+  },
+  "account": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "company": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "coupon": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "couponRecord": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "reconciliation": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "share": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "wechatuser": {
+    "dataSource": null,
+    "public": false
+  },
+  "wxuser": {
+    "dataSource": "mysql",
+    "public": true
+  }
 }

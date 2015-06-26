@@ -7,6 +7,7 @@ var loggedInUser = {email:"gbo2@example.com", password: "123456", id: 123456, co
 
 describe('# Account', function() {
   lt.beforeEach.withApp(app);
+  lt.beforeEach.withUserModel('account');
   lt.beforeEach.givenLoggedInUser(loggedInUser);
   
   describe('## Update', function() {
@@ -20,7 +21,7 @@ describe('# Account', function() {
     });
   });
   
-  describe('## Find', function() {
+  describe.only('## Find', function() {
     var filter = {
       include: ['company'],
       limit: 25,

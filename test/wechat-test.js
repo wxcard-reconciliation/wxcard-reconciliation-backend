@@ -63,7 +63,7 @@ describe('# Coupon', function() {
   });
 });
 
-describe.only('# Short Url', function() {
+describe('# Short Url', function() {
   it('should success convert long2short', function(done) {
    var longurl =  'http://fusion.qq.com/app_download?appid=1104658877&platform=qzone&via=QZ.MOBILEDETAIL.QRCODE'
    api.shorturl(longurl, function (err, result) {

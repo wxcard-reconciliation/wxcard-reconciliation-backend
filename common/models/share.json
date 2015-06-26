@@ -1,1 +1,42 @@
-{"name":"share","base":"PersistedModel","idInjection":true,"options":{"validateUpsert":true},"properties":{"module":{"type":"string"},"moduleid":{"type":"number"},"token":{"type":"string"},"wecha_id":{"type":"string"},"to":{"type":"string"},"time":{"type":"number"},"url":{"type":"string"}},"validations":[],"relations":{},"acls":[{"accessType":"WRITE","principalType":"ROLE","principalId":"$everyone","permission":"DENY"}],"methods":[]}
+{
+  "name": "share",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "module": {
+      "type": "string"
+    },
+    "moduleid": {
+      "type": "number"
+    },
+    "token": {
+      "type": "string"
+    },
+    "wecha_id": {
+      "type": "string"
+    },
+    "to": {
+      "type": "string"
+    },
+    "time": {
+      "type": "number"
+    },
+    "url": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    }
+  ],
+  "methods": []
+}

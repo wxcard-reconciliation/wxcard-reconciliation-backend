@@ -1,20 +1,20 @@
 {
-    "beewx": {
-        "connector": "mysql",
-        "database": "beewx",
-        "host": "122.114.37.143",
-        "name": "beewx",
-        "password": "beewx8088",
-        "username": "beewx"
-    },
-    "db": {
-        "connector": "memory",
-        "name": "db"
-    },
-    "mysql": {
-        "connector": "mysql",
-        "database": "petrojs",
-        "name": "mysql",
-        "username": "root"
-    }
+  "beewx": {
+    "host": "122.114.37.143",
+    "database": "beewx",
+    "username": "beewx",
+    "password": "beewx8088",
+    "name": "beewx",
+    "connector": "mysql"
+  },
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "mysql": {
+    "database": "petrojs",
+    "username": "root",
+    "name": "mysql",
+    "connector": "mysql"
+  }
 }
