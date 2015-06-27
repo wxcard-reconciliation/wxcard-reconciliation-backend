@@ -1,7 +1,8 @@
 module.exports = function(Wxuser) {
 
   Wxuser.observe('access', function limitToToken(ctx, next) {
-    ctx.query.where = {token:process.env.BEEWX_TOKEN, username: ""};
+    ctx.query.where = ctx.query.where || {};
+    ctx.query.token = process.env.BEEWX_TOKEN;
     next();
   });
 };

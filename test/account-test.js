@@ -21,7 +21,7 @@ describe('# Account', function() {
     });
   });
   
-  describe.only('## Find', function() {
+  describe('## Find', function() {
     var filter = {
       include: ['company'],
       limit: 25,

@@ -8,6 +8,7 @@ var loggedInUser = {email:"gbo2@example.com", password: "123456", id: 233, compa
 describe('Coupon', function() {
   // this.timeout(10000)
   lt.beforeEach.withApp(app);
+  lt.beforeEach.withUserModel('account');
   lt.beforeEach.givenLoggedInUser(loggedInUser);
   
   describe('#Find Coupon', function() {
@@ -19,11 +20,13 @@ describe('Coupon', function() {
     });
   });
   
-  describe('#Find Coupon Record', function() {
+  describe.only('#Find Coupon Record', function() {
     var filter = {
+      where: {},
+      order: 'add_time DESC',
       // where:{use_time:{between:[1433956235, Date.now()/1000]}},
-      include: ['coupon', 'company'],
-      limit: 25,
+      include: ['coupon', 'wxuser', 'company'],
+      limit: 10,
       skip: 0
     }
     var qs = querystring.stringify({filter: JSON.stringify(filter)})
@@ -34,7 +37,7 @@ describe('Coupon', function() {
     });
   });
   
-  describe.skip('#Count count User', function() {
+  describe('#Count count User', function() {
     lt.describe.whenCalledRemotely('GET', '/api/couponRecords/countUser', function () {
       it('should success get count user', function() {
         assert.equal(this.res.statusCode, 200);
