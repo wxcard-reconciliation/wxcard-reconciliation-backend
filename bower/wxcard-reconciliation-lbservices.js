@@ -1,7 +1,7 @@
 (function(window, angular, undefined) {'use strict';
 
-var urlBase = "http://0.0.0.0:3000/api";
-// var urlBase = "http://120.26.66.200:3000/api";
+// var urlBase = "http://0.0.0.0:3000/api";
+var urlBase = "http://120.26.66.200:3000/api";
 var authHeader = 'authorization';
 
 /**

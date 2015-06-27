@@ -10,7 +10,6 @@ module.exports = function(CouponRecord) {
     if(currentUser.companyId) {
       ctx.query.where.company_id = currentUser.companyId;
     }
-    console.log(ctx.query.where)
     next();
   });
   
