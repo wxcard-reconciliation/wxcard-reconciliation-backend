@@ -6,7 +6,6 @@ var querystring = require('querystring')
 var loggedInUser = {email:"gbo2@example.com", password: "123456", id: 233, companyId: 4}
 
 describe('Coupon', function() {
-  // this.timeout(10000)
   lt.beforeEach.withApp(app);
   lt.beforeEach.withUserModel('account');
   lt.beforeEach.givenLoggedInUser(loggedInUser);
@@ -14,17 +13,18 @@ describe('Coupon', function() {
   describe('#Find Coupon', function() {
     lt.describe.whenCalledRemotely('GET', '/api/coupons', function () {
       it('should success get coupon', function() {
-        // console.log(this.res.body)
         assert.equal(this.res.statusCode, 200);
       });
     });
   });
   
-  describe.only('#Find Coupon Record', function() {
+  describe('#Find Coupon Record', function() {
     var filter = {
-      where: {},
       order: 'add_time DESC',
-      // where:{use_time:{between:[1433956235, Date.now()/1000]}},
+      where:{
+        // use_time:{between:[1433956235, Date.now()/1000]},
+        cancel_code: '383022229292'
+      },
       include: ['coupon', 'wxuser', 'company'],
       limit: 10,
       skip: 0
@@ -41,6 +41,17 @@ describe('Coupon', function() {
     lt.describe.whenCalledRemotely('GET', '/api/couponRecords/countUser', function () {
       it('should success get count user', function() {
         assert.equal(this.res.statusCode, 200);
+      });
+    })
+  });
+  
+  describe.only('# Cancel code', function() {
+    this.timeout(10000)
+    lt.describe.whenCalledRemotely('POST', '/api/coupons/cancel', {
+      code: '099428819130'
+    }, function () {
+      it('should success cancel code', function() {
+        // console.log(this.res.body)
       });
     })
   });
