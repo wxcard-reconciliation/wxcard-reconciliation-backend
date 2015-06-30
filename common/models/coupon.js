@@ -2,7 +2,6 @@ module.exports = function(Coupon) {
 
   Coupon.cancel = function (code, next) {
     Coupon.app.wechat.consumeCode(code, null, function (err, result) {
-      console.log(result)
       if(err) {
         next(err);
       } else {

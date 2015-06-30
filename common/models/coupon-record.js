@@ -4,7 +4,7 @@ module.exports = function(CouponRecord) {
   
   CouponRecord.observe('access', function limitToScope(ctx, next) {
     ctx.query.where = ctx.query.where || {};
-    ctx.query.token = process.env.BEEWX_TOKEN;
+    ctx.query.where.token = process.env.BEEWX_TOKEN;
     var context = loopback.getCurrentContext()
     var currentUser = context && context.get('currentUser');
     if(currentUser.companyId) {

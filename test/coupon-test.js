@@ -18,7 +18,7 @@ describe('Coupon', function() {
     });
   });
   
-  describe('#Find Coupon Record', function() {
+  describe.only('#Find Coupon Record', function() {
     var filter = {
       order: 'add_time DESC',
       where:{
@@ -45,7 +45,7 @@ describe('Coupon', function() {
     })
   });
   
-  describe.only('# Cancel code', function() {
+  describe('# Cancel code', function() {
     this.timeout(10000)
     lt.describe.whenCalledRemotely('POST', '/api/coupons/cancel', {
       code: '099428819130'
