@@ -18,7 +18,7 @@ describe('Coupon', function() {
     });
   });
   
-  describe.only('#Find Coupon Record', function() {
+  describe('#Find Coupon Record', function() {
     var filter = {
       order: 'add_time DESC',
       where:{
