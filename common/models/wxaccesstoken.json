@@ -1,0 +1,29 @@
+{
+  "name": "wxaccesstoken",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "mysql": {
+      "table": "tp_wx_accesstoken"
+    },
+    "validateUpsert": true
+  },
+  "properties": {
+    "accesstoken": {
+      "type": "string",
+      "required": true
+    },
+    "appid": {
+      "type": "string",
+      "required": true
+    },
+    "time": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

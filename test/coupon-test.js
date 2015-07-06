@@ -45,13 +45,13 @@ describe('Coupon', function() {
     })
   });
   
-  describe('# Cancel code', function() {
+  describe.only('# Cancel code', function() {
     this.timeout(10000)
     lt.describe.whenCalledRemotely('POST', '/api/coupons/cancel', {
-      code: '099428819130'
+      code: '070539146169'
     }, function () {
       it('should success cancel code', function() {
-        // console.log(this.res.body)
+        console.log(this.res.body)
       });
     })
   });

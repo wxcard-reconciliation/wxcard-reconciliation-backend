@@ -11,7 +11,7 @@ gulp.task('build', function () {
 });
 
 var paths = {
-  scripts: ['common/models/*.js', 'common/models/*.json', 'test/*.js'],
+  scripts: ['common/models/*.js', 'common/models/*.json', 'test/*.js', 'server/**/*.js'],
 };
 
 gulp.task('bdd', function (cb) {
