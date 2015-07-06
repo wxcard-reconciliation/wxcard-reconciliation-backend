@@ -79,7 +79,7 @@
   "relations": {},
   "acls": [
     {
-      "accessType": "WRITE",
+      "accessType": "EXECUTE",
       "principalType": "ROLE",
       "principalId": "$unauthenticated",
       "permission": "DENY"

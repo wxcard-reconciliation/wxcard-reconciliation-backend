@@ -45,14 +45,27 @@ describe('Coupon', function() {
     })
   });
   
-  describe.only('# Cancel code', function() {
+  describe('# Cancel code', function() {
     this.timeout(10000)
     lt.describe.whenCalledRemotely('POST', '/api/coupons/cancel', {
       code: '070539146169'
     }, function () {
       it('should success cancel code', function() {
-        console.log(this.res.body)
+        assert.equal(this.res.statusCode, 200);
       });
     })
   });
+  
+});
+
+describe.only('# Cancel code error', function() {
+  lt.beforeEach.withApp(app);
+  lt.describe.whenCalledUnauthenticated('POST', '/api/coupons/cancel', {
+    code: '070539146169'
+  }, function () {
+    it('should be forbidden', function() {
+      // console.log(this.res.body)
+      assert.equal(this.res.statusCode, 401);
+    });
+  })
 });
