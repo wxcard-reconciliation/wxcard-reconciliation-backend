@@ -3,12 +3,14 @@ var assert = require('assert');
 var app = require('../server/server.js'); 
 var querystring = require('querystring')
 
-var loggedInUser = {email:"gbo2@example.com", password: "123456", id: 123456, companyId:4}
+lt.beforeEach.withApp(app);
+lt.beforeEach.withUserModel('account');
+
+var loggedInUser = {email:"gbo2@example.com", password: "123456", id: 233, companyId:4, job: '管理员'}
+var gasstationUser = {email:"gasstation@example.com", password: '123456', id: 333, job: '加油站长'}
 
 describe('# Account', function() {
-  lt.beforeEach.withApp(app);
-  lt.beforeEach.withUserModel('account');
-  lt.beforeEach.givenLoggedInUser(loggedInUser);
+  lt.beforeEach.givenLoggedInUser(loggedInUser, 'account');
   
   describe('## Update', function() {
     lt.describe.whenCalledRemotely('PUT', '/api/accounts/'+loggedInUser.id,{
@@ -35,4 +37,17 @@ describe('# Account', function() {
     })
   });
   
+});
+
+describe.only('# Account Exeception', function() {
+  
+  describe('## Find', function() {
+    lt.describe.whenCalledAnonymously('GET', '/api/accounts', function () {
+      lt.it.shouldBeDenied();
+    })
+    
+    lt.describe.whenCalledByUser(gasstationUser, 'GET', '/api/accounts', function () {
+      lt.it.shouldBeDenied();
+    })
+  });
 });

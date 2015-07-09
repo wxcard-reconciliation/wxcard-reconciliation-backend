@@ -56,7 +56,7 @@ describe('Coupon', function() {
     })
   });
   
-  describe.only('# Delivery card', function() {
+  describe('# Delivery card', function() {
     this.timeout(10000)
     lt.describe.whenCalledRemotely('POST', '/api/coupons/delivery', {
       card_id: 'p2sNkuIpoK4enrIBJuK4npc4r3zw',
