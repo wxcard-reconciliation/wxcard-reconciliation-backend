@@ -56,15 +56,26 @@ describe('Coupon', function() {
     })
   });
   
+  describe.only('# Delivery card', function() {
+    this.timeout(10000)
+    lt.describe.whenCalledRemotely('POST', '/api/coupons/delivery', {
+      card_id: 'p2sNkuIpoK4enrIBJuK4npc4r3zw',
+      openid: 'o2sNkuH9b_Q6E3ABpBKvHUUQiktI'
+    }, function () {
+      it('should success cancel code', function() {
+        console.log(this.res.body)
+        // assert.equal(this.res.statusCode, 200);
+      });
+    })
+  });
 });
 
-describe.only('# Cancel code error', function() {
+describe('# Cancel code error', function() {
   lt.beforeEach.withApp(app);
   lt.describe.whenCalledUnauthenticated('POST', '/api/coupons/cancel', {
     code: '070539146169'
   }, function () {
     it('should be forbidden', function() {
-      // console.log(this.res.body)
       assert.equal(this.res.statusCode, 401);
     });
   })

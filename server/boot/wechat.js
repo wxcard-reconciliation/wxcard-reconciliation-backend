@@ -17,7 +17,6 @@ module.exports = function(app) {
       }
     });
   }, function (token, next) {
-    console.log(token)
     var expireTime = Math.round(token.expireTime/1000)
     app.models.wxaccesstoken.findOrCreate({where: {appid: process.env.WX_APPID}}, {
       appid: process.env.WX_APPID,
