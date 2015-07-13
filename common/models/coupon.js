@@ -1,11 +1,28 @@
+var loopback = require('loopback');
+
 module.exports = function(Coupon) {
 
   Coupon.cancel = function (code, next) {
+    
+    function updateCompanyId(card_id) {
+      var context = loopback.getCurrentContext()
+      var currentUser = context && context.get('currentUser');
+
+      console.log(code, card_id, currentUser.companyId)
+      Coupon.app.models.couponRecord.updateAll({
+        cancel_code: code, 
+        card_id: card_id
+      }, {
+        company_id: currentUser.companyId
+      }, next);
+    };
+    
     Coupon.app.wechat.consumeCode(code, null, function (err, result) {
       if(err) {
         next(err);
       } else {
-        next(err, result.card);
+        updateCompanyId(result.card.card_id);
+        // next(err, result.card);
       }
     });
   };
@@ -26,12 +43,14 @@ module.exports = function(Coupon) {
       out_id: 1
     }, function (err, result) {
       if(err) return next(err);
-      if(result.errcode !== 0) next(result);
+      if(result.errcode !== 0) return next(result);
 
       var wechat = Coupon.app.wechat;
       var url = wechat.showQRCodeURL(result.ticket);
-      var desc = '请点击下面链接打开二维码以后，扫描或者长按二维码领取卡卷。';
-      wechat.sendText(coupon.openid, desc+url, next);
+      wechat.shorturl(url, function (err, result) {
+        var desc = '请点击下面链接打开二维码以后，扫描或者长按二维码领取卡卷。';
+        wechat.sendText(coupon.openid, desc+result.short_url, next);
+      });
     });
   };
 

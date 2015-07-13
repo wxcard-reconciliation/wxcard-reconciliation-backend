@@ -3,11 +3,12 @@ var assert = require('assert');
 var app = require('../server/server.js'); 
 var querystring = require('querystring')
 
-var loggedInUser = {email:"gbo2@example.com", password: "123456", id: 233, companyId: 4}
+lt.beforeEach.withApp(app);
+lt.beforeEach.withUserModel('account');
 
+var loggedInUser = {email:"gbo2@example.com", password: "123456", id: 233, companyId: 4}
+var gasstationUser = {email:"stations@example.com", password: "123456", id: 333, job: '加油站长', companyId:4}
 describe('Coupon', function() {
-  lt.beforeEach.withApp(app);
-  lt.beforeEach.withUserModel('account');
   lt.beforeEach.givenLoggedInUser(loggedInUser);
   
   describe('#Find Coupon', function() {
@@ -48,7 +49,7 @@ describe('Coupon', function() {
   describe('# Cancel code', function() {
     this.timeout(10000)
     lt.describe.whenCalledRemotely('POST', '/api/coupons/cancel', {
-      code: '070539146169'
+      code: '802785972422'
     }, function () {
       it('should success cancel code', function() {
         assert.equal(this.res.statusCode, 200);
@@ -59,19 +60,18 @@ describe('Coupon', function() {
   describe('# Delivery card', function() {
     this.timeout(10000)
     lt.describe.whenCalledRemotely('POST', '/api/coupons/delivery', {
-      card_id: 'p2sNkuIpoK4enrIBJuK4npc4r3zw',
-      openid: 'o2sNkuH9b_Q6E3ABpBKvHUUQiktI'
+      card_id: 'p2sNkuI1l8tpQMM2taeJGufBjC7o',
+      openid: 'o2sNkuOLxSKDVL5SkO-Gsc4OFDbY'
     }, function () {
       it('should success cancel code', function() {
-        console.log(this.res.body)
-        // assert.equal(this.res.statusCode, 200);
+        assert.equal(this.res.statusCode, 200);
       });
     })
   });
 });
 
 describe('# Cancel code error', function() {
-  lt.beforeEach.withApp(app);
+
   lt.describe.whenCalledUnauthenticated('POST', '/api/coupons/cancel', {
     code: '070539146169'
   }, function () {
@@ -79,4 +79,18 @@ describe('# Cancel code error', function() {
       assert.equal(this.res.statusCode, 401);
     });
   })
+  
+});
+
+describe.only('# Gasstation', function() {
+  
+  describe('## Cancel code', function() {
+    lt.describe.whenCalledByUser(gasstationUser, 'POST', '/api/coupons/cancel', {
+      code: '689285956012'
+    }, function () {
+      it('should success cancel by gasstation', function() {
+        console.log(this.res.body)
+      });
+    });
+  });
 });

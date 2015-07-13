@@ -5,11 +5,20 @@ module.exports = function(CouponRecord) {
   CouponRecord.observe('access', function limitToScope(ctx, next) {
     ctx.query.where = ctx.query.where || {};
     ctx.query.where.token = process.env.BEEWX_TOKEN;
-    var context = loopback.getCurrentContext()
+    var context = loopback.getCurrentContext();
     var currentUser = context && context.get('currentUser');
     if(currentUser.companyId) {
-      ctx.query.where.company_id = currentUser.companyId;
+      // ctx.query.where.company_id = currentUser.companyId;
+      ctx.query.where.and = [
+        {
+          or:[
+            {company_id: currentUser.companyId },
+            {company_id: 0 }
+          ]
+        }
+      ];
     }
+    // console.log('-----', ctx.query.where)
     next();
   });
   

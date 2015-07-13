@@ -39,7 +39,7 @@ describe('# Account', function() {
     })
   });
   
-  describe.only('## FindById', function() {
+  describe('## FindById', function() {
     lt.describe.whenCalledRemotely('GET', '/api/accounts/'+loggedInUser.id+'?filter[include]=company', function () {
       it('should have successCode 200', function() {
         console.log(this.res.body);
