@@ -9,7 +9,9 @@ lt.beforeEach.withUserModel('account');
 var loggedInUser = {email:"gbo2@example.com", password: "123456", id: 233, companyId:4, job: '管理员'}
 var gasstationUser = {email:"gasstation@example.com", password: '123456', id: 333, job: '加油站长'}
 
+
 describe('# Account', function() {
+
   lt.beforeEach.givenLoggedInUser(loggedInUser, 'account');
   
   describe('## Update', function() {
@@ -37,9 +39,16 @@ describe('# Account', function() {
     })
   });
   
+  describe.only('## FindById', function() {
+    lt.describe.whenCalledRemotely('GET', '/api/accounts/'+loggedInUser.id+'?filter[include]=company', function () {
+      it('should have successCode 200', function() {
+        console.log(this.res.body);
+      });
+    })
+  });
 });
 
-describe.only('# Account Exeception', function() {
+describe('# Account Exeception', function() {
   
   describe('## Find', function() {
     lt.describe.whenCalledAnonymously('GET', '/api/accounts', function () {
@@ -50,4 +59,23 @@ describe.only('# Account Exeception', function() {
       lt.it.shouldBeDenied();
     })
   });
+  
+  describe('## FindById', function () {
+    lt.describe.whenCalledByUser(gasstationUser, 'GET', '/api/accounts/'+gasstationUser.id, function () {
+      lt.it.shouldBeAllowed();
+    })
+    
+    lt.describe.whenCalledByUser(gasstationUser, 'GET', '/api/accounts/'+loggedInUser.id, function () {
+      lt.it.shouldBeDenied();
+    })
+    
+    describe('Administartor', function() {
+      lt.beforeEach.givenUser(gasstationUser, 'account');
+      
+      lt.describe.whenCalledByUser(loggedInUser, 'GET', '/api/accounts/'+gasstationUser.id, function () {
+        lt.it.shouldBeAllowed();
+      })
+    });
+  });
+  
 });
