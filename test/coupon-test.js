@@ -19,12 +19,13 @@ describe('Coupon', function() {
     });
   });
   
-  describe('#Find Coupon Record', function() {
+  describe.only('#Find Coupon Record', function() {
     var filter = {
-      order: 'add_time DESC',
+      // order: ['add_time DESC'],
       where:{
+        is_use: {gt: 0}
         // use_time:{between:[1433956235, Date.now()/1000]},
-        cancel_code: '383022229292'
+        // cancel_code: '383022229292'
       },
       include: ['coupon', 'wxuser', 'company'],
       limit: 10,
@@ -33,7 +34,10 @@ describe('Coupon', function() {
     var qs = querystring.stringify({filter: JSON.stringify(filter)})
     lt.describe.whenCalledRemotely('GET', '/api/couponRecords?'+qs, function () {
       it('should success get coupon records', function() {
-        console.log(this.res.body, this.res.body.length)
+        this.res.body.forEach(function (item) {
+          console.log(item.use_time, item.is_use, item.id);
+        })
+        // console.log(this.res.body, this.res.body.length)
       });
     });
   });
@@ -82,7 +86,7 @@ describe('# Cancel code error', function() {
   
 });
 
-describe.only('# Gasstation', function() {
+describe('# Gasstation', function() {
   
   describe('## Cancel code', function() {
     lt.describe.whenCalledByUser(gasstationUser, 'POST', '/api/coupons/cancel', {

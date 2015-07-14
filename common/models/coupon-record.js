@@ -3,6 +3,7 @@ var loopback = require('loopback');
 module.exports = function(CouponRecord) {
   
   CouponRecord.observe('access', function limitToScope(ctx, next) {
+    ctx.query.order = ctx.query.order || ['use_time DESC'];
     ctx.query.where = ctx.query.where || {};
     ctx.query.where.token = process.env.BEEWX_TOKEN;
     var context = loopback.getCurrentContext();
@@ -18,7 +19,7 @@ module.exports = function(CouponRecord) {
         }
       ];
     }
-    // console.log('-----', ctx.query.where)
+    // console.log('-----', JSON.stringify(ctx.query.where))
     next();
   });
   
