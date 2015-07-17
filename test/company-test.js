@@ -5,7 +5,7 @@ var querystring = require('querystring')
 
 var loggedInUser = {email:"gbo2@example.com", password: "123456", id: 233}
 
-describe('Company', function() {
+describe('# Company', function() {
   lt.beforeEach.withApp(app);
   lt.beforeEach.withUserModel('account');
   lt.beforeEach.givenLoggedInUser(loggedInUser);
@@ -21,5 +21,16 @@ describe('Company', function() {
         console.log(this.res.body, this.res.body.length)
       });
     });
+  });
+  
+  describe.only('## Sync from wechat', function() {
+    this.timeout(10000)
+    lt.describe.whenCalledRemotely('POST', '/api/companies/sync', {
+      begin: 0
+    }, function () {
+      it('should success sync', function() {
+        console.log(this.res.body)
+      });
+    })
   });
 });

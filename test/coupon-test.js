@@ -19,7 +19,7 @@ describe('Coupon', function() {
     });
   });
   
-  describe.only('#Find Coupon Record', function() {
+  describe('#Find Coupon Record', function() {
     var filter = {
       // order: ['add_time DESC'],
       where:{
@@ -69,6 +69,17 @@ describe('Coupon', function() {
     }, function () {
       it('should success cancel code', function() {
         assert.equal(this.res.statusCode, 200);
+      });
+    })
+  });
+  
+  describe('# Sync cards from wechat', function() {
+    // this.timeout(10000)
+    lt.describe.whenCalledRemotely('POST', '/api/coupons/sync', {
+      offset: 0
+    }, function () {
+      it('should success sync cards', function() {
+        console.log(this.res.body);
       });
     })
   });

@@ -65,6 +65,9 @@
     "statdate": {
       "type": "number"
     },
+    "pic": {
+      "type": "string"
+    },
     "title": {
       "type": "string"
     },
@@ -73,6 +76,18 @@
     },
     "type": {
       "type": "number"
+    },
+    "group": {
+      "type": "number"
+    },
+    "attr": {
+      "type": "string"
+    },
+    "price": {
+      "type": "number"
+    },
+    "token": {
+      "type": "string"
     }
   },
   "validations": [],
