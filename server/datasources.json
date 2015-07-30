@@ -16,5 +16,9 @@
     "username": "root",
     "name": "mysql",
     "connector": "mysql"
+  },
+  "mongodb": {
+    "name": "mongodb",
+    "connector": "mongodb"
   }
 }

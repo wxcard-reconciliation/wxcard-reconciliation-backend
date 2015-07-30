@@ -16,6 +16,7 @@
     "loopback-boot": "^2.6.5",
     "loopback-connector-mysql": "^2.1.1",
     "loopback-datasource-juggler": "^2.19.0",
+    "request": "^2.59.0",
     "serve-favicon": "^2.0.1",
     "wechat-api": "^1.9.1"
   },
