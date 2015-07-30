@@ -10,7 +10,7 @@ var request = require('request');
 var loggedInUser = {email:"gbo2@example.com", password: "123456", id: 233};
 var poiurl = 'http://apis.map.qq.com/lbscloud/v1/poi/search?';
 
-describe.only('# Fetch POI from apis.map.qq.com', function() {
+describe('# Fetch POI from apis.map.qq.com', function() {
   this.timeout(10000)
   it('should success get poi of gas stations', function(done) {
     var qs = querystring.stringify({
