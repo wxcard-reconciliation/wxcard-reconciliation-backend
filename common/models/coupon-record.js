@@ -79,7 +79,7 @@ module.exports = function(CouponRecord) {
     'receiptUrl',
     {
       accepts: {arg: 'receipt', type: 'string'},
-      returns: {arg: 'data', type: 'object', root: true},
+      returns: {arg: 'data', type: 'string', root: true},
       http: {path: '/receiptUrl', verb: 'GET'}
     }
   );
