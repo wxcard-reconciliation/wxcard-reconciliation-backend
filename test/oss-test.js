@@ -21,12 +21,13 @@ var oss = new ALY.OSS({
 
 var fs = require('fs');
 var options = {
-  Bucket: 'petrojs',
+  Bucket: 'petrojs-receipt',
   Key: 'sample.jpg',
 }
 
-describe.only('# OSS', function() {
+describe('# OSS', function() {
   it('## should success putObject', function(done) {
+    this.timeout(50000)
     fs.readFile('test/fixtures/'+options.Key, function (err, data) {
       if (err) return done(err);
 

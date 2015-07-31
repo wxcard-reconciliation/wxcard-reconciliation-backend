@@ -3,19 +3,24 @@ var async = require('async');
 
 module.exports = function(Coupon) {
 
-  Coupon.cancel = function (code, next) {
+  Coupon.cancel = function (options, next) {
     
+    var code = options.code;
     function updateCompanyId(card_id) {
       var context = loopback.getCurrentContext()
       var currentUser = context && context.get('currentUser');
+      var updateData = {
+        company_id: currentUser.companyId
+      };
+      if(options.receipt) updateData.receipt = options.receipt;
 
       // console.log(code, card_id, currentUser.companyId)
       Coupon.app.models.couponRecord.updateAll({
         cancel_code: code, 
         card_id: card_id
-      }, {
-        company_id: currentUser.companyId
-      }, next);
+      }, updateData, function (err, result) {
+        next(err, {card_id: card_id});
+      });
     };
     
     Coupon.app.wechat.consumeCode(code, null, function (err, result) {
@@ -23,7 +28,6 @@ module.exports = function(Coupon) {
         next(err);
       } else {
         updateCompanyId(result.card.card_id);
-        // next(err, result.card);
       }
     });
   };
@@ -31,7 +35,7 @@ module.exports = function(Coupon) {
   Coupon.remoteMethod(
     'cancel',
     {
-      accepts: {arg: 'code', type: 'string'},
+      accepts: {arg: 'options', type: 'object', http: {source: 'body'}},
       returns: {arg: 'data', type: 'object', root: true}
     }
   );

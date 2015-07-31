@@ -59,13 +59,28 @@ module.exports = function(CouponRecord) {
       }
     })
   };
-  
   CouponRecord.remoteMethod(
     'countUser',
     {
       accepts: {arg: 'filter', type: 'object', http: { source: 'form' }},
       returns: {arg: 'data', type: 'object', root: true},
       http: {path: '/countUser', verb: 'GET'}
+    }
+  );
+  
+  CouponRecord.receiptUrl = function (receipt, next) {
+    CouponRecord.app.oss.getSignedUrl('getObject', {
+      Bucket: 'petrojs-receipt',
+      Key: receipt,
+      Expires: 60
+    }, next);
+  };
+  CouponRecord.remoteMethod(
+    'receiptUrl',
+    {
+      accepts: {arg: 'receipt', type: 'string'},
+      returns: {arg: 'data', type: 'object', root: true},
+      http: {path: '/receiptUrl', verb: 'GET'}
     }
   );
 };

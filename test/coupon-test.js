@@ -42,6 +42,19 @@ describe('Coupon', function() {
     });
   });
   
+  describe.only('# Get Receipt Signed Url', function() {
+    this.timeout(10000);
+    var filter = {
+      receipt: 'sample.jpg'
+    }
+    var qs = querystring.stringify({filter: JSON.stringify(filter)})
+    lt.describe.whenCalledRemotely('GET', '/api/couponRecords/receiptUrl?receipt=sample.jpg', function () {
+      it('should success get receipt signed url', function() {
+        console.log(this.res.body);
+      });
+    })
+  });
+  
   describe('#Count count User', function() {
     lt.describe.whenCalledRemotely('GET', '/api/couponRecords/countUser', function () {
       it('should success get count user', function() {
@@ -53,7 +66,8 @@ describe('Coupon', function() {
   describe('# Cancel code', function() {
     this.timeout(10000)
     lt.describe.whenCalledRemotely('POST', '/api/coupons/cancel', {
-      code: '802785972422'
+      code: '804328683411',
+      receipt: 'receipt.jpg'
     }, function () {
       it('should success cancel code', function() {
         assert.equal(this.res.statusCode, 200);
@@ -79,7 +93,7 @@ describe('Coupon', function() {
       offset: 0
     }, function () {
       it('should success sync cards', function() {
-        console.log(this.res.body);
+        assert.equal(this.res.statusCode, 200);
       });
     })
   });

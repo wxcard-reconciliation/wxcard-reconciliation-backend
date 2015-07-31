@@ -27,6 +27,9 @@
     "staff_id": {
       "type": "number"
     },
+    "receipt": {
+      "type": "string"
+    },
     "use_time": {
       "type": "string"
     },
