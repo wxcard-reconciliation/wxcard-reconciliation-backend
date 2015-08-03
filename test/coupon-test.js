@@ -42,7 +42,7 @@ describe('Coupon', function() {
     });
   });
   
-  describe.only('# Get Receipt Signed Url', function() {
+  describe('# Get Receipt Signed Url', function() {
     this.timeout(10000);
     var filter = {
       receipt: 'sample.jpg'

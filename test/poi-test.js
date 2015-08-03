@@ -10,19 +10,20 @@ var request = require('request');
 var loggedInUser = {email:"gbo2@example.com", password: "123456", id: 233};
 var poiurl = 'http://apis.map.qq.com/lbscloud/v1/poi/search?';
 
-describe('# Fetch POI from apis.map.qq.com', function() {
+describe.only('# Fetch POI from apis.map.qq.com', function() {
   this.timeout(10000)
   it('should success get poi of gas stations', function(done) {
     var qs = querystring.stringify({
       poi_table: 'gas_station',
       key: 'RGGBZ-CPSHD-QG54O-P53UE-3AIV5-HIFNS',
       orderby: 'distance(31.94414175,118.81311756)',
-      boundary: 'nearby(31.94414175,118.81311756,500000)',
+      boundary: 'nearby(31.94414175,118.81311756,5000000)',
       page_size: 10,
       page_index: 1
     });
     request({url: poiurl+qs}, function (err, res, body) {
       console.log(body);
+      done();
     });
   });
 });
@@ -47,7 +48,7 @@ describe('# POI', function() {
   
   describe('## Sync from wechat', function() {
     this.timeout(10000)
-    lt.describe.whenCalledRemotely('POST', '/api/pois', {
+    lt.describe.whenCalledRemotely('POST', '/api/companies/sync', {
       begin: 0
     }, function () {
       it('should success sync', function() {

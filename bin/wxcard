@@ -1,0 +1,100 @@
+#!/usr/bin/env node
+
+var async = require('async');
+var querystring = require('querystring');
+var request = require('request');
+var WechatAPI = require('wechat-api');
+var api = new WechatAPI(process.env.WX_APPID, process.env.WX_APPSECRET);
+var MongoClient = require('../node_modules/loopback-connector-mongodb/node_modules/mongodb').MongoClient;
+var mongodburl = 'mongodb://localhost:27017/wxcard';
+
+var poiurl = 'http://apis.map.qq.com/lbscloud/v1/poi/search?';
+var count = 0
+var options = {
+  poi_table: 'gas_station',
+  key: 'RGGBZ-CPSHD-QG54O-P53UE-3AIV5-HIFNS',
+  orderby: 'distance(33.54414175,119.01311756)',
+  boundary: 'nearby(33.54414175,119.01311756,350000)',
+  page_size: 200 // Range: 1~200 limit by apis.map.qq.com
+};
+
+var beginTime = Date.now();
+var gasstations = [];
+function fetchPOIs(page_index, next) {
+  options.page_index = page_index || 1;
+  var qs = querystring.stringify(options);
+  request({url: poiurl+qs, json:true}, function (err, res, body) {
+    if(body.status !== 0) {
+      console.log(body.status, body.message, 'When:', (Date.now()-beginTime)/1000, options.page_index);
+      return fetchPOIs(options.page_index, next);
+    }
+    
+    body.data.forEach(function (poi) {
+      if(poi.province === '江苏省') {
+        gasstations.push(poi);
+      }
+    })
+    if(options.page_index*options.page_size < body.count) {
+      fetchPOIs(++options.page_index, next);
+    } else {
+      console.log("Done:", (Date.now()-beginTime)/1000, gasstations.length, body.data[2]);
+      if(next) next(gasstations);
+    }
+  });
+}
+
+var createPoi = function (collection, poi, next) {
+  var option = {
+    business_name: "中国石油",
+    branch_name: poi.title,
+    province: poi.province,
+    city: poi.city,
+    district: poi.district,
+    address: poi.address,
+    telephone: poi.tel,
+    categories: ['汽车,加油站', '购物,便利店', '购物,超市'],
+    offset_type: 1,
+    longitude: poi.location.lng,
+    latitude: poi.location.lat,
+    photo_list: [{"photo_url": "http://mmbiz.qpic.cn/123456"}],
+    special: '免费停车',
+    open_time: "0:00-24:00"
+  };
+  if(!option.telephone || option.telephone === '') option.telephone = "95504";
+  
+  collection.save(option).then(function (result) {
+    var op = result.ops[0];
+    op.sid = op._id;
+    delete op._id;
+    api.addPoi(op, next)
+  }, function (err) {
+    console.log("Collection save error: "+err);
+  })
+};
+
+MongoClient.connect(mongodburl, function(err, db) {
+
+  fetchPOIs(1, function (pois) {
+
+    var collection = db.collection('poi');
+  
+    async.each(pois, function (poi, callback) {
+      createPoi(collection, poi, function (err, result) {
+        console.log(arguments);
+        if(err) {
+          callback(err);
+        } else {
+          callback();
+        }
+      });
+    }, function (err) {
+      if(err) {
+        console.log('Error: '+err)
+      } else {
+        console.log('Success')
+      }
+      db.close();
+    });
+  });
+  
+});

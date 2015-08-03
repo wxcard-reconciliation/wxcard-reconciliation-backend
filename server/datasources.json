@@ -18,6 +18,7 @@
     "connector": "mysql"
   },
   "mongodb": {
+    "database": "wxcard",
     "name": "mongodb",
     "connector": "mongodb"
   }
