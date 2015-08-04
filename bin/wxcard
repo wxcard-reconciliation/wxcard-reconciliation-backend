@@ -4,7 +4,8 @@ var async = require('async');
 var querystring = require('querystring');
 var request = require('request');
 var WechatAPI = require('wechat-api');
-var api = new WechatAPI(process.env.WX_APPID, process.env.WX_APPSECRET);
+// var api = new WechatAPI(process.env.WX_APPID, process.env.WX_APPSECRET);
+var api = new WechatAPI('wxf9856b62841d1cf4', '4effcae6537cfeef60ea60e44191b40e');
 var MongoClient = require('../node_modules/loopback-connector-mongodb/node_modules/mongodb').MongoClient;
 var mongodburl = 'mongodb://localhost:27017/wxcard';
 
@@ -72,29 +73,294 @@ var createPoi = function (collection, poi, next) {
   })
 };
 
+var restpois = [
+{ business_name: '中国石油',
+  branch_name: '新力加油站 ',
+  province: '江苏省',
+  city: '苏州市',
+  district: '吴江区',
+  address: '吴江市平望镇金联村3组运河边',
+  telephone: '95504',
+  categories: [ '汽车,加油站', '购物,便利店', '购物,超市' ],
+  offset_type: 1,
+  longitude: 120.6688119,
+  latitude: 30.98576965,
+  photo_list: [ { photo_url: 'http://mmbiz.qpic.cn/123456' } ],
+  special: '免费停车',
+  open_time: '0:00-24:00',
+  sid: '55bf3d125b437423c2b20e00' },
+{ business_name: '中国石油',
+  branch_name: '吴江大力加油站',
+  province: '江苏省',
+  city: '苏州市',
+  district: '吴江区',
+  address: '江苏苏州市吴江市平望镇复兴村227省道',
+  telephone: '63641062',
+  categories: [ '汽车,加油站', '购物,便利店', '购物,超市' ],
+  offset_type: 1,
+  longitude: 120.63806376,
+  latitude: 30.95351939,
+  photo_list: [ { photo_url: 'http://mmbiz.qpic.cn/123456' } ],
+  special: '免费停车',
+  open_time: '0:00-24:00',
+  sid: '55bf3d125b437423c2b20e01' },
+{ business_name: '中国石油',
+  branch_name: '吴江天力加油站',
+  province: '江苏省',
+  city: '苏州市',
+  district: '吴江区',
+  address: '江苏苏州市吴江市小圩村平望镇民营开发区227省道东侧',
+  telephone: '63657206',
+  categories: [ '汽车,加油站', '购物,便利店', '购物,超市' ],
+  offset_type: 1,
+  longitude: 120.6460449,
+  latitude: 30.94800397,
+  photo_list: [ { photo_url: 'http://mmbiz.qpic.cn/123456' } ],
+  special: '免费停车',
+  open_time: '0:00-24:00',
+  sid: '55bf3d125b437423c2b20e02' },
+{ business_name: '中国石油',
+  branch_name: '吴江南麻加油站',
+  province: '江苏省',
+  city: '苏州市',
+  district: '吴江区',
+  address: '江苏苏州市吴江市吴江市盛泽镇南麻三叉口',
+  telephone: '63831389',
+  categories: [ '汽车,加油站', '购物,便利店', '购物,超市' ],
+  offset_type: 1,
+  longitude: 120.53109846,
+  latitude: 30.87229946,
+  photo_list: [ { photo_url: 'http://mmbiz.qpic.cn/123456' } ],
+  special: '免费停车',
+  open_time: '0:00-24:00',
+  sid: '55bf3d125b437423c2b20e05' },
+{ business_name: '中国石油',
+  branch_name: '吴江芦墟加油站',
+  province: '江苏省',
+  city: '苏州市',
+  district: '吴江区',
+  address: '江苏苏州市吴江市芦墟318国道旁汽车站西',
+  telephone: '63273438',
+  categories: [ '汽车,加油站', '购物,便利店', '购物,超市' ],
+  offset_type: 1,
+  longitude: 120.83106727,
+  latitude: 31.01433672,
+  photo_list: [ { photo_url: 'http://mmbiz.qpic.cn/123456' } ],
+  special: '免费停车',
+  open_time: '0:00-24:00',
+  sid: '55bf3d125b437423c2b20e03' },
+{ business_name: '中国石油',
+  branch_name: '吴江西二环便利加油点',
+  province: '江苏省',
+  city: '苏州市',
+  district: '吴江区',
+  address: '吴江盛泽镇西二环路东侧',
+  telephone: '95504',
+  categories: [ '汽车,加油站', '购物,便利店', '购物,超市' ],
+  offset_type: 1,
+  longitude: 120.6259101,
+  latitude: 30.91466998,
+  photo_list: [ { photo_url: 'http://mmbiz.qpic.cn/123456' } ],
+  special: '免费停车',
+  open_time: '0:00-24:00',
+  sid: '55bf3d125b437423c2b20e04' },
+{ business_name: '中国石油',
+  branch_name: '思古桥水上加油站',
+  province: '江苏省',
+  city: '苏州市',
+  district: '吴江区',
+  address: '苏州市吴江市桃源镇铜锣严东村',
+  telephone: '95504',
+  categories: [ '汽车,加油站', '购物,便利店', '购物,超市' ],
+  offset_type: 1,
+  longitude: 120.5548609,
+  latitude: 30.82509682,
+  photo_list: [ { photo_url: 'http://mmbiz.qpic.cn/123456' } ],
+  special: '免费停车',
+  open_time: '0:00-24:00',
+  sid: '55bf3d125b437423c2b20e09' },
+{ business_name: '中国石油',
+  branch_name: '吴江中心大道便利加油点',
+  province: '江苏省',
+  city: '苏州市',
+  district: '吴江区',
+  address: '江苏省苏州市吴江区盛泽镇中心大道西侧',
+  telephone: '95504',
+  categories: [ '汽车,加油站', '购物,便利店', '购物,超市' ],
+  offset_type: 1,
+  longitude: 120.645462,
+  latitude: 30.88495567,
+  photo_list: [ { photo_url: 'http://mmbiz.qpic.cn/123456' } ],
+  special: '免费停车',
+  open_time: '0:00-24:00',
+  sid: '55bf3d125b437423c2b20e08' },
+{ business_name: '中国石油',
+  branch_name: '吴江百花加油站',
+  province: '江苏省',
+  city: '苏州市',
+  district: '吴江区',
+  address: '江苏苏州市吴江市桃源镇青云社区远欣路1911号',
+  telephone: '63866688',
+  categories: [ '汽车,加油站', '购物,便利店', '购物,超市' ],
+  offset_type: 1,
+  longitude: 120.48776382,
+  latitude: 30.84490476,
+  photo_list: [ { photo_url: 'http://mmbiz.qpic.cn/123456' } ],
+  special: '免费停车',
+  open_time: '0:00-24:00',
+  sid: '55bf3d125b437423c2b20e06' },
+{ business_name: '中国石油',
+  branch_name: '桃源加油站',
+  province: '江苏省',
+  city: '苏州市',
+  district: '吴江区',
+  address: '吴江市桃源镇前窑村',
+  telephone: '95504',
+  categories: [ '汽车,加油站', '购物,便利店', '购物,超市' ],
+  offset_type: 1,
+  longitude: 120.50530206,
+  latitude: 30.75942304,
+  photo_list: [ { photo_url: 'http://mmbiz.qpic.cn/123456' } ],
+  special: '免费停车',
+  open_time: '0:00-24:00',
+  sid: '55bf3d125b437423c2b20e0a' },
+{ business_name: '中国石油',
+  branch_name: '吴江明达加油站',
+  province: '江苏省',
+  city: '苏州市',
+  district: '吴江区',
+  address: '江苏苏州市吴江市苏州盛泽镇坛丘社区大熟村',
+  telephone: '63603772',
+  categories: [ '汽车,加油站', '购物,便利店', '购物,超市' ],
+  offset_type: 1,
+  longitude: 120.59897527,
+  latitude: 30.88691852,
+  photo_list: [ { photo_url: 'http://mmbiz.qpic.cn/123456' } ],
+  special: '免费停车',
+  open_time: '0:00-24:00',
+  sid: '55bf3d125b437423c2b20e07' },
+{ business_name: '中国石油',
+  branch_name: '吴江八坼加油站',
+  province: '江苏省',
+  city: '苏州市',
+  district: '吴江区',
+  address: '江苏苏州市吴江市八坼镇227省道西松陵镇八坼桥向北500米',
+  telephone: '63365209',
+  categories: [ '汽车,加油站', '购物,便利店', '购物,超市' ],
+  offset_type: 1,
+  longitude: 120.66952654,
+  latitude: 31.08190984,
+  photo_list: [ { photo_url: 'http://mmbiz.qpic.cn/123456' } ],
+  special: '免费停车',
+  open_time: '0:00-24:00',
+  sid: '55bf3d125b437423c2b20df5' },
+{ business_name: '中国石油',
+  branch_name: '吴江吴娄加油站',
+  province: '江苏省',
+  city: '苏州市',
+  district: '吴江区',
+  address: '江苏苏州市吴江市七都镇建设路小暑桥旁',
+  telephone: '63817693',
+  categories: [ '汽车,加油站', '购物,便利店', '购物,超市' ],
+  offset_type: 1,
+  longitude: 120.3977747,
+  latitude: 30.93349625,
+  photo_list: [ { photo_url: 'http://mmbiz.qpic.cn/123456' } ],
+  special: '免费停车',
+  open_time: '0:00-24:00',
+  sid: '55bf3d125b437423c2b20dfa' },
+{ business_name: '中国石油',
+  branch_name: '新华路加油站',
+  province: '江苏省',
+  city: '苏州市',
+  district: '吴中区',
+  address: '江苏苏州市园区苏州工业园区新华路36号',
+  telephone: '62995095',
+  categories: [ '汽车,加油站', '购物,便利店', '购物,超市' ],
+  offset_type: 1,
+  longitude: 120.77599099,
+  latitude: 31.26897428,
+  photo_list: [ { photo_url: 'http://mmbiz.qpic.cn/123456' } ],
+  special: '免费停车',
+  open_time: '0:00-24:00',
+  sid: '55bf3d125b437423c2b20de3' },
+{ business_name: '中国石油',
+  branch_name: '昆山大庆加油站',
+  province: '江苏省',
+  city: '苏州市',
+  district: '昆山市',
+  address: '江苏苏州市昆山市昆山开发区朝阳东路121号',
+  telephone: '57703184',
+  categories: [ '汽车,加油站', '购物,便利店', '购物,超市' ],
+  offset_type: 1,
+  longitude: 120.99884707,
+  latitude: 31.35768519,
+  photo_list: [ { photo_url: 'http://mmbiz.qpic.cn/123456' } ],
+  special: '免费停车',
+  open_time: '0:00-24:00',
+  sid: '55bf3d125b437423c2b20df0' },
+{ business_name: '中国石油',
+  branch_name: '太仓富豪加油站',
+  province: '江苏省',
+  city: '苏州市',
+  district: '太仓市',
+  address: '江苏苏州市太仓市柳园路8-1号',
+  telephone: '53528154',
+  categories: [ '汽车,加油站', '购物,便利店', '购物,超市' ],
+  offset_type: 1,
+  longitude: 121.10808639,
+  latitude: 31.4574301,
+  photo_list: [ { photo_url: 'http://mmbiz.qpic.cn/123456' } ],
+  special: '免费停车',
+  open_time: '0:00-24:00',
+  sid: '55bf3d125b437423c2b20de9' }
+];
+
+var createPois = function (pois, next) {
+  console.log('Start pois: '+pois.length);
+  async.eachLimit(pois, 10, function (poi, callback) {
+    if(poi._id) {
+      poi.sid = poi._id;
+      delete poi._id;
+    }
+    if(poi.telephone === '') poi.telephone = "95504";
+    api.addPoi(poi, function (err, result) {
+      if(err) {
+        console.log(poi);
+        callback(err);
+      } else {
+        callback();
+      }
+    });
+  }, next);
+};
+
 MongoClient.connect(mongodburl, function(err, db) {
 
-  fetchPOIs(1, function (pois) {
-
-    var collection = db.collection('poi');
+  var collection = db.collection('poi');
+  var cleanup = function (err) {
+    if(err) {
+      console.log('Error: '+err)
+    } else {
+      console.log('Success')
+    }
+    db.close();      
+  }
   
-    async.each(pois, function (poi, callback) {
-      createPoi(collection, poi, function (err, result) {
-        console.log(arguments);
-        if(err) {
-          callback(err);
-        } else {
-          callback();
-        }
-      });
-    }, function (err) {
-      if(err) {
-        console.log('Error: '+err)
-      } else {
-        console.log('Success')
-      }
-      db.close();
-    });
-  });
+  createPois(restpois, cleanup);
+  // collection.find({}).toArray(function (err, pois) {
+  // });
+  
+  // fetchPOIs(1, function (pois) {
+  //   async.each(pois, function (poi, callback) {
+  //     createPoi(collection, poi, function (err, result) {
+  //       if(err) {
+  //         callback(err);
+  //       } else {
+  //         callback();
+  //       }
+  //     });
+  //   }, cleanup);
+  // });
   
 });
