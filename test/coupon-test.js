@@ -111,11 +111,11 @@ describe('# Cancel code error', function() {
   
 });
 
-describe('# Gasstation', function() {
+describe.only('# Gasstation', function() {
   
   describe('## Cancel code', function() {
     lt.describe.whenCalledByUser(gasstationUser, 'POST', '/api/coupons/cancel', {
-      code: '689285956012'
+      code: '771080731569'
     }, function () {
       it('should success cancel by gasstation', function() {
         console.log(this.res.body)

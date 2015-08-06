@@ -1,4 +1,4 @@
-all : bin
+all : test
 	
 bin :
 	bin/wxcard
