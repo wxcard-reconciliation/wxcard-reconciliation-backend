@@ -111,7 +111,7 @@ describe('# Cancel code error', function() {
   
 });
 
-describe.only('# Gasstation', function() {
+describe('# Gasstation', function() {
   
   describe('## Cancel code', function() {
     lt.describe.whenCalledByUser(gasstationUser, 'POST', '/api/coupons/cancel', {

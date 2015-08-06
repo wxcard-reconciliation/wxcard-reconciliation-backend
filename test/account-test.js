@@ -6,13 +6,13 @@ var querystring = require('querystring')
 lt.beforeEach.withApp(app);
 lt.beforeEach.withUserModel('account');
 
-var loggedInUser = {email:"gbo2@example.com", password: "123456", id: 233, companyId:4, job: '管理员'}
-var gasstationUser = {email:"gasstation@example.com", password: '123456', id: 333, job: '加油站长'}
+var loggedInUser = {email:"gbo2@example.com", password: "123456", id: 233, job: '管理员'}
+var gasstationUser = {email:"gasstation@example.com", password: '123456', id: 333, companyId:4, job: '加油站长', openId: 'abc123'}
 
 
 describe('# Account', function() {
 
-  lt.beforeEach.givenLoggedInUser(loggedInUser, 'account');
+  lt.beforeEach.givenLoggedInUser(loggedInUser);
   
   describe('## Update', function() {
     lt.describe.whenCalledRemotely('PUT', '/api/accounts/'+loggedInUser.id,{
@@ -50,7 +50,7 @@ describe('# Account', function() {
 
 describe('# Account Exeception', function() {
   
-  describe('## Find', function() {
+  describe.only('## Find', function() {
     lt.describe.whenCalledAnonymously('GET', '/api/accounts', function () {
       lt.it.shouldBeDenied();
     })

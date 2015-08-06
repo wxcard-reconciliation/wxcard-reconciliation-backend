@@ -23,7 +23,7 @@ describe('# Company', function() {
     });
   });
   
-  describe.only('## Sync from wechat', function() {
+  describe('## Sync from wechat', function() {
     this.timeout(10000)
     lt.describe.whenCalledRemotely('POST', '/api/companies/sync', {
       begin: 0

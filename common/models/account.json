@@ -6,6 +6,9 @@
     "validateUpsert": true
   },
   "properties": {
+    "openId": {
+      "type": "string"
+    },
     "companyId": {
       "type": "number"
     },
