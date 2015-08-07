@@ -8,16 +8,16 @@ module.exports = function(CouponRecord) {
     ctx.query.where.token = process.env.BEEWX_TOKEN;
     var context = loopback.getCurrentContext();
     var currentUser = context && context.get('currentUser');
-    if(currentUser.companyId) {
-      // ctx.query.where.company_id = currentUser.companyId;
-      ctx.query.where.and = [
-        {
-          or:[
-            {company_id: currentUser.companyId },
-            {company_id: 0 }
-          ]
-        }
-      ];
+    if(currentUser.companyId > 0) {
+      ctx.query.where.company_id = currentUser.companyId;
+      // ctx.query.where.and = [
+      //   {
+      //     or:[
+      //       {company_id: currentUser.companyId },
+      //       {company_id: 0 }
+      //     ]
+      //   }
+      // ];
     }
     // console.log('-----', JSON.stringify(ctx.query.where))
     next();
