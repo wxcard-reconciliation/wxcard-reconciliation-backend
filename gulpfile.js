@@ -5,7 +5,7 @@ var exec = require('child_process').exec;
 
 gulp.task('build', function () {
   return gulp.src('./server/server.js')
-    .pipe(loopbackAngular({apiUrl:'http://0.0.0.0:3000/api'}))
+    .pipe(loopbackAngular({apiUrl:'http://120.26.66.200:3000/api'}))
     .pipe(rename('wxcard-reconciliation-lbservices.js'))
     .pipe(gulp.dest('./bower/'));
 });
