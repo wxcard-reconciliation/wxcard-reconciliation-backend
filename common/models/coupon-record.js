@@ -9,15 +9,15 @@ module.exports = function(CouponRecord) {
     var context = loopback.getCurrentContext();
     var currentUser = context && context.get('currentUser');
     if(currentUser.companyId > 0) {
-      ctx.query.where.company_id = currentUser.companyId;
-      // ctx.query.where.and = [
-      //   {
-      //     or:[
-      //       {company_id: currentUser.companyId },
-      //       {company_id: 0 }
-      //     ]
-      //   }
-      // ];
+      // Before cancel code, coupon/company info need been query for check
+      ctx.query.where.and = [
+        {
+          or:[
+            {company_id: currentUser.companyId },
+            {company_id: 0 }
+          ]
+        }
+      ];
     }
     // console.log('-----', JSON.stringify(ctx.query.where))
     next();
