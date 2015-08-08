@@ -3,6 +3,9 @@
   "base": "User",
   "idInjection": true,
   "options": {
+    "mysql": {
+      "table": "tp_account"
+    },
     "validateUpsert": true
   },
   "properties": {
