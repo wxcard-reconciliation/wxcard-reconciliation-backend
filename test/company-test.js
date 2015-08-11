@@ -3,7 +3,7 @@ var assert = require('assert');
 var app = require('../server/server.js'); 
 var querystring = require('querystring')
 
-var loggedInUser = {email:"gbo2@example.com", password: "123456", id: 233}
+var loggedInUser = {email:"gbo2@example.com", password: "123456", id: 233, job: '管理员'}
 
 describe('# Company', function() {
   lt.beforeEach.withApp(app);
@@ -23,10 +23,10 @@ describe('# Company', function() {
     });
   });
   
-  describe('## Sync from wechat', function() {
-    this.timeout(10000)
+  describe.only('## Sync from wechat', function() {
+    this.timeout(1000000)
     lt.describe.whenCalledRemotely('POST', '/api/companies/sync', {
-      begin: 0
+      begin: 150
     }, function () {
       it('should success sync', function() {
         console.log(this.res.body)

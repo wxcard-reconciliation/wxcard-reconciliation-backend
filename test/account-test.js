@@ -50,7 +50,7 @@ describe('# Account', function() {
 
 describe('# Account Exeception', function() {
   
-  describe.only('## Find', function() {
+  describe('## Find', function() {
     lt.describe.whenCalledAnonymously('GET', '/api/accounts', function () {
       lt.it.shouldBeDenied();
     })
