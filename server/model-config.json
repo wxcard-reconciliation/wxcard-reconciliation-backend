@@ -72,5 +72,13 @@
   "poi": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "card": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "cardevent": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

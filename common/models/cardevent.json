@@ -1,0 +1,19 @@
+{
+  "name": "cardevent",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "card": {
+      "type": "belongsTo",
+      "model": "card",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": []
+}
