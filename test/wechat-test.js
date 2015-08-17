@@ -6,7 +6,7 @@ var assert = require('assert');
 var app = require('../server/server.js'); 
 var querystring = require('querystring')
 
-var loggedInUser = {email:"gbo2@example.com", password: "123456", id: 123456}
+lt.beforeEach.withApp(app);
 
 describe('Wechat API', function() {
   describe('#User', function() {
@@ -32,22 +32,6 @@ describe('Wechat API', function() {
   
 });
 
-describe('#Wechatuse', function() {
-  lt.beforeEach.withApp(app);
-  lt.beforeEach.givenLoggedInUser(loggedInUser);
-  
-  var qs = querystring.stringify({
-    limit: 5,
-    skip:0
-  })
-  lt.describe.whenCalledRemotely('GET', '/api/wechatusers?'+qs, function () {
-    it('should success get users', function() {
-      assert.equal(this.res.statusCode, 200);
-      // console.log(this.res.body.data.users)
-    });
-  });
-});
-
 describe('# Coupon', function() {
   it('should success issue', function(done) {
     api.createQRCode({
@@ -70,5 +54,101 @@ describe('# Short Url', function() {
      console.log(result);
      done();
    })
+  });
+});
+
+describe.only('# WXMessage', function() {
+  describe('## Get Card', function() {
+    lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
+      ToUserName: 'zyjshkez',
+      FromUserName: 'abc123',
+      CreateTime: Math.round(Date.now()/1000),
+      MsgType: 'event',
+      Event: 'user_get_card',
+      CardId: 'abcdef123456',
+      IsGiveByFriend: 0,
+      UserCardCode: '1234567890',
+      OuterId: 0
+    }, function () {
+      it('should success', function(done) {
+        assert.equal(this.res.statusCode, 200);
+        done()
+      });
+    });
+  });
+  
+  describe('## Donate Card', function() {
+    lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
+      ToUserName: 'zyjshkez',
+      FromUserName: 'def456',
+      FriendUserName: 'abc123',
+      CreateTime: Math.round(Date.now()/1000),
+      MsgType: 'event',
+      Event: 'user_get_card',
+      CardId: 'abcdef123456',
+      IsGiveByFriend: 1,
+      UserCardCode: '0987654321',
+      OldUserCardCode: '1234567890',
+      OuterId: 0
+    }, function () {
+      it('should success', function(done) {
+        assert.equal(this.res.statusCode, 200);
+        done()
+      });
+    });
+  });
+  
+  describe('## Consume Card', function() {
+    lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
+      ToUserName: 'zyjshkez',
+      FromUserName: 'def456',
+      FriendUserName: 'abc123',
+      CreateTime: Math.round(Date.now()/1000),
+      MsgType: 'event',
+      Event: 'user_consume_card',
+      CardId: 'abcdef123456',
+      UserCardCode: '0987654321',
+      ConsumeSource: 'FROM_API'
+    }, function () {
+      it('should success', function(done) {
+        assert.equal(this.res.statusCode, 200);
+        done()
+      });
+    });
+  });
+  
+  describe('## Delete Card', function() {
+    var code = '451234567890';
+    lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
+      ToUserName: 'zyjshkez',
+      FromUserName: 'abc123',
+      CreateTime: Math.round(Date.now()/1000),
+      MsgType: 'event',
+      Event: 'user_get_card',
+      CardId: 'abcdef123456',
+      IsGiveByFriend: 0,
+      UserCardCode: code,
+      OuterId: 0
+    }, function () {
+      it('should success', function(done) {
+        assert.equal(this.res.statusCode, 200);
+        done()
+      });
+    });
+    
+    lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
+      ToUserName: 'zyjshkez',
+      FromUserName: 'abc123',
+      CreateTime: Math.round(Date.now()/1000),
+      MsgType: 'event',
+      Event: 'user_del_card',
+      CardId: 'abcdef123456',
+      UserCardCode: code
+    }, function () {
+      it('should success', function(done) {
+        assert.equal(this.res.statusCode, 200);
+        done()
+      });
+    });
   });
 });

@@ -80,5 +80,9 @@
   "cardevent": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "wxmessage": {
+    "dataSource": null,
+    "public": true
   }
 }

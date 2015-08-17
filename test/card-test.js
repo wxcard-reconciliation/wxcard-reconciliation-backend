@@ -11,7 +11,7 @@ var loggedInUser = {username: "13912345678", email:"13912345678@example.com", pa
 describe('# Card', function() {
   lt.beforeEach.givenLoggedInUser(loggedInUser);
   
-  describe.only('## Sync', function() {
+  describe('## Sync', function() {
     this.timeout(100000)
     lt.describe.whenCalledRemotely('POST', '/api/cards/sync', {
       offset: 0,
@@ -19,7 +19,7 @@ describe('# Card', function() {
     }, function () {
       it('should success get coupon', function() {
         console.log(this.res.body);
-        // assert.equal(this.res.statusCode, 200);
+        assert.equal(this.res.statusCode, 200);
       });
     });
     
