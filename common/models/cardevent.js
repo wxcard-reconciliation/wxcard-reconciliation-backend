@@ -1,8 +1,10 @@
+var async = require('async');
+
 module.exports = function(Cardevent) {
 
   Cardevent.updateStatus = function (code, status, next) {
     Cardevent.updateAll({
-      UserCardCode: code
+      id: code
     }, {status: status}, function (err, info) {
       // console.log('====',arguments);
       if(next) next(err, '');
@@ -15,11 +17,29 @@ module.exports = function(Cardevent) {
       Cardevent.updateStatus(msg.OldUserCardCode, 'donated');
     }
 
-    Cardevent.findOrCreate({
-      where:{UserCardCode: msg.UserCardCode}
-    }, msg, function (err, instance, isNew) {
-      // console.log('----', arguments);
-      next(err, '')
+    async.parallel([
+      function attachWXUser(callback) {
+        Cardevent.app.models.wxuser.findById(msg.FromUserName, callback);
+      },
+      function attachCard(callback) {
+        Cardevent.app.models.card.findById(msg.CardId, callback);
+      }
+    ], function (err, results) {
+      // console.log('==--==', arguments)
+      msg.wxuser = results[0];
+      msg.card = results[1];
+      msg.id = msg.UserCardCode;
+      delete msg.UserCardCode;
+      Cardevent.upsert(msg, function (err, instance) {
+        console.log('----', arguments);
+        next(err, '')
+      })
+      // Cardevent.findOrCreate({
+      //   where:{UserCardCode: msg.UserCardCode}
+      // }, msg, function (err, instance, isNew) {
+      //   console.log('----', arguments);
+      //   next(err, '')
+      // });
     });
   };
   

@@ -61,11 +61,11 @@ describe.only('# WXMessage', function() {
   describe('## Get Card', function() {
     lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
       ToUserName: 'zyjshkez',
-      FromUserName: 'abc123',
+      FromUserName: 'o2sNkuH9b_Q6E3ABpBKvHUUQiktI',
       CreateTime: Math.round(Date.now()/1000),
       MsgType: 'event',
       Event: 'user_get_card',
-      CardId: 'abcdef123456',
+      CardId: 'pAtUNs-HV0evhGTWbU3ohp99tW7k',
       IsGiveByFriend: 0,
       UserCardCode: '1234567890',
       OuterId: 0
@@ -80,12 +80,12 @@ describe.only('# WXMessage', function() {
   describe('## Donate Card', function() {
     lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
       ToUserName: 'zyjshkez',
-      FromUserName: 'def456',
-      FriendUserName: 'abc123',
+      FromUserName: 'o2sNkuDGXZ6ei0kXxpBkjW5akra8',
+      FriendUserName: 'o2sNkuH9b_Q6E3ABpBKvHUUQiktI',
       CreateTime: Math.round(Date.now()/1000),
       MsgType: 'event',
       Event: 'user_get_card',
-      CardId: 'abcdef123456',
+      CardId: 'pAtUNs-HV0evhGTWbU3ohp99tW7k',
       IsGiveByFriend: 1,
       UserCardCode: '0987654321',
       OldUserCardCode: '1234567890',
@@ -101,12 +101,11 @@ describe.only('# WXMessage', function() {
   describe('## Consume Card', function() {
     lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
       ToUserName: 'zyjshkez',
-      FromUserName: 'def456',
-      FriendUserName: 'abc123',
+      FromUserName: 'o2sNkuH9b_Q6E3ABpBKvHUUQiktI',
       CreateTime: Math.round(Date.now()/1000),
       MsgType: 'event',
       Event: 'user_consume_card',
-      CardId: 'abcdef123456',
+      CardId: 'pAtUNs-HV0evhGTWbU3ohp99tW7k',
       UserCardCode: '0987654321',
       ConsumeSource: 'FROM_API'
     }, function () {
@@ -121,11 +120,11 @@ describe.only('# WXMessage', function() {
     var code = '451234567890';
     lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
       ToUserName: 'zyjshkez',
-      FromUserName: 'abc123',
+      FromUserName: 'o2sNkuH9b_Q6E3ABpBKvHUUQiktI',
       CreateTime: Math.round(Date.now()/1000),
       MsgType: 'event',
       Event: 'user_get_card',
-      CardId: 'abcdef123456',
+      CardId: 'pAtUNs-HV0evhGTWbU3ohp99tW7k',
       IsGiveByFriend: 0,
       UserCardCode: code,
       OuterId: 0
@@ -138,11 +137,11 @@ describe.only('# WXMessage', function() {
     
     lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
       ToUserName: 'zyjshkez',
-      FromUserName: 'abc123',
+      FromUserName: 'o2sNkuH9b_Q6E3ABpBKvHUUQiktI',
       CreateTime: Math.round(Date.now()/1000),
       MsgType: 'event',
       Event: 'user_del_card',
-      CardId: 'abcdef123456',
+      CardId: 'pAtUNs-HV0evhGTWbU3ohp99tW7k',
       UserCardCode: code
     }, function () {
       it('should success', function(done) {

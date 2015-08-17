@@ -7,13 +7,7 @@
   },
   "properties": {},
   "validations": [],
-  "relations": {
-    "card": {
-      "type": "belongsTo",
-      "model": "card",
-      "foreignKey": ""
-    }
-  },
+  "relations": {},
   "acls": [
     {
       "accessType": "WRITE",
