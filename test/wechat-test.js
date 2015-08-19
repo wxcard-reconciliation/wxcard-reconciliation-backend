@@ -57,7 +57,7 @@ describe('# Short Url', function() {
   });
 });
 
-describe.only('# WXMessage', function() {
+describe('# WXMessage', function() {
   describe('## Get Card', function() {
     lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
       ToUserName: 'zyjshkez',

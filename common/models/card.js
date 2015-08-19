@@ -9,7 +9,7 @@ module.exports = function(Card) {
     Card.app.wechat.getCards(offset, count, function (err, result) {
       async.each(result.card_id_list, function (card_id, callback) {
         Card.app.wechat.getCard(card_id, function (err, result) {
-          if(err) return callback();
+          if(err) return callback(err);
           
           var card_type = result.card.card_type.toLowerCase()
           var entity = result.card[card_type];
@@ -27,7 +27,7 @@ module.exports = function(Card) {
           });
         });
       }, function (err) {
-        next(err, result);
+        next(err);
       });
     })
   };

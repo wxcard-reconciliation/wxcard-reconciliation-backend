@@ -57,10 +57,6 @@
     "dataSource": "mysql",
     "public": true
   },
-  "wechatuser": {
-    "dataSource": null,
-    "public": false
-  },
   "wxuser": {
     "dataSource": "mysql",
     "public": true
@@ -83,6 +79,10 @@
   },
   "wxmessage": {
     "dataSource": null,
+    "public": true
+  },
+  "wxclient": {
+    "dataSource": "mongodb",
     "public": true
   }
 }
