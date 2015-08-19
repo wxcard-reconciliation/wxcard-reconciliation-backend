@@ -3,19 +3,24 @@ var async = require('async');
 module.exports = function(Wxclient) {
 
   Wxclient.getUsers = function (openids, next) {
-    var getUser = function (openid, callback) {
-      console.log('openid', openid);
-      Wxclient.app.wechat.getUser(openid, function (err, result) {
-        if(err) console.log('====',err, result);
-        if(err) return callback(err);
-
-        result.id = result.openid;
-        delete result.openid;
-        Wxclient.upsert(result, callback);
+    var batchGetUsers = function (openids, callback) {
+      Wxclient.app.wechat.batchGetUsers(openids, function (err, result) {
+        if(err) console.log('====', err);
+        // if(err) return callback(err);
+        
+        async.each(result.user_info_list, function (wxuser, callback) {
+          wxuser.id = wxuser.openid;
+          delete wxuser.openid;
+          Wxclient.upsert(wxuser, callback);
+        }, callback);
       });
     }
-    async.eachLimit(openids, 10, getUser, function (err) {
-      if(next) next(err, openids);
+    var groups = [];
+    while(openids.length > 0) {
+      groups.push(openids.splice(0, 100));
+    }
+    async.eachLimit(groups, 5, batchGetUsers, function (err) {
+      if(next) next(err, groups);
     });
   }
   
