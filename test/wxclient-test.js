@@ -10,16 +10,15 @@ lt.beforeEach.withUserModel('account');
 
 var loggedInUser = {username: "13912345678", email:"13912345678@example.com", password: "123456", id: 2}
 
-
-describe.only('# WXClient', function() {
+describe('# WXClient', function() {
   this.timeout(0);
-  lt.beforeEach.givenLoggedInUser(loggedInUser);
+  // lt.beforeEach.givenLoggedInUser(loggedInUser);
   
   describe('## Sync', function() {
     lt.describe.whenCalledRemotely('POST', '/api/wxclients/sync', {}, function () {
       it('should success', function() {
         // console.log(this.res.body.length);
-        // assert.equal(this.res.statusCode, 200);
+        assert.equal(this.res.statusCode, 200);
       });
     });   
   });
@@ -43,5 +42,28 @@ describe('# Invalidate JSON String', function() {
     str = str.replace(/[\u0000-\u001f\u0080-\u009f]/g, "");
     console.log(str);
     console.log(JSON.parse(str));
+  });
+});
+
+describe('# Invalidate JSON String', function() {
+  var str = '{"user_info_list":[{"subscribe":1,"openid":"oAtUNs4nYe4hBW9bh6lqCJFmuDGY","nickname":"\\躲茬角落看天倥\"","sex":1,"language":"zh_CN","city":"Yangzhou","province":"Jiangsu","country":"China","headimgurl":"http:\/\/wx.qlogo.cn\/mmopen\/ajNVdqHZLLAqicRtUE4bfOJkpvRNv5wDSFbHjqowBMhvZ96qVylab12QK7MrF9gPiaYhP0gej6w4xFhkLsbFId2Q\/0","subscribe_time":1438232032,"remark":"","groupid":0}]}';
+  
+  var escMap = {
+    '"': '\\"',       // \u0022
+    '\\': '\\\\',     // \u005c
+    '\b': '\\b',      // \u0008 
+    '\f': '\\f',      // \u000c
+    '\n': '\\n',      // \u000a
+    '\r': '\\r',      // \u000d
+    '\t': '\\t'       // \u0009
+  };
+  var escFunc = function (m) { 
+    return escMap[m] || '\\u' + (m.charCodeAt(0) + 0x10000).toString(16).substr(1); 
+  };
+  var escRE = /[\u0000-\u001F\u005C]/g;
+  it('should ok', function() {
+    str = str.replace(escRE, escFunc);
+    console.log(str);
+    JSON.parse(str);
   });
 });

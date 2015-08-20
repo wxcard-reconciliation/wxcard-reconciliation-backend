@@ -5,8 +5,14 @@ module.exports = function(Wxclient) {
   Wxclient.getUsers = function (openids, next) {
     var batchGetUsers = function (openids, callback) {
       Wxclient.app.wechat.batchGetUsers(openids, function (err, result) {
-        if(err) console.log('====', err);
-        // if(err) return callback(err);
+        if(err) {
+          if(err.name === 'WeChatAPIJSONResponseFormatError') {
+            result = JSON.parse(result.replace(/[\u0000-\u001F]/g, ''));
+          } else {
+            console.log('====', result);
+            // return callback(err, result);
+          }
+        }
         
         async.each(result.user_info_list, function (wxuser, callback) {
           wxuser.id = wxuser.openid;
