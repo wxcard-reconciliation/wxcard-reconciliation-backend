@@ -26,7 +26,6 @@ app.use(function setCurrentUser(req, res, next) {
 });
 
 app.start = function() {
-  app.post('/wxmessages', require('./middleware/wxmessage')());
   // start the web server
   return app.listen(function() {
     app.emit('started');
