@@ -14,7 +14,7 @@ describe('# WXClient', function() {
   this.timeout(0);
   lt.beforeEach.givenLoggedInUser(loggedInUser);
   
-  describe.only('## Sync', function() {
+  describe('## Sync', function() {
     lt.describe.whenCalledRemotely('POST', '/api/wxclients/sync', {}, function () {
       it('should success', function() {
         // console.log(this.res.body);

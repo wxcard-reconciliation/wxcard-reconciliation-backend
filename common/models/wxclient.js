@@ -73,4 +73,13 @@ module.exports = function(Wxclient) {
     }
   );
 
+  Wxclient.subscribe = function (msg, next) {
+    Wxclient.app.wechat.getUser(msg.FromUserName, function (err, wxuser) {
+      if(err) return next(err);
+      
+      wxuser.id = wxuser.openid;
+      delete wxuser.openid;
+      Wxclient.upsert(wxuser, next);
+    })
+  }
 };

@@ -1,6 +1,8 @@
 module.exports = function(Wxmessage) {
 
   Wxmessage.event = {
+    subscribe: 'wxclient',
+    unsubscribe: 'wxclient',
     card_not_pass_check: 'card',
     card_pass_check: 'card',
     user_del_card: 'cardevent',
