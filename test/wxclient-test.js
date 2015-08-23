@@ -12,12 +12,12 @@ var loggedInUser = {username: "13912345678", email:"13912345678@example.com", pa
 
 describe('# WXClient', function() {
   this.timeout(0);
-  // lt.beforeEach.givenLoggedInUser(loggedInUser);
+  lt.beforeEach.givenLoggedInUser(loggedInUser);
   
-  describe('## Sync', function() {
+  describe.only('## Sync', function() {
     lt.describe.whenCalledRemotely('POST', '/api/wxclients/sync', {}, function () {
       it('should success', function() {
-        // console.log(this.res.body.length);
+        // console.log(this.res.body);
         assert.equal(this.res.statusCode, 200);
       });
     });   
