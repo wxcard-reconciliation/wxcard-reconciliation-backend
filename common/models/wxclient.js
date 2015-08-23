@@ -80,6 +80,10 @@ module.exports = function(Wxclient) {
       wxuser.id = wxuser.openid;
       delete wxuser.openid;
       Wxclient.upsert(wxuser, next);
-    })
-  }
+    });
+  };
+  
+  Wxclient.unsubscribe = function (msg, next) {
+    Wxclient.upsert({id: msg.FromUserName, subscribe: 0}, next);
+  };
 };

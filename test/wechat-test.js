@@ -164,6 +164,19 @@ describe('# WXMessage', function() {
         // assert.equal(this.res.statusCode, 200);
         done()
       });
-    })
+    });
+    
+    lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
+      ToUserName: 'zyjshkez',
+      FromUserName: 'oAtUNs_WhBwy3QiftzLuk6aihKlU',
+      CreateTime: Math.round(Date.now()/1000),
+      MsgType: 'event',
+      Event: 'unsubscribe'
+    }, function () {
+      it('should success unsubscribe', function(done) {
+        console.log(this.res.body);
+        done();
+      });
+    });
   });
 });
