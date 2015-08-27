@@ -155,7 +155,7 @@ describe('# WXMessage', function() {
     lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
       ToUserName: 'zyjshkez',
       FromUserName: 'o2sNkuH9b_Q6E3ABpBKvHUUQiktI',
-      CreateTime: Math.round(Date.now()/1000),
+      CreateTime: '1438936030',
       MsgType: 'event',
       Event: 'subscribe'
     }, function () {
