@@ -154,21 +154,21 @@ describe('# WXMessage', function() {
   describe.only('## Subscribe Event', function() {
     lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
       ToUserName: 'zyjshkez',
-      FromUserName: 'oAtUNs_WhBwy3QiftzLuk6aihKlU',
+      FromUserName: 'o2sNkuH9b_Q6E3ABpBKvHUUQiktI',
       CreateTime: Math.round(Date.now()/1000),
       MsgType: 'event',
       Event: 'subscribe'
     }, function () {
       it('should success', function(done) {
         console.log(this.res.body);
-        // assert.equal(this.res.statusCode, 200);
+        assert.equal(this.res.statusCode, 200);
         done()
       });
     });
     
     lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
       ToUserName: 'zyjshkez',
-      FromUserName: 'oAtUNs_WhBwy3QiftzLuk6aihKlU',
+      FromUserName: 'o2sNkuH9b_Q6E3ABpBKvHUUQiktI',
       CreateTime: Math.round(Date.now()/1000),
       MsgType: 'event',
       Event: 'unsubscribe'

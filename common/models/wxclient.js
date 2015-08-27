@@ -74,7 +74,7 @@ module.exports = function(Wxclient) {
   );
 
   Wxclient.subscribe = function (msg, next) {
-    Wxclient.app.wechat.getUser(msg.FromUserName, function (err, wxuser) {
+    Wxclient.app.wechat.getUser({openid: msg.FromUserName, lang: 'zh_CN'}, function (err, wxuser) {
       if(err) return next(err);
       
       wxuser.id = wxuser.openid;
@@ -84,6 +84,16 @@ module.exports = function(Wxclient) {
   };
   
   Wxclient.unsubscribe = function (msg, next) {
-    Wxclient.upsert({id: msg.FromUserName, subscribe: 0}, next);
+    var data = {
+      id: msg.FromUserName,
+      subscribe: 0
+    }
+    Wxclient.findOrCreate({
+      where:{id: msg.FromUserName}
+    }, data, function (err, instance, isNew) {
+      if(err) return next(err);
+      if(!isNew) instance.updateAttributes({subscribe: 0}, next);
+      else next();
+    });
   };
 };
