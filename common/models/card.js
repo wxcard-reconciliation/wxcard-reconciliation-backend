@@ -47,14 +47,12 @@ module.exports = function(Card) {
       var context = loopback.getCurrentContext()
       var currentUser = context && context.get('currentUser');
       var updateData = {
-        company_id: currentUser.companyId
+        cacnelAt: currentUser.poi
       };
       if(options.receipt) updateData.receipt = options.receipt;
 
-      // console.log(code, card_id, currentUser.companyId)
-      Card.app.models.couponRecord.updateAll({
-        cancel_code: code, 
-        card_id: card_id
+      Card.app.models.cardEvent.updateAll({
+        id: code
       }, updateData, function (err, result) {
         next(err, {card_id: card_id});
       });
@@ -64,8 +62,7 @@ module.exports = function(Card) {
       if(err) {
         next(err);
       } else {
-        next(null, result.card);
-        // updateCompanyId(result.card.card_id);
+        updateCompanyId(result.card.card_id);
       }
     });
   };

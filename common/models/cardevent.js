@@ -6,7 +6,6 @@ module.exports = function(Cardevent) {
     Cardevent.updateAll({
       id: code
     }, {status: status}, function (err, info) {
-      // console.log('====',arguments);
       if(next) next(err, '');
     });
   };
@@ -25,7 +24,6 @@ module.exports = function(Cardevent) {
         Cardevent.app.models.card.findById(msg.CardId, callback);
       }
     ], function (err, results) {
-      // console.log('==--==', arguments)
       msg.wxuser = results[0];
       msg.card = results[1];
       msg.id = msg.UserCardCode;
