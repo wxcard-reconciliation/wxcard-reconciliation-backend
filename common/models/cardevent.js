@@ -2,16 +2,16 @@ var async = require('async');
 
 module.exports = function(Cardevent) {
 
-  Cardevent.updateCode = function (code, data, next) {
-    code = code.toString();
-    Cardevent.findById(code, function (err, instance) {
+  Cardevent.updateCode = function (msg, next) {
+    msg.id = msg.UserCardCode.toString();
+    delete msg.UserCardCode;
+
+    Cardevent.findById(msg.id, function (err, instance) {
       if(err) return next(err);
       if(!instance) {
-        data.id = code;
-        data.CreateTime = Math.round(Date.now()/1000);
-        Cardevent.saveCode(data, next);
+        Cardevent.saveCode(msg, next);
       } else {
-        instance.updateAttributes(data, next);
+        instance.updateAttributes(msg, next);
       }
     });
   };
@@ -38,17 +38,22 @@ module.exports = function(Cardevent) {
     
     if(msg.IsGiveByFriend) {
       msg.OldUserCardCode = msg.OldUserCardCode.toString();
-      Cardevent.updateCode(msg.OldUserCardCode, {'status':'donated'});
+      Cardevent.updateCode({
+        UserCardCode: msg.OldUserCardCode,
+        'status':'donated'
+      });
     }
 
     Cardevent.saveCode(msg, next);
   };
   
   Cardevent.user_consume_card = function (msg, next) {
-    Cardevent.updateCode(msg.UserCardCode, {'status':'consumed'}, next);
+    msg.status = 'consumed';
+    Cardevent.updateCode(msg, next);
   };
   
   Cardevent.user_del_card = function (msg, next) {
-    Cardevent.updateCode(msg.UserCardCode, {'status':'deleted'}, next);
+    msg.status = 'deleted';
+    Cardevent.updateCode(msg, next);
   };
 };

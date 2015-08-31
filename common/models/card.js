@@ -51,11 +51,13 @@ module.exports = function(Card) {
         var context = loopback.getCurrentContext();
         var currentUser = context && context.get('currentUser');
 
-        Card.app.models.Cardevent.updateCode(code, {
+        Card.app.models.Cardevent.updateCode({
           FromUserName: result.openid,
           CardId: result.card.card_id,
+          UserCardCode: code,
           cancelBy: currentUser,
           rececipt: options.receipt,
+          CreateTime: Math.round(Date.now()/1000),
           "status": 'consumed'
         }, next);
       }

@@ -24,9 +24,9 @@ describe('# Card', function() {
     });    
   });
   
-  describe('## Cancel', function() {
+  describe.only('## Cancel', function() {
     lt.describe.whenCalledRemotely('POST', '/api/cards/cancel', {
-      code: '041625691557',
+      code: '650243564813',
       receipt: 'http://zsydz.aceweet.com/app/img/logo-single.png'
     }, function () {
       it('should success', function() {

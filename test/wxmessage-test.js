@@ -5,7 +5,7 @@ var querystring = require('querystring')
 
 lt.beforeEach.withApp(app);
 
-describe.only('# WXMessage Card', function() {
+describe('# WXMessage Card', function() {
   
   describe('## Get Card', function() {
     lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
@@ -66,6 +66,7 @@ describe.only('# WXMessage Card', function() {
   });
   
 });
+
 describe('# WXMessage', function() {
   
   describe('## Delete Card', function() {
