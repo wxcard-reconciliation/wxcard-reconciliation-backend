@@ -31,9 +31,9 @@ describe('# Fetch POI from apis.map.qq.com', function() {
 describe('# POI', function() {
   lt.beforeEach.withApp(app);
   // lt.beforeEach.withUserModel('account');
-  // lt.beforeEach.givenLoggedInUser(loggedInUser);  
+  // lt.beforeEach.givenLoggedInUser(loggedInUser);
   
-  describe.only('##Find', function() {
+  describe('##Find', function() {
     var qs = querystring.stringify({filter: JSON.stringify({
       where: {"branch_name": {regex: "中央北路"}},
       limit: 10,

@@ -84,5 +84,9 @@
   "wxclient": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "user": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

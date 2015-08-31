@@ -10,7 +10,9 @@ app.use(function setCurrentUser(req, res, next) {
   if (!req.accessToken) {
     return next();
   }
-  app.models.Account.findById(req.accessToken.userId, function(err, user) {
+  
+  var modelName = req.url.match(/^\/api\/users/) ? 'user': 'Account';
+  app.models[modelName].findById(req.accessToken.userId, function(err, user) {
     if (err) {
       return next(err);
     }
