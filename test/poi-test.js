@@ -31,7 +31,7 @@ describe('# Fetch POI from apis.map.qq.com', function() {
 });
 
 describe('# POI', function() {
-  // lt.beforeEach.withUserModel('user');
+  // lt.beforeEach.withUserModel('account');
   // lt.beforeEach.givenLoggedInUser(users.cashier);
   
   describe('##Find', function() {

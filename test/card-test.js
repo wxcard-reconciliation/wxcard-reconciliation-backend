@@ -9,7 +9,7 @@ var users = require('./fixtures/users');
 
 describe('# Card', function() {
   
-  lt.beforeEach.withUserModel('user');
+  lt.beforeEach.withUserModel('account');
   lt.beforeEach.givenLoggedInUser(users.cashier);
   
   describe('## Sync', function() {
@@ -24,9 +24,9 @@ describe('# Card', function() {
     });    
   });
   
-  describe('## Cancel', function() {
+  describe.only('## Cancel', function() {
     lt.describe.whenCalledRemotely('POST', '/api/cards/cancel', {
-      code: '052432608736',
+      code: '087535519681',
       receipt: 'http://zsydz.aceweet.com/app/img/logo-single.png'
     }, function () {
       it('should success', function() {

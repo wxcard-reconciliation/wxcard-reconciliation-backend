@@ -6,28 +6,22 @@ var querystring = require('querystring')
 lt.beforeEach.withApp(app);
 lt.beforeEach.withUserModel('account');
 
-var loggedInUser = {email:"gbo2@example.com", password: "123456", id: 233, job: '管理员'}
-var gasstationUser = {email:"gasstation@example.com", password: '123456', id: 333, companyId:4, job: '加油站长', openId: 'abc123'}
+var users = require('./fixtures/users');
 
-
-describe('# Account', function() {
-
-  lt.beforeEach.givenLoggedInUser(loggedInUser);
+describe('# Administrator User', function() {
   
-  describe('## Update', function() {
-    lt.describe.whenCalledRemotely('PUT', '/api/accounts/'+loggedInUser.id,{
-      id: loggedInUser.id,
-      name: "update name "+Date.now()
-    }, function () {
-      it('should have successCode 200', function() {
-        assert.equal(this.res.statusCode, 200);
+  lt.beforeEach.givenLoggedInUser(users.administrator);
+  
+  describe('## Create new Cashier', function() {
+    lt.describe.whenCalledRemotely('POST', '/api/accounts', users.cashier2, function () {
+      it('should success', function(done) {
+        console.log(this.res.body);
+        done();
       });
     });
   });
-  
   describe('## Find', function() {
     var filter = {
-      include: ['company'],
       limit: 25,
       skip: 0
     }
@@ -36,46 +30,21 @@ describe('# Account', function() {
       it('should have successCode 200', function() {
         console.log(this.res.body);
       });
-    })
-  });
-  
-  describe('## FindById', function() {
-    lt.describe.whenCalledRemotely('GET', '/api/accounts/'+loggedInUser.id+'?filter[include]=company', function () {
-      it('should have successCode 200', function() {
-        console.log(this.res.body);
-      });
-    })
+    });    
   });
 });
 
-describe('# Account Exeception', function() {
+describe('# Cashier User', function() {
   
-  describe('## Find', function() {
-    lt.describe.whenCalledAnonymously('GET', '/api/accounts', function () {
-      lt.it.shouldBeDenied();
-    })
-    
-    lt.describe.whenCalledByUser(gasstationUser, 'GET', '/api/accounts', function () {
-      lt.it.shouldBeDenied();
-    })
+  lt.beforeEach.withUserModel('account');
+  lt.beforeEach.givenLoggedInUser(users.cashier);
+
+  describe('## FindById', function() {
+    lt.describe.whenCalledRemotely('GET', '/api/accounts/'+users.cashier.id, function () {
+      it('should have successCode 200', function(done) {
+        console.log(this.res.body);
+        done();
+      });
+    });    
   });
-  
-  describe('## FindById', function () {
-    lt.describe.whenCalledByUser(gasstationUser, 'GET', '/api/accounts/'+gasstationUser.id, function () {
-      lt.it.shouldBeAllowed();
-    })
-    
-    lt.describe.whenCalledByUser(gasstationUser, 'GET', '/api/accounts/'+loggedInUser.id, function () {
-      lt.it.shouldBeDenied();
-    })
-    
-    describe('Administartor', function() {
-      lt.beforeEach.givenUser(gasstationUser, 'account');
-      
-      lt.describe.whenCalledByUser(loggedInUser, 'GET', '/api/accounts/'+gasstationUser.id, function () {
-        lt.it.shouldBeAllowed();
-      })
-    });
-  });
-  
 });

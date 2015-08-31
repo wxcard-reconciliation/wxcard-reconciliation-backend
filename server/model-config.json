@@ -34,7 +34,7 @@
     "public": false
   },
   "account": {
-    "dataSource": "mysql",
+    "dataSource": "mongodb",
     "public": true
   },
   "company": {
@@ -82,10 +82,6 @@
     "public": true
   },
   "wxclient": {
-    "dataSource": "mongodb",
-    "public": true
-  },
-  "user": {
     "dataSource": "mongodb",
     "public": true
   }

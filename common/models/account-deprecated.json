@@ -1,0 +1,48 @@
+{
+  "name": "account",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "mysql": {
+      "table": "tp_account"
+    },
+    "validateUpsert": true
+  },
+  "properties": {
+    "openId": {
+      "type": "string"
+    },
+    "companyId": {
+      "type": "number"
+    },
+    "job": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "picture": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "company": {
+      "type": "belongsTo",
+      "model": "company",
+      "foreignKey": ""
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "administrator",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": []
+}

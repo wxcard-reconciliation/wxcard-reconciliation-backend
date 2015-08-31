@@ -52,7 +52,7 @@ module.exports = function(Card) {
       };
       if(options.receipt) updateData.receipt = options.receipt;
 
-      Card.app.models.cardEvent.updateAll({
+      Card.app.models.Cardevent.updateAll({
         id: code
       }, updateData, function (err, result) {
         next(err, {card_id: card_id});

@@ -9,7 +9,7 @@ module.exports = function(app) {
       }
       cb(null, false);
     }
-    if (context.modelName !== 'account' && context.modelName !== 'user') {
+    if (context.modelName !== 'account') {
       // the target model is not account
       return reject();
     }

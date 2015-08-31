@@ -1,41 +1,14 @@
 {
-  "name": "account",
+  "name": "user",
   "base": "User",
   "idInjection": true,
   "options": {
-    "mysql": {
-      "table": "tp_account"
-    },
     "validateUpsert": true
   },
-  "properties": {
-    "openId": {
-      "type": "string"
-    },
-    "companyId": {
-      "type": "number"
-    },
-    "job": {
-      "type": "string"
-    },
-    "name": {
-      "type": "string"
-    },
-    "phone": {
-      "type": "string"
-    },
-    "picture": {
-      "type": "string"
-    }
-  },
+  "mixins": {"Timestamp": {"myOptions": 1}},
+  "properties": {},
   "validations": [],
-  "relations": {
-    "company": {
-      "type": "belongsTo",
-      "model": "company",
-      "foreignKey": ""
-    }
-  },
+  "relations": {},
   "acls": [
     {
       "accessType": "*",
