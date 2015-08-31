@@ -33,20 +33,20 @@ describe('# POI', function() {
   // lt.beforeEach.withUserModel('account');
   // lt.beforeEach.givenLoggedInUser(loggedInUser);  
   
-  describe('##Find', function() {
+  describe.only('##Find', function() {
     var qs = querystring.stringify({filter: JSON.stringify({
-      where: {"name": {like: "%江宁%"}},
+      where: {"branch_name": {regex: "中央北路"}},
       limit: 10,
       skip: 0
     })});
-    lt.describe.whenCalledRemotely('GET', '/api/companies?'+qs, function () {
+    lt.describe.whenCalledRemotely('GET', '/api/pois?'+qs, function () {
       it('should success get comanpayies', function() {
         console.log(this.res.body, this.res.body.length)
       });
     });
   });
   
-  describe.only('## Sync from wechat', function() {
+  describe('## Sync from wechat', function() {
     this.timeout(20000)
     lt.describe.whenCalledRemotely('POST', '/api/pois/sync', {
       begin: 0
@@ -57,7 +57,3 @@ describe('# POI', function() {
     })
   });
 }); 
-
-describe('# POI', function() {
-  
-});
