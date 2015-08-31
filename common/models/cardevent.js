@@ -7,6 +7,7 @@ module.exports = function(Cardevent) {
       if(err) return next(err);
       if(!instance) {
         data.id = code;
+        data.CreateTime = Math.round(Date.now()/1000);
         Cardevent.saveCode(data, next);
       } else {
         instance.updateAttributes(data, next);
