@@ -41,13 +41,14 @@ module.exports = function(Card) {
   );
   
   Card.cancel = function (options, next) {
-    
+    console.log(options);
     var code = options.code;
-    function updateCompanyId(card_id) {
+    
+    function updateConsumeInfo(card_id) {
       var context = loopback.getCurrentContext()
       var currentUser = context && context.get('currentUser');
       var updateData = {
-        cacnelAt: currentUser.poi
+        cacnelBy: currentUser
       };
       if(options.receipt) updateData.receipt = options.receipt;
 
@@ -62,7 +63,7 @@ module.exports = function(Card) {
       if(err) {
         next(err);
       } else {
-        updateCompanyId(result.card.card_id);
+        updateConsumeInfo(result.card.card_id);
       }
     });
   };

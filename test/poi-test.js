@@ -7,7 +7,9 @@ var app = require('../server/server.js');
 var querystring = require('querystring');
 var request = require('request');
 
-var loggedInUser = {email:"gbo2@example.com", password: "123456", id: 233};
+lt.beforeEach.withApp(app);
+
+var users = require('./fixtures/users');
 var poiurl = 'http://apis.map.qq.com/lbscloud/v1/poi/search?';
 
 describe('# Fetch POI from apis.map.qq.com', function() {
@@ -29,9 +31,8 @@ describe('# Fetch POI from apis.map.qq.com', function() {
 });
 
 describe('# POI', function() {
-  lt.beforeEach.withApp(app);
-  // lt.beforeEach.withUserModel('account');
-  // lt.beforeEach.givenLoggedInUser(loggedInUser);
+  // lt.beforeEach.withUserModel('user');
+  // lt.beforeEach.givenLoggedInUser(users.cashier);
   
   describe('##Find', function() {
     var qs = querystring.stringify({filter: JSON.stringify({

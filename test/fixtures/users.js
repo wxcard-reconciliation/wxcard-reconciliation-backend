@@ -15,5 +15,12 @@ module.exports = {
     username: "18712345678",
     password: "123456",
     job: "管理员"
+  },
+  cashier2: {
+    email: "18687654321@petrojs.com",
+    username: "18687654321",
+    password: "1234567",
+    job: "加油站收银员",
+    poi: pois[0]
   }
 }

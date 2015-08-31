@@ -4,12 +4,13 @@ var app = require('../server/server.js');
 var querystring = require('querystring')
 
 lt.beforeEach.withApp(app);
-lt.beforeEach.withUserModel('account');
 
-var loggedInUser = {username: "13912345678", email:"13912345678@example.com", password: "123456", id: 2}
+var users = require('./fixtures/users');
 
 describe('# Card', function() {
-  lt.beforeEach.givenLoggedInUser(loggedInUser);
+  
+  lt.beforeEach.withUserModel('user');
+  lt.beforeEach.givenLoggedInUser(users.cashier);
   
   describe('## Sync', function() {
     this.timeout(100000)
@@ -25,7 +26,7 @@ describe('# Card', function() {
   
   describe('## Cancel', function() {
     lt.describe.whenCalledRemotely('POST', '/api/cards/cancel', {
-      code: '',
+      code: '052432608736',
       receipt: 'http://zsydz.aceweet.com/app/img/logo-single.png'
     }, function () {
       it('should success', function() {

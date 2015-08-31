@@ -5,13 +5,21 @@ var querystring = require('querystring')
 
 lt.beforeEach.withApp(app);
 
-var users = require('./fixtures/users')
+var users = require('./fixtures/users');
 
 describe('# Administrator User', function() {
   
   lt.beforeEach.withUserModel('user');
   lt.beforeEach.givenLoggedInUser(users.administrator);
   
+  describe.only('## Create new Cashier', function() {
+    lt.describe.whenCalledRemotely('POST', '/api/users', users.cashier2, function () {
+      it('should success', function(done) {
+        console.log(this.res.body);
+        done();
+      });
+    });
+  });
   describe('## Find', function() {
     var filter = {
       limit: 25,
@@ -26,7 +34,7 @@ describe('# Administrator User', function() {
   });
 });
 
-describe.only('# Cashier User', function() {
+describe('# Cashier User', function() {
   
   lt.beforeEach.withUserModel('user');
   lt.beforeEach.givenLoggedInUser(users.cashier);
