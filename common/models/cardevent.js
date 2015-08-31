@@ -3,6 +3,7 @@ var async = require('async');
 module.exports = function(Cardevent) {
 
   Cardevent.updateCode = function (code, data, next) {
+    code = code.toString();
     Cardevent.findById(code, function (err, instance) {
       if(err) return next(err);
       if(!instance) {
@@ -32,10 +33,11 @@ module.exports = function(Cardevent) {
     
   Cardevent.user_get_card = function (msg, next) {
     msg.status = 'got';
-    msg.id = msg.UserCardCode;
+    msg.id = msg.UserCardCode.toString();
     delete msg.UserCardCode;
     
     if(msg.IsGiveByFriend) {
+      msg.OldUserCardCode = msg.OldUserCardCode.toString();
       Cardevent.updateCode(msg.OldUserCardCode, {'status':'donated'});
     }
 

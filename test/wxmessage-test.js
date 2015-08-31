@@ -5,17 +5,18 @@ var querystring = require('querystring')
 
 lt.beforeEach.withApp(app);
 
-describe('# WXMessage', function() {
+describe.only('# WXMessage Card', function() {
+  
   describe('## Get Card', function() {
     lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
       ToUserName: 'zyjshkez',
-      FromUserName: 'o2sNkuH9b_Q6E3ABpBKvHUUQiktI',
+      FromUserName: 'oAtUNsxlV2L7LuV_ZmyIYseszAZ0',
       CreateTime: Math.round(Date.now()/1000),
       MsgType: 'event',
       Event: 'user_get_card',
       CardId: 'pAtUNs-HV0evhGTWbU3ohp99tW7k',
       IsGiveByFriend: 0,
-      UserCardCode: '1234567890',
+      UserCardCode: 123456789012,
       OuterId: 0
     }, function () {
       it('should success', function(done) {
@@ -28,15 +29,15 @@ describe('# WXMessage', function() {
   describe('## Donate Card', function() {
     lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
       ToUserName: 'zyjshkez',
-      FromUserName: 'o2sNkuDGXZ6ei0kXxpBkjW5akra8',
-      FriendUserName: 'o2sNkuH9b_Q6E3ABpBKvHUUQiktI',
+      FromUserName: 'oAtUNs_WhBwy3QiftzLuk6aihKlU',
+      FriendUserName: 'oAtUNsxlV2L7LuV_ZmyIYseszAZ0',
       CreateTime: Math.round(Date.now()/1000),
       MsgType: 'event',
       Event: 'user_get_card',
       CardId: 'pAtUNs-HV0evhGTWbU3ohp99tW7k',
       IsGiveByFriend: 1,
-      UserCardCode: '0987654321',
-      OldUserCardCode: '1234567890',
+      UserCardCode: '210987654321',
+      OldUserCardCode: '123456789012',
       OuterId: 0
     }, function () {
       it('should success', function(done) {
@@ -45,16 +46,16 @@ describe('# WXMessage', function() {
       });
     });
   });
-  
+
   describe('## Consume Card', function() {
     lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
       ToUserName: 'zyjshkez',
-      FromUserName: 'o2sNkuH9b_Q6E3ABpBKvHUUQiktI',
+      FromUserName: 'oAtUNs_WhBwy3QiftzLuk6aihKlU',
       CreateTime: Math.round(Date.now()/1000),
       MsgType: 'event',
       Event: 'user_consume_card',
       CardId: 'pAtUNs-HV0evhGTWbU3ohp99tW7k',
-      UserCardCode: '0987654321',
+      UserCardCode: '210987654321',
       ConsumeSource: 'FROM_API'
     }, function () {
       it('should success', function(done) {
@@ -64,11 +65,14 @@ describe('# WXMessage', function() {
     });
   });
   
+});
+describe('# WXMessage', function() {
+  
   describe('## Delete Card', function() {
     var code = '451234567890';
     lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
       ToUserName: 'zyjshkez',
-      FromUserName: 'o2sNkuH9b_Q6E3ABpBKvHUUQiktI',
+      FromUserName: 'oAtUNs_WhBwy3QiftzLuk6aihKlU',
       CreateTime: Math.round(Date.now()/1000),
       MsgType: 'event',
       Event: 'user_get_card',
@@ -85,7 +89,7 @@ describe('# WXMessage', function() {
     
     lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
       ToUserName: 'zyjshkez',
-      FromUserName: 'o2sNkuH9b_Q6E3ABpBKvHUUQiktI',
+      FromUserName: 'oAtUNs_WhBwy3QiftzLuk6aihKlU',
       CreateTime: Math.round(Date.now()/1000),
       MsgType: 'event',
       Event: 'user_del_card',
@@ -102,7 +106,7 @@ describe('# WXMessage', function() {
   describe('## Subscribe Event', function() {
     lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
       ToUserName: 'zyjshkez',
-      FromUserName: 'o2sNkuH9b_Q6E3ABpBKvHUUQiktI',
+      FromUserName: 'oAtUNs_WhBwy3QiftzLuk6aihKlU',
       CreateTime: '1438936030',
       MsgType: 'event',
       Event: 'subscribe'
@@ -116,7 +120,7 @@ describe('# WXMessage', function() {
     
     lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
       ToUserName: 'zyjshkez',
-      FromUserName: 'o2sNkuH9b_Q6E3ABpBKvHUUQiktI',
+      FromUserName: 'oAtUNs_WhBwy3QiftzLuk6aihKlU',
       CreateTime: Math.round(Date.now()/1000),
       MsgType: 'event',
       Event: 'unsubscribe'
