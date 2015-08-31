@@ -32,7 +32,7 @@ module.exports = function(Wxclient) {
   
   Wxclient.on('GET_USERS', Wxclient.getUsers);
   
-  Wxclient.sync = function (filter, next) {
+  Wxclient.sync = function (options, next) {
 
     var openids = [];
     
@@ -68,7 +68,7 @@ module.exports = function(Wxclient) {
   Wxclient.remoteMethod(
     'sync',
     {
-      accepts: {arg: 'filter', type: 'object', http: { source: 'body' }},
+      accepts: {arg: 'options', type: 'object', http: { source: 'body' }},
       returns: {arg: 'data', type: 'object', root: true}
     }
   );

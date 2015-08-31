@@ -41,29 +41,23 @@ module.exports = function(Card) {
   );
   
   Card.cancel = function (options, next) {
-    console.log(options);
+    // console.log(options);
     var code = options.code;
-    
-    function updateConsumeInfo(card_id) {
-      var context = loopback.getCurrentContext()
-      var currentUser = context && context.get('currentUser');
-      var updateData = {
-        cacnelBy: currentUser
-      };
-      if(options.receipt) updateData.receipt = options.receipt;
-
-      Card.app.models.Cardevent.updateAll({
-        id: code
-      }, updateData, function (err, result) {
-        next(err, {card_id: card_id});
-      });
-    };
     
     Card.app.wechat.consumeCode(code, null, function (err, result) {
       if(err) {
         next(err);
       } else {
-        updateConsumeInfo(result.card.card_id);
+        var context = loopback.getCurrentContext();
+        var currentUser = context && context.get('currentUser');
+
+        Card.app.models.Cardevent.updateCode(code, {
+          FromUserName: result.openid,
+          CardId: result.card.card_id,
+          cancelBy: currentUser,
+          rececipt: options.receipt,
+          "status": 'consumed'
+        }, next);
       }
     });
   };

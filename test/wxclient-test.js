@@ -8,16 +8,16 @@ var punycode = require('punycode');
 lt.beforeEach.withApp(app);
 lt.beforeEach.withUserModel('account');
 
-var loggedInUser = {username: "13912345678", email:"13912345678@example.com", password: "123456", id: 2}
+var users = require('./fixtures/users')
 
 describe('# WXClient', function() {
   this.timeout(0);
-  lt.beforeEach.givenLoggedInUser(loggedInUser);
+  lt.beforeEach.givenLoggedInUser(users.administrator);
   
   describe('## Sync', function() {
     lt.describe.whenCalledRemotely('POST', '/api/wxclients/sync', {}, function () {
       it('should success', function() {
-        // console.log(this.res.body);
+        console.log(this.res.body);
         assert.equal(this.res.statusCode, 200);
       });
     });   
@@ -25,7 +25,7 @@ describe('# WXClient', function() {
   
 });
 
-describe('## Sync2', function() {
+describe('## WXClient Sync2', function() {
   var apiurl = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=byKh6zRYf2Vwci5vBXm-svyt9TSvanQdJXQc3SM5uTYybtm4xJnNNxKXV_15ECjtn0MscrKR3f6TbzSmwq0iOkALhvYZ3m0J-8SR-fFEAKk&openid=oAtUNsweXUu7EA7mSWNy95_u3VMA&&lang=zh_CN"
   it('should ok', function(done) {
     request({url: apiurl}, function (err, res, body) {
