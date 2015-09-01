@@ -37,7 +37,7 @@ describe('# WXMessage Card', function() {
     });
   });
     
-  describe.only('## Get Card', function() {
+  describe('## Get Card', function() {
     lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
       ToUserName: 'zyjshkez',
       FromUserName: 'oAtUNsxlV2L7LuV_ZmyIYseszAZ0',

@@ -40,7 +40,7 @@ module.exports = function(Cardevent) {
     ], function (err, results) {
       msg.wxclient = results[0];
       msg.card = results[1];
-      Cardevent.upsert(msg, next);
+      Cardevent.create(msg, next);
     });
   }
     
