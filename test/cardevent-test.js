@@ -12,7 +12,7 @@ describe('# Cardevent By Cashier', function() {
   lt.beforeEach.withUserModel('account');
   lt.beforeEach.givenLoggedInUser(users.cashier);
   
-  describe.only('## Find', function() {
+  describe('## Find', function() {
     var filter = {
       // order: ['CreateTime DESC'],
       where:{

@@ -20,10 +20,22 @@ module.exports = function(Cardevent) {
   Cardevent.saveCode = function (msg, next) {
     async.parallel([
       function attachWXUser(callback) {
-        Cardevent.app.models.wxclient.findById(msg.FromUserName, callback);
+        Cardevent.app.models.wxclient.findById(msg.FromUserName, function (err, result) {
+          if(!err && !result) {
+            Cardevent.app.models.wxclient.fetchUser(msg.FromUserName, callback);
+          } else {
+            callback(err, result);
+          }
+        });
       },
       function attachCard(callback) {
-        Cardevent.app.models.card.findById(msg.CardId, callback);
+        Cardevent.app.models.card.findById(msg.CardId, function (err, result) {
+          if(!err && !result) {
+            Cardevent.app.models.card.fetchCard(msg.CardId, callback);
+          } else {
+            callback(err, result);
+          }
+        });
       }
     ], function (err, results) {
       msg.wxclient = results[0];

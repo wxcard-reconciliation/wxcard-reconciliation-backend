@@ -3,30 +3,35 @@ var async = require('async');
 
 module.exports = function(Card) {
 
+  Card.fetchCard = function (cardId, next) {
+    Card.app.wechat.getCard(cardId, function (err, result) {
+      if(err) return next(err);
+      
+      var card_type = result.card.card_type.toLowerCase()
+      var entity = result.card[card_type];
+      var c = entity.base_info;
+      c.card_type = card_type;
+      for(var key in entity) {
+        if(key !== 'base_info') c[key] = entity[key];
+      }
+      
+      Card.upsert(c, next);
+    });
+  };
+  
+  Card.card_pass_check = function (msg, next) {
+    Card.fetchCard(msg.CardId, next);
+  };
+  
+  Card.card_not_pass_check = function (msg, next) {
+    Card.fetchCard(msg.CardId, next);
+  };
+
   Card.sync = function (filter, next) {
     var offset = filter && filter.offset || 0;
     var count = filter && filter.count || 50;
     Card.app.wechat.getCards(offset, count, function (err, result) {
-      async.each(result.card_id_list, function (card_id, callback) {
-        Card.app.wechat.getCard(card_id, function (err, result) {
-          if(err) return callback(err);
-          
-          var card_type = result.card.card_type.toLowerCase()
-          var entity = result.card[card_type];
-          var c = entity.base_info;
-          c.card_type = card_type;
-          for(var key in entity) {
-            if(key !== 'base_info') c[key] = entity[key];
-          }
-          Card.findOrCreate({
-            where: {id: c.id}
-          }, c, function (err, instance, isNew) {
-            if(err) return callback(err);
-            if(!isNew) instance.updateAttributes(c, callback);
-            else callback();
-          });
-        });
-      }, function (err) {
+      async.each(result.card_id_list, Card.fetchCard, function (err) {
         next(err);
       });
     })
@@ -41,7 +46,7 @@ module.exports = function(Card) {
   );
   
   Card.cancel = function (options, next) {
-    // console.log(options);
+
     var code = options.code;
     
     Card.app.wechat.consumeCode(code, null, function (err, result) {

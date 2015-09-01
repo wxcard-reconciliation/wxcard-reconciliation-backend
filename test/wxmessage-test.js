@@ -6,8 +6,38 @@ var querystring = require('querystring')
 lt.beforeEach.withApp(app);
 
 describe('# WXMessage Card', function() {
-  
-  describe('## Get Card', function() {
+
+  describe('## Card Pass Check', function() {
+    lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
+      ToUserName: 'zyjshkez',
+      FromUserName: 'oAtUNsxlV2L7LuV_ZmyIYseszAZ0',
+      CreateTime: Math.round(Date.now()/1000),
+      MsgType: 'event',
+      Event: 'card_pass_check',
+      CardId: 'pAtUNs-HV0evhGTWbU3ohp99tW7k'
+    }, function () {
+      it('should success', function(done) {
+        assert.equal(this.res.statusCode, 200);
+        done()
+      });
+    });
+    
+    lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
+      ToUserName: 'zyjshkez',
+      FromUserName: 'oAtUNsxlV2L7LuV_ZmyIYseszAZ0',
+      CreateTime: Math.round(Date.now()/1000),
+      MsgType: 'event',
+      Event: 'card_not_pass_check',
+      CardId: 'pAtUNs-HV0evhGTWbU3ohp99tW7k'
+    }, function () {
+      it('should success', function(done) {
+        assert.equal(this.res.statusCode, 200);
+        done()
+      });
+    });
+  });
+    
+  describe.only('## Get Card', function() {
     lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
       ToUserName: 'zyjshkez',
       FromUserName: 'oAtUNsxlV2L7LuV_ZmyIYseszAZ0',

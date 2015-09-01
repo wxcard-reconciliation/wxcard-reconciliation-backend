@@ -12,7 +12,6 @@ module.exports = function(Wxmessage) {
   
   Wxmessage.create = function (msg, next) {
     if(msg.ToUserName) delete msg.ToUserName;
-    // if(typeof msg.CreateTime == 'string') msg.CreateTime = parseInt(msg.CreateTime);
     
     if(msg.MsgType === 'event') {
       var handler = this.app.models[this.event[msg.Event]][msg.Event] || function () {
