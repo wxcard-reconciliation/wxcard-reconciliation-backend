@@ -26,7 +26,7 @@ describe('# Card', function() {
   
   describe.only('## Cancel', function() {
     lt.describe.whenCalledRemotely('POST', '/api/cards/cancel', {
-      code: '037628563972',
+      code: '430218938436',
       receipt: 'http://zsydz.aceweet.com/app/img/logo-single.png'
     }, function () {
       it('should success', function() {

@@ -12,6 +12,7 @@ module.exports = function(Cardevent) {
       if(!instance) {
         Cardevent.saveCode(msg, next);
       } else {
+        delete msg.id;
         instance.updateAttributes(msg, next);
       }
     });
