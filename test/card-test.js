@@ -4,16 +4,16 @@ var app = require('../server/server.js');
 var querystring = require('querystring')
 
 lt.beforeEach.withApp(app);
+lt.beforeEach.withUserModel('account');
 
 var users = require('./fixtures/users');
 
 describe('# Card', function() {
   
-  lt.beforeEach.withUserModel('account');
   lt.beforeEach.givenLoggedInUser(users.cashier);
   
   describe('## Sync', function() {
-    this.timeout(100000)
+    this.timeout(0)
     lt.describe.whenCalledRemotely('POST', '/api/cards/sync', {
       offset: 0,
       count: 50
@@ -24,7 +24,7 @@ describe('# Card', function() {
     });    
   });
   
-  describe.only('## Cancel', function() {
+  describe('## Cancel', function() {
     lt.describe.whenCalledRemotely('POST', '/api/cards/cancel', {
       code: '650243564813',
       receipt: 'http://zsydz.aceweet.com/app/img/logo-single.png'
@@ -32,6 +32,6 @@ describe('# Card', function() {
       it('should success', function() {
         console.log(this.res.body);
       });
-    })
+    });
   });
 });

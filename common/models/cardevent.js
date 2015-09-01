@@ -1,3 +1,4 @@
+var loopback = require('loopback');
 var async = require('async');
 
 module.exports = function(Cardevent) {
@@ -56,4 +57,26 @@ module.exports = function(Cardevent) {
     msg.status = 'deleted';
     Cardevent.updateCode(msg, next);
   };
+  
+  Cardevent.observe('access', function limitToScope(ctx, next) {
+    ctx.query.order = ctx.query.order || ['use_time DESC'];
+    ctx.query.where = ctx.query.where || {};
+    if(ctx.query.where.id) ctx.query.where.id = ctx.query.where.id.toString();
+    var context = loopback.getCurrentContext();
+    var currentUser = context && context.get('currentUser');
+    if(currentUser && currentUser.poi) {
+      // Before cancel code, coupon/company info need been query for check
+      ctx.query.where.and = [
+        {
+          or:[
+            {"cancelBy.poi.id": currentUser.poi.id },
+            {"status": "got" }
+          ]
+        }
+      ];
+    }
+    // console.log('-----', JSON.stringify(ctx.query.where))
+    next();
+  });
+  
 };

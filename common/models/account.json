@@ -5,7 +5,11 @@
   "options": {
     "validateUpsert": true
   },
-  "mixins": {"Timestamp": {"myOptions": 1}},
+  "mixins": {
+    "Timestamp": {
+      "myOptions": 1
+    }
+  },
   "properties": {},
   "validations": [],
   "relations": {},
