@@ -62,7 +62,6 @@ module.exports = function(Card) {
           UserCardCode: code,
           cancelBy: currentUser,
           rececipt: options.receipt,
-          CreateTime: Math.round(Date.now()/1000),
           "status": 'consumed'
         }, next);
       }
@@ -71,6 +70,37 @@ module.exports = function(Card) {
   
   Card.remoteMethod(
     'cancel',
+    {
+      accepts: {arg: 'options', type: 'object', http: {source: 'body'}},
+      returns: {arg: 'data', type: 'object', root: true}
+    }
+  );
+  
+  Card.check = function (options, next) {
+
+    Card.app.wechat.getCode(options.code, function (err, result) {
+      var msg = {UserCardCode: options.code};
+      if(err) {
+        switch(err.code) {
+          case 40099: msg.status = 'consumed'; break;
+          case 40127: msg.status = 'deleted'; break;
+          default:return next(err);
+        }
+      } else {
+        msg = {
+          FromUserName: result.openid,
+          CardId: result.card.card_id,
+          UserCardCode: options.code,
+          BeginTime: result.card.begin_time,
+          EndTime: result.card.end_time
+        }
+      }
+      Card.app.models.Cardevent.updateCode(msg, next);
+    });
+  };
+  
+  Card.remoteMethod(
+    'check',
     {
       accepts: {arg: 'options', type: 'object', http: {source: 'body'}},
       returns: {arg: 'data', type: 'object', root: true}

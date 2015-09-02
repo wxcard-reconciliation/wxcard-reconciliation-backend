@@ -41,6 +41,9 @@ module.exports = function(Cardevent) {
     ], function (err, results) {
       msg.wxclient = results[0];
       msg.card = results[1];
+      if(!msg.CreateTime || msg.CreateTime === '') {
+        msg.CreateTime = Math.round(Date.now()/1000);
+      }
       Cardevent.create(msg, next);
     });
   }
@@ -72,23 +75,26 @@ module.exports = function(Cardevent) {
   };
   
   Cardevent.observe('access', function limitToScope(ctx, next) {
-    ctx.query.order = ctx.query.order || ['use_time DESC'];
+    ctx.query.order = ctx.query.order || ['CreateTime DESC'];
     ctx.query.where = ctx.query.where || {};
-    if(ctx.query.where.id) ctx.query.where.id = ctx.query.where.id.toString();
-    var context = loopback.getCurrentContext();
-    var currentUser = context && context.get('currentUser');
-    if(currentUser && currentUser.poi) {
-      // Before cancel code, coupon/company info need been query for check
-      ctx.query.where.and = [
-        {
-          or:[
-            {"cancelBy.poi.id": currentUser.poi.id },
-            {"status": "got" }
-          ]
-        }
-      ];
+    if(ctx.query.where.id) {
+      ctx.query.where.id = ctx.query.where.id.toString();
+    } else {
+      var context = loopback.getCurrentContext();
+      var currentUser = context && context.get('currentUser');
+      if(currentUser && currentUser.poi) {
+        // Before cancel code, coupon/company info need been query for check
+        ctx.query.where.and = [
+          {
+            or:[
+              {"cancelBy.poi.id": currentUser.poi.id },
+              {"status": {neq: "consumed"} }
+            ]
+          }
+        ];
+      }
     }
-    // console.log('-----', JSON.stringify(ctx.query.where))
+    // console.log('-----', JSON.stringify(ctx.query.where));
     next();
   });
   

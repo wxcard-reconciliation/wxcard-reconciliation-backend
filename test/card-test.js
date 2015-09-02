@@ -24,7 +24,7 @@ describe('# Card', function() {
     });    
   });
   
-  describe.only('## Cancel', function() {
+  describe('## Cancel', function() {
     lt.describe.whenCalledRemotely('POST', '/api/cards/cancel', {
       code: '430218938436',
       receipt: 'http://zsydz.aceweet.com/app/img/logo-single.png'
@@ -33,5 +33,16 @@ describe('# Card', function() {
         console.log(this.res.body);
       });
     });
+  });
+  
+  describe.only('## Check Code', function() {
+    lt.describe.whenCalledRemotely('POST', '/api/cards/check', {
+      code: '430218938436'
+    }, function () {
+      it('should success', function(done) {
+        console.log(this.res.body);
+        done()
+      });
+    })
   });
 });
