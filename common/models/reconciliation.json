@@ -5,7 +5,16 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "beginTime": {
+      "type": "number",
+      "required": true
+    },
+    "endTime": {
+      "type": "number",
+      "required": true
+    }
+  },
   "validations": [],
   "relations": {},
   "acls": [

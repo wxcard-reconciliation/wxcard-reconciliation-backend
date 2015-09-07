@@ -35,7 +35,7 @@ describe('# Card', function() {
     });
   });
   
-  describe.only('## Check Code', function() {
+  describe('## Check Code', function() {
     lt.describe.whenCalledRemotely('POST', '/api/cards/check', {
       code: '430218938436'
     }, function () {

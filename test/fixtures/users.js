@@ -2,7 +2,6 @@ var pois = require('./pois');
 
 module.exports = {
   cashier: {
-    id: 'abc223',
     email: "18612345678@petrojs.com",
     username: "18612345678",
     password: "123456",
@@ -17,6 +16,7 @@ module.exports = {
     job: "管理员"
   },
   cashier2: {
+    id: '55e3d50e5271404871f94805',
     email: "18687654321@petrojs.com",
     username: "18687654321",
     password: "123456",

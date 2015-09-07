@@ -10,7 +10,7 @@ var users = require('./fixtures/users');
 describe('# Cardevent By Cashier', function() {
 
   lt.beforeEach.withUserModel('account');
-  lt.beforeEach.givenLoggedInUser(users.cashier);
+  lt.beforeEach.givenLoggedInUser(users.cashier2);
   
   describe('## Find', function() {
     var filter = {
@@ -29,4 +29,5 @@ describe('# Cardevent By Cashier', function() {
       });
     });
   });
+  
 });

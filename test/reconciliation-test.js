@@ -8,19 +8,51 @@ lt.beforeEach.withUserModel('account');
 
 var users = require('./fixtures/users');
 
-describe('# Reconciliation', function() {
+describe.only('# Reconciliation', function() {
   
-  lt.beforeEach.givenLoggedInUser(users.cashier);
+  lt.beforeEach.givenLoggedInUser(users.cashier2);
 
-  describe('## Try reconciliating', function() {
-    var now = Math.round(Date.now()/1000);
-    lt.describe.whenCalledRemotely('POST', '/api/reconciliations/try', {
-      BeginTime: now-86400,
-      EndTime: now
+  var reconciliation = {}
+  var now = Math.round(Date.now()/1000);
+
+  describe('## Try && Create', function() {
+    
+    lt.describe.whenCalledRemotely('POST', '/api/reconciliations/try',{
+      beginTime: now-86400
     }, function () {
-      it('should success', function() {
-        console.log(this.res.body);
+      it('should success', function(done) {
+        reconciliation = this.res.body;
+        done();
       });
     });
+    
+    lt.describe.whenCalledRemotely('POST', '/api/reconciliations', function () {
+      return reconciliation;
+    }, function () {
+      it('should success', function(done) {
+        // console.log(this.res.body);
+        done();
+      });
+    });
+  });
+  
+  describe('## Find', function() {
+    var filter = {
+      order: ['beginTime ASC'],
+      where:{
+        // ors:[
+        //   {beginTime: {gt:now-86400*2}}
+        // ]
+      },
+      limit: 10,
+      skip: 0
+    }
+    var qs = querystring.stringify({filter: JSON.stringify(filter)})
+    lt.describe.whenCalledRemotely('GET', '/api/reconciliations?'+qs, function () {
+      it('should success', function(done) {
+        console.log(this.res.body);
+        done();
+      });
+    })
   });
 });

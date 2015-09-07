@@ -136,11 +136,11 @@ describe('# WXMessage', function() {
   
   describe('## Subscribe Event', function() {
     lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
-      ToUserName: 'zyjshkez',
-      FromUserName: 'oAtUNs_WhBwy3QiftzLuk6aihKlU',
-      CreateTime: '1438936030',
-      MsgType: 'event',
-      Event: 'subscribe'
+      "ToUserName": "zyjshkez",
+      "FromUserName": "oAtUNs_WhBwy3QiftzLuk6aihKlU",
+      "CreateTime": "1438936030",
+      "MsgType": "event",
+      "Event": "subscribe"
     }, function () {
       it('should success', function(done) {
         console.log(this.res.body);
