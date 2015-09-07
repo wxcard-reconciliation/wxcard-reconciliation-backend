@@ -60,8 +60,8 @@ module.exports = function(Card) {
           FromUserName: result.openid,
           CardId: result.card.card_id,
           UserCardCode: code,
-          CancelBy: currentUser,
-          CancelTime: Math.round(Date.now()/1000),
+          cancelBy: currentUser,
+          cancelTime: Math.round(Date.now()/1000),
           rececipt: options.receipt,
           "status": 'consumed'
         }, next);
