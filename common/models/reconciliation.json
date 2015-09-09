@@ -5,6 +5,11 @@
   "options": {
     "validateUpsert": true
   },
+  "mixins": {
+    "Timestamp": {
+      "myOptions": 1
+    }
+  },
   "properties": {
     "beginTime": {
       "type": "number",

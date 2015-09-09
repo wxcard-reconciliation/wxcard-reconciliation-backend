@@ -18,7 +18,8 @@ describe.only('# Reconciliation', function() {
   describe('## Try && Create', function() {
     
     lt.describe.whenCalledRemotely('POST', '/api/reconciliations/try',{
-      beginTime: now-86400
+      beginTime: now-86400*4,
+      endTime: now-86400*1
     }, function () {
       it('should success', function(done) {
         reconciliation = this.res.body;
@@ -36,11 +37,11 @@ describe.only('# Reconciliation', function() {
     });
   });
   
-  describe('## Find', function() {
+  describe('## Find by cashier', function() {
     var filter = {
       order: ['beginTime ASC'],
       where:{
-        // ors:[
+        // or:[
         //   {beginTime: {gt:now-86400*2}}
         // ]
       },
@@ -48,7 +49,7 @@ describe.only('# Reconciliation', function() {
       skip: 0
     }
     var qs = querystring.stringify({filter: JSON.stringify(filter)})
-    lt.describe.whenCalledRemotely('GET', '/api/reconciliations?'+qs, function () {
+    lt.describe.whenCalledByUser(users.cashier, 'GET', '/api/reconciliations?'+qs, function () {
       it('should success', function(done) {
         console.log(this.res.body);
         done();
