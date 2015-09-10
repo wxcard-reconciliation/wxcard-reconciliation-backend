@@ -96,7 +96,7 @@ module.exports = function(Cardevent) {
         ];
       }
     }
-    console.log('-----', JSON.stringify(ctx.query.where));
+    // console.log('-----', JSON.stringify(ctx.query.where));
     next();
   });
   
