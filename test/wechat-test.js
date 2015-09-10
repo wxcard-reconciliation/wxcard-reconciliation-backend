@@ -1,4 +1,5 @@
 var WechatAPI = require('wechat-api');
+// var api = new WechatAPI('wx6e03557e5813778c', '57b0470ca6aff1b7d3409d84778b6d82');
 var api = new WechatAPI(process.env.WX_APPID, process.env.WX_APPSECRET);
 
 var assert = require('assert');
@@ -59,6 +60,17 @@ describe('# Wechat POI', function() {
         console.log(result.business_list);
         done();
       });
+    });
+  });
+});
+
+describe.only('# Create QR', function() {
+  it('should success', function(done) {
+    api.createLimitQRCode('poi_223941789', function (err, result) {
+      ticket = result.ticket;
+      var url = api.showQRCodeURL(result.ticket);
+      console.log(url);
+      done(err);
     });
   });
 });

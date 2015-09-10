@@ -62,7 +62,7 @@ describe('# Reconciliation By Administrator', function() {
 
   lt.beforeEach.givenLoggedInUser(users.administrator);
 
-  describe.only('## Find', function() {
+  describe('## Find', function() {
     var filter = {
       order: ['beginTime ASC'],
       where:{
