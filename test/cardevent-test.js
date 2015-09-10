@@ -10,13 +10,13 @@ var users = require('./fixtures/users');
 describe('# Cardevent By Cashier', function() {
 
   lt.beforeEach.withUserModel('account');
-  lt.beforeEach.givenLoggedInUser(users.cashier2);
+  lt.beforeEach.givenLoggedInUser(users.cashier);
   
-  describe('## Find', function() {
+  describe.only('## Find', function() {
     var filter = {
       // order: ['CreateTime DESC'],
       where:{
-        id: '650243564813'
+        id: {inq: ['891399341333']}
       },
       limit: 10,
       skip: 0

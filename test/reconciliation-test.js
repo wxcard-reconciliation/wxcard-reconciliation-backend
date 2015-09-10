@@ -8,7 +8,7 @@ lt.beforeEach.withUserModel('account');
 
 var users = require('./fixtures/users');
 
-describe.only('# Reconciliation', function() {
+describe('# Reconciliation', function() {
   
   lt.beforeEach.givenLoggedInUser(users.cashier2);
 

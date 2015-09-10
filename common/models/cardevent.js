@@ -78,7 +78,9 @@ module.exports = function(Cardevent) {
     ctx.query.order = ctx.query.order || ['CreateTime DESC'];
     ctx.query.where = ctx.query.where || {};
     if(ctx.query.where.id) {
-      ctx.query.where.id = ctx.query.where.id.toString();
+      if(typeof ctx.query.where.id === 'number') {
+        ctx.query.where.id = ctx.query.where.id.toString();
+      }
     } else {
       var context = loopback.getCurrentContext();
       var currentUser = context && context.get('currentUser');
@@ -94,7 +96,7 @@ module.exports = function(Cardevent) {
         ];
       }
     }
-    // console.log('-----', JSON.stringify(ctx.query.where));
+    console.log('-----', JSON.stringify(ctx.query.where));
     next();
   });
   
