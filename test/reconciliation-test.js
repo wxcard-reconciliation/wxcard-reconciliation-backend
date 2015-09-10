@@ -8,9 +8,9 @@ lt.beforeEach.withUserModel('account');
 
 var users = require('./fixtures/users');
 
-describe('# Reconciliation', function() {
+describe('# Reconciliation By User2', function() {
   
-  lt.beforeEach.givenLoggedInUser(users.cashier2);
+  lt.beforeEach.givenLoggedInUser(users.user2);
 
   var reconciliation = {}
   var now = Math.round(Date.now()/1000);
@@ -37,7 +37,32 @@ describe('# Reconciliation', function() {
     });
   });
   
-  describe('## Find by cashier', function() {
+  describe('## Find', function() {
+    var filter = {
+      order: ['beginTime ASC'],
+      where:{
+        // or:[
+        //   {beginTime: {gt:now-86400*2}}
+        // ]
+      },
+      limit: 10,
+      skip: 0
+    }
+    var qs = querystring.stringify({filter: JSON.stringify(filter)})
+    lt.describe.whenCalledByUser(users.cashier, 'GET', '/api/reconciliations?'+qs, function () {
+      it('should success', function(done) {
+        console.log(this.res.body);
+        done();
+      });
+    })
+  });
+});
+
+describe('# Reconciliation By Administrator', function() {
+
+  lt.beforeEach.givenLoggedInUser(users.administrator);
+
+  describe.only('## Find', function() {
     var filter = {
       order: ['beginTime ASC'],
       where:{

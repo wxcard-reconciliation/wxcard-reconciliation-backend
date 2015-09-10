@@ -77,7 +77,7 @@ module.exports = function(Reconciliation) {
     var context = loopback.getCurrentContext();
     var currentUser = context && context.get('currentUser');
     ctx.query.where = ctx.query.where || {};
-    ctx.query.where["staff.poi.id"] = currentUser.poi.id;
+    if(currentUser.poi) ctx.query.where["staff.poi.id"] = currentUser.poi.id;
     var now = Math.round(Date.now()/1000)
     ctx.query.where.or = ctx.query.where.or || [
       {beginTime: {gte:now-86400}},
