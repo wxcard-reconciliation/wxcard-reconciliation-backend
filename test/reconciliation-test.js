@@ -10,12 +10,12 @@ var users = require('./fixtures/users');
 
 describe('# Reconciliation By User2', function() {
   
-  lt.beforeEach.givenLoggedInUser(users.user2);
+  lt.beforeEach.givenLoggedInUser(users.cashier);
 
   var reconciliation = {}
   var now = Math.round(Date.now()/1000);
 
-  describe('## Try && Create', function() {
+  describe.only('## Try && Create', function() {
     
     lt.describe.whenCalledRemotely('POST', '/api/reconciliations/try',{
       beginTime: now-86400*4,
@@ -31,7 +31,7 @@ describe('# Reconciliation By User2', function() {
       return reconciliation;
     }, function () {
       it('should success', function(done) {
-        // console.log(this.res.body);
+        console.log(this.res.body);
         done();
       });
     });

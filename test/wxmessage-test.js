@@ -198,7 +198,7 @@ describe('# WXMessage SCAN', function() {
   });
 });
 
-describe.only('# WXMessage SEND', function() {
+describe('# WXMessage SEND', function() {
   this.timeout(0);
 
   lt.beforeEach.givenLoggedInUser(users.cashier);

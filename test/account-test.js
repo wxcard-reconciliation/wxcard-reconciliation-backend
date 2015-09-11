@@ -13,13 +13,14 @@ describe('# Administrator User', function() {
   lt.beforeEach.givenLoggedInUser(users.administrator);
   
   describe('## Create new Cashier', function() {
-    lt.describe.whenCalledRemotely('POST', '/api/accounts', users.cashier2, function () {
+    lt.describe.whenCalledRemotely('POST', '/api/accounts', users.cashier, function () {
       it('should success', function(done) {
         console.log(this.res.body);
         done();
       });
     });
   });
+  
   describe('## Find', function() {
     var filter = {
       limit: 25,
