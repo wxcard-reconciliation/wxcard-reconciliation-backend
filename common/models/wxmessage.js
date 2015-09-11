@@ -36,7 +36,6 @@ module.exports = function(Wxmessage) {
   );
   
   Wxmessage.SCAN = function (msg, next) {
-    console.log('SCAN Event:',msg);
     var found = ''
     if((found = msg.EventKey.match(/^poi_/i))
     || (found = msg.EventKey.match(/^qrscene_poi_/i))) {
@@ -49,4 +48,19 @@ module.exports = function(Wxmessage) {
       next();
     }
   };
+  
+  Wxmessage.send = function (msg, next) {
+    if(msg.msgtype === 'wxcard') {
+      Wxmessage.app.wechat.sendCard(msg.touser, msg.card, next);
+    }
+  };
+  
+  Wxmessage.remoteMethod(
+    'send',
+    {
+      accepts: {arg: 'msg', type: 'object', http: { source: 'body' }},
+      returns: {arg: 'data', type: 'string', root: true},
+      http: {path: '/send', verb: 'POST'}
+    }
+  );
 };

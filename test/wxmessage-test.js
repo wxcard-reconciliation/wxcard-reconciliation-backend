@@ -4,6 +4,9 @@ var app = require('../server/server.js');
 var querystring = require('querystring')
 
 lt.beforeEach.withApp(app);
+lt.beforeEach.withUserModel('account');
+
+var users = require('./fixtures/users');
 
 describe('# WXMessage Card', function() {
 
@@ -164,7 +167,7 @@ describe('# WXMessage', function() {
   });
 });
 
-describe.only('# WXMessage SCAN', function() {
+describe('# WXMessage SCAN', function() {
   
   describe('## when subscribed', function() {
     lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
@@ -195,3 +198,20 @@ describe.only('# WXMessage SCAN', function() {
   });
 });
 
+describe.only('# WXMessage SEND', function() {
+  this.timeout(0);
+
+  lt.beforeEach.givenLoggedInUser(users.cashier);
+
+  describe('## card message', function() {
+    lt.describe.whenCalledRemotely('POST', '/api/wxmessages/send', {
+      "touser":"oAtUNs_WhBwy3QiftzLuk6aihKlU", 
+      "msgtype":"wxcard",
+      "card":{
+        "card_id":"pAtUNs-HV0evhGTWbU3ohp99tW7k"
+      }
+    }, function () {
+      lt.it.shouldBeAllowed();
+    });
+  });
+});
