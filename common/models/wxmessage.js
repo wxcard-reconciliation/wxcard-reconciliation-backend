@@ -37,5 +37,16 @@ module.exports = function(Wxmessage) {
   
   Wxmessage.SCAN = function (msg, next) {
     console.log('SCAN Event:',msg);
+    var found = ''
+    if((found = msg.EventKey.match(/^poi_/i))
+    || (found = msg.EventKey.match(/^qrscene_poi_/i))) {
+      Wxmessage.app.models.checkin.create({
+        poi_id: msg.EventKey.substr(found[0].length),
+        client_id: msg.FromUserName,
+        CreateTime: msg.CreateTime
+      }, next);
+    } else {
+      next();
+    }
   };
 };

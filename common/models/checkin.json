@@ -1,0 +1,37 @@
+{
+  "name": "checkin",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "poi_id": {
+      "type": "string",
+      "required": true
+    },
+    "client_id": {
+      "type": "string",
+      "required": true
+    },
+    "CreateTime": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "poi": {
+      "type": "belongsTo",
+      "model": "poi",
+      "foreignKey": "poi_id"
+    },
+    "wxclient": {
+      "type": "belongsTo",
+      "model": "wxclient",
+      "foreignKey": "client_id"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

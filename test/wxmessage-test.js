@@ -164,3 +164,34 @@ describe('# WXMessage', function() {
   });
 });
 
+describe.only('# WXMessage SCAN', function() {
+  
+  describe('## when subscribed', function() {
+    lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
+      "ToUserName": "zyjshkez",
+      "FromUserName": "oAtUNs_WhBwy3QiftzLuk6aihKlU",
+      "CreateTime": Math.round(Date.now()/1000),
+      "MsgType": "event",
+      "Event": "SCAN",
+      "EventKey": "poi_223941789",
+      "Ticket": "gQG67zoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL1NFUHFzclBsaV9QeUtzVmZBbXNlAAIEXqTxVQMEAAAAAA=="
+    }, function () {
+      lt.it.shouldBeAllowed();
+    });
+  });
+  
+  describe('## when unsubscribed', function() {
+    lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
+      "ToUserName": "zyjshkez",
+      "FromUserName": "oAtUNs_WhBwy3QiftzLuk6aihKlU",
+      "CreateTime": Math.round(Date.now()/1000),
+      "MsgType": "event",
+      "Event": "subscribe",
+      "EventKey": "qrscene_poi_223941789",
+      "Ticket": "gQG67zoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xL1NFUHFzclBsaV9QeUtzVmZBbXNlAAIEXqTxVQMEAAAAAA=="
+    }, function () {
+      lt.it.shouldBeAllowed();
+    });
+  });
+});
+

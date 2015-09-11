@@ -84,6 +84,7 @@ module.exports = function(Wxclient) {
   };
   
   Wxclient.subscribe = function (msg, next) {
+    if(msg.Ticket) Wxclient.app.models.wxmessage.SCAN(msg);
     Wxclient.fetchUser(msg.FromUserName, next);
   };
   
