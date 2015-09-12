@@ -107,4 +107,30 @@ module.exports = function(Card) {
       returns: {arg: 'data', type: 'object', root: true}
     }
   );
+  
+  Card.qrcode = function (options, next) {
+    var expire_seconds = options.expire_seconds || 60;
+    if(options.expire_seconds) delete options.expire_seconds;
+
+    var context = loopback.getCurrentContext();
+    var currentUser = context && context.get('currentUser');
+    var outId = parseInt(currentUser.poi.poi_id, 10);
+    outId = Number.isNaN(outId)?0:outId;
+    var card_list = options.multiple_card && options.multiple_card.card_list || [options.card];
+    card_list.forEach(function (item) {
+      item.outer_id = outId;
+      item.is_unique_code = item.is_unique_code || true;
+    })
+    // console.log(JSON.stringify(options));
+    Card.app.wechat.createCardQRCode(options, expire_seconds, next);
+  };
+  
+  Card.remoteMethod(
+    'qrcode',
+    {
+      accepts: {arg: 'options', type: 'object', http: {source: 'body'}},
+      returns: {arg: 'data', type: 'object', root: true}
+    }
+  );
+  
 };

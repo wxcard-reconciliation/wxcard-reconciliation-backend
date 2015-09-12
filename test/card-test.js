@@ -12,6 +12,32 @@ describe('# Card', function() {
   
   lt.beforeEach.givenLoggedInUser(users.cashier);
   
+  describe.only('## Delivery QRCode', function() {
+    lt.describe.whenCalledRemotely('POST', '/api/cards/qrcode', {
+      "expire_seconds": 1800,
+      "card": {
+        // "openid": "oAtUNs_WhBwy3QiftzLuk6aihKlU",
+        "card_id": "pAtUNs1c3cBtMs5KeL8FP1f3fOaE"
+      }
+      // "multiple_card": {
+      //   "card_list": [
+      //     {
+      //       // "openid": "oAtUNs_WhBwy3QiftzLuk6aihKlU",
+      //       "card_id": "pAtUNs-HV0evhGTWbU3ohp99tW7k"
+      //     },
+      //     {
+      //       // "openid": "oAtUNs_WhBwy3QiftzLuk6aihKlU",
+      //       "card_id": "pAtUNs1c3cBtMs5KeL8FP1f3fOaE"
+      //     }
+      //   ]
+      // }
+    }, function () {
+      it('should success get', function() {
+        console.log(this.res.body);
+        assert.equal(this.res.statusCode, 200);
+      });
+    });
+  });
   describe('## Sync', function() {
     this.timeout(0)
     lt.describe.whenCalledRemotely('POST', '/api/cards/sync', {

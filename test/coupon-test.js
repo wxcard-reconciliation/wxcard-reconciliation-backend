@@ -64,7 +64,7 @@ describe('Coupon', function() {
   });
   
   describe('# Cancel code', function() {
-    this.timeout(10000)
+    this.timeout(0)
     lt.describe.whenCalledRemotely('POST', '/api/coupons/cancel', {
       code: '804328683411',
       receipt: 'receipt.jpg'
