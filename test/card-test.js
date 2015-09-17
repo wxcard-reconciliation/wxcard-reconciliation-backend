@@ -12,7 +12,7 @@ describe('# Card', function() {
   
   lt.beforeEach.givenLoggedInUser(users.cashier);
   
-  describe.only('## Delivery QRCode', function() {
+  describe('## Delivery QRCode', function() {
     lt.describe.whenCalledRemotely('POST', '/api/cards/qrcode', {
       "expire_seconds": 1800,
       "card": {

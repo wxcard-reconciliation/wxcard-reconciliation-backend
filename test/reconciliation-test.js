@@ -10,22 +10,26 @@ var users = require('./fixtures/users');
 
 describe('# Reconciliation By User2', function() {
   
-  lt.beforeEach.givenLoggedInUser(users.cashier);
+  lt.beforeEach.givenLoggedInUser(users.cashier3);
 
   var reconciliation = {}
   var now = Math.round(Date.now()/1000);
 
-  describe('## Try && Create', function() {
+  describe.only('## Try && Create', function() {
     
     lt.describe.whenCalledRemotely('POST', '/api/reconciliations/try',{
-      beginTime: now-86400*4,
-      endTime: now-86400*1
+      // beginTime: now-86400*4,
+      // endTime: now-86400*1
     }, function () {
       it('should success', function(done) {
         reconciliation = this.res.body;
+        console.log(reconciliation);
         done();
       });
     });
+  // });
+  //
+  // describe.only('## Create', function() {
     
     lt.describe.whenCalledRemotely('POST', '/api/reconciliations', function () {
       return reconciliation;
@@ -35,8 +39,8 @@ describe('# Reconciliation By User2', function() {
         done();
       });
     });
+    
   });
-  
   describe('## Find', function() {
     var filter = {
       order: ['beginTime ASC'],
