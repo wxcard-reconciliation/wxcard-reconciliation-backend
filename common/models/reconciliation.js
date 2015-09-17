@@ -16,9 +16,7 @@ module.exports = function(Reconciliation) {
       var Model = Reconciliation.app.models.Cardevent;
       var connector = Model.getDataSource().connector
       var collection = connector.collection(Model.modelName)
-      console.log(JSON.stringify(where));
-      console.log(new Date(beginTime*1000))
-      console.log(new Date(endTime*1000));
+      // console.log(JSON.stringify(where));
       collection.aggregate([
         { $match: where },
         {
