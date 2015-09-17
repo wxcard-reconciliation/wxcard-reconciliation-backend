@@ -64,9 +64,9 @@ describe('# Wechat POI', function() {
   });
 });
 
-describe('# Create QR', function() {
+describe.only('# Create QR', function() {
   it('should success', function(done) {
-    api.createLimitQRCode('poi_223941789', function (err, result) {
+    api.createLimitQRCode('poi_232259441', function (err, result) {
       ticket = result.ticket;
       var url = api.showQRCodeURL(result.ticket);
       console.log(url);
