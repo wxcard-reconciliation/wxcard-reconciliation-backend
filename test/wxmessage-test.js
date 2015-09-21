@@ -40,6 +40,10 @@ describe('# WXMessage Card', function() {
     });
   });
     
+});
+
+describe('# WXMessage Card Event', function() {
+  
   describe('## Get Card', function() {
     lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
       ToUserName: 'zyjshkez',
@@ -49,17 +53,18 @@ describe('# WXMessage Card', function() {
       Event: 'user_get_card',
       CardId: 'pAtUNs-HV0evhGTWbU3ohp99tW7k',
       IsGiveByFriend: 0,
-      UserCardCode: 123456789012,
+      UserCardCode: "6977066979",
       OuterId: 0
     }, function () {
       it('should success', function(done) {
+        // console.log(this.res.body);
         assert.equal(this.res.statusCode, 200);
         done()
       });
     });
   });
   
-  describe('## Donate Card', function() {
+  describe.skip('## Donate Card', function() {
     lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
       ToUserName: 'zyjshkez',
       FromUserName: 'oAtUNs_WhBwy3QiftzLuk6aihKlU',
@@ -69,8 +74,8 @@ describe('# WXMessage Card', function() {
       Event: 'user_get_card',
       CardId: 'pAtUNs-HV0evhGTWbU3ohp99tW7k',
       IsGiveByFriend: 1,
-      UserCardCode: '210987654321',
-      OldUserCardCode: '123456789012',
+      UserCardCode: '006977066970',
+      OldUserCardCode: '006977066979',
       OuterId: 0
     }, function () {
       it('should success', function(done) {
@@ -80,7 +85,7 @@ describe('# WXMessage Card', function() {
     });
   });
 
-  describe('## Consume Card', function() {
+  describe.only('## Consume Card', function() {
     lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
       ToUserName: 'zyjshkez',
       FromUserName: 'oAtUNs_WhBwy3QiftzLuk6aihKlU',
@@ -88,7 +93,7 @@ describe('# WXMessage Card', function() {
       MsgType: 'event',
       Event: 'user_consume_card',
       CardId: 'pAtUNs-HV0evhGTWbU3ohp99tW7k',
-      UserCardCode: '210987654321',
+      UserCardCode: '6977066979',
       ConsumeSource: 'FROM_API'
     }, function () {
       it('should success', function(done) {
@@ -98,7 +103,7 @@ describe('# WXMessage Card', function() {
     });
   });
   
-});
+});   
 
 describe('# WXMessage', function() {
   

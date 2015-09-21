@@ -47,11 +47,16 @@ module.exports = function(Cardevent) {
       Cardevent.create(msg, next);
     });
   }
-    
+  
+  function format_code(code) {
+    return code.length < 12 ? format_code('0'+code) : code;
+  }
+  
   Cardevent.user_get_card = function (msg, next) {
     msg.status = 'got';
-    msg.id = msg.UserCardCode.toString();
+    msg.id = format_code(msg.UserCardCode.toString());
     delete msg.UserCardCode;
+    console.log(msg);
     
     if(msg.IsGiveByFriend) {
       msg.OldUserCardCode = msg.OldUserCardCode.toString();
@@ -65,6 +70,7 @@ module.exports = function(Cardevent) {
   };
   
   Cardevent.user_consume_card = function (msg, next) {
+    msg.UserCardCode = format_code(msg.UserCardCode.toString());
     msg.status = 'consumed';
     Cardevent.updateCode(msg, next);
   };
