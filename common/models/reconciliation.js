@@ -76,15 +76,17 @@ module.exports = function(Reconciliation) {
   );
   
   Reconciliation.beforeRemote('create', function (ctx, modelInstance, next) {
+    var context = loopback.getCurrentContext();
+    var currentUser = context && context.get('currentUser');
+    
     Reconciliation.findOne({
-      order:['endTime DESC']
+      order:['endTime DESC'],
+      where:{"staff.id": currentUser.id}
     },function (err, reconciliation) {
       if(reconciliation && reconciliation.endTime > ctx.req.body.beginTime) {
         err = new Error('BeginTime earlier last reconciliated time');
         err.status = 400;
       } else {
-        var context = loopback.getCurrentContext();
-        var currentUser = context && context.get('currentUser');
         ctx.req.body.staff = currentUser;
       }
       next(err);

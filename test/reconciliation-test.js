@@ -15,7 +15,7 @@ describe('# Reconciliation By User2', function() {
   var reconciliation = {}
   var now = Math.round(Date.now()/1000);
 
-  describe('## Try && Create', function() {
+  describe.only('## Try && Create', function() {
     
     lt.describe.whenCalledRemotely('POST', '/api/reconciliations/try',{
       // beginTime: now-86400*4,
@@ -23,13 +23,11 @@ describe('# Reconciliation By User2', function() {
     }, function () {
       it('should success', function(done) {
         reconciliation = this.res.body;
-        console.log(reconciliation);
+        // console.log(reconciliation);
+        lt.it.shouldBeAllowed();
         done();
       });
     });
-  // });
-  //
-  // describe.only('## Create', function() {
     
     lt.describe.whenCalledRemotely('POST', '/api/reconciliations', function () {
       return reconciliation;
@@ -41,6 +39,7 @@ describe('# Reconciliation By User2', function() {
     });
     
   });
+  
   describe('## Find', function() {
     var filter = {
       order: ['beginTime ASC'],

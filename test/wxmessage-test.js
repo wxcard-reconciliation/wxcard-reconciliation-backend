@@ -85,7 +85,7 @@ describe('# WXMessage Card Event', function() {
     });
   });
 
-  describe.only('## Consume Card', function() {
+  describe('## Consume Card', function() {
     lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
       ToUserName: 'zyjshkez',
       FromUserName: 'oAtUNs_WhBwy3QiftzLuk6aihKlU',
