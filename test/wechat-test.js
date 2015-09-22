@@ -24,6 +24,14 @@ describe('Wechat API', function() {
         });
       })
     });
+    
+    it.only('should get specific user info', function(done) {
+      openid = 'oAtUNs7hgnjDXTTnb6ZBSjyiBrv8';
+      api.getUser(openid, function (err, result) {
+        console.log(result);
+        done();
+      })
+    });
   });
   
 });
