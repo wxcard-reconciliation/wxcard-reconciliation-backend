@@ -213,10 +213,43 @@ describe('# WXMessage SEND', function() {
       "touser":"oAtUNs_WhBwy3QiftzLuk6aihKlU", 
       "msgtype":"wxcard",
       "card":{
-        "card_id":"pAtUNs-HV0evhGTWbU3ohp99tW7k"
+        "card_id":"pAtUNszgOkzyobBItkpo3aSSbSKM"
       }
     }, function () {
+      it('should be ok', function(done) {
+        console.log(this.res.body);
+        done();
+      });
       lt.it.shouldBeAllowed();
     });
   });
+});
+
+describe('# WXMessage', function() {
+  
+  describe.only('## Consume By Mobile Helper', function() {
+    
+    lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
+      "MsgType": "event",
+      "Event": "user_consume_card",
+      "CardId": "pAtUNszgOkzyobBItkpo3aSSbSKM",
+      "ConsumeSource": "FROM_MOBILE_HELPER",
+      "CreateTime": 1451891411,
+      "FriendUserName": "oAtUNs_WhBwy3QiftzLuk6aihKlU",
+      "FromUserName": "oAtUNs8jOg2PFOoofurBkJTfPOto",
+      "IsGiveByFriend": 1,
+      "LocationName": "",
+      "OldUserCardCode": "992325005846",
+      "OuterId": 0,
+      "StaffOpenId": "oAtUNs_WhBwy3QiftzLuk6aihKlU",
+      "UserCardCode": "953490754746"
+    }, function () {
+      it('should ok', function(done) {
+        console.log(this.res.body);
+        done()
+      });
+    });
+    
+  });
+  
 });

@@ -56,7 +56,7 @@ module.exports = function(Cardevent) {
     msg.status = 'got';
     msg.id = format_code(msg.UserCardCode.toString());
     delete msg.UserCardCode;
-    console.log(msg);
+    // console.log(msg);
     
     if(msg.IsGiveByFriend) {
       msg.OldUserCardCode = msg.OldUserCardCode.toString();
@@ -69,10 +69,30 @@ module.exports = function(Cardevent) {
     Cardevent.saveCode(msg, next);
   };
   
+  Cardevent.cancelBy = function (msg, next) {
+    if(msg.ConsumeSource === 'FROM_MOBILE_HELPER') {
+      Cardevent.app.models.Account.findOne({
+        where: {"wxclient.id": msg.StaffOpenId}
+      }, function (err, instance) {
+        if(err) {
+          console.log(err);
+        } else {
+          msg.cancelBy = instance;
+        }
+        next(null, msg);
+      });
+    } else {
+      next(null, msg);
+    }
+  };
+  
   Cardevent.user_consume_card = function (msg, next) {
     msg.UserCardCode = format_code(msg.UserCardCode.toString());
     msg.status = 'consumed';
-    Cardevent.updateCode(msg, next);
+    
+    Cardevent.cancelBy(msg, function (err, msg) {
+      Cardevent.updateCode(msg, next);
+    });
   };
   
   Cardevent.user_del_card = function (msg, next) {
