@@ -9,7 +9,6 @@ module.exports = function(Poi) {
           base_info.id = base_info.sid;
           delete base_info.sid;
         }
-        console.log(base_info.branch_name);
         Poi.upsert(base_info);
       });
       if(result.total_count > count+result.business_list.length) {
