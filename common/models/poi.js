@@ -9,6 +9,7 @@ module.exports = function(Poi) {
           base_info.id = base_info.sid;
           delete base_info.sid;
         }
+        console.log(base_info.branch_name);
         Poi.upsert(base_info);
       });
       if(result.total_count > count+result.business_list.length) {
@@ -22,11 +23,15 @@ module.exports = function(Poi) {
   Poi.on('GET_POIS', Poi.fetchPois);
   
   Poi.sync = function (options, next) {
-    
-    Poi.count(function (err, count) {
-      if(err) return next(err);
-      Poi.fetchPois(count, next);
-    });
+    options = options || {};
+    if(options.begin == undefined) {
+      Poi.count(function (err, count) {
+        if(err) return next(err);
+        Poi.fetchPois(count, next);
+      });
+    } else {
+      Poi.fetchPois(options.begin, next);
+    }
     
   };
 

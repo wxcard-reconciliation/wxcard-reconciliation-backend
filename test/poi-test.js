@@ -31,8 +31,8 @@ describe('# Fetch POI from apis.map.qq.com', function() {
 });
 
 describe('# POI', function() {
-  // lt.beforeEach.withUserModel('account');
-  // lt.beforeEach.givenLoggedInUser(users.cashier);
+  lt.beforeEach.withUserModel('account');
+  lt.beforeEach.givenLoggedInUser(users.cashier);
   
   describe('##Find', function() {
     var qs = querystring.stringify({filter: JSON.stringify({
@@ -47,7 +47,7 @@ describe('# POI', function() {
     });
   });
   
-  describe('## Sync from wechat', function() {
+  describe.only('## Sync from wechat', function() {
     this.timeout(20000)
     lt.describe.whenCalledRemotely('POST', '/api/pois/sync', {
       begin: 0
