@@ -47,7 +47,7 @@ describe('# POI', function() {
     });
   });
   
-  describe.only('## Sync from wechat', function() {
+  describe('## Sync from wechat', function() {
     this.timeout(20000)
     lt.describe.whenCalledRemotely('POST', '/api/pois/sync', {
       begin: 0

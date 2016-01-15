@@ -223,6 +223,38 @@ describe('# WXMessage SEND', function() {
       lt.it.shouldBeAllowed();
     });
   });
+  
+  describe.only('## template message', function() {
+    lt.describe.whenCalledRemotely('POST', '/api/wxmessages/send', {
+      "touser":"oGsPwt7oAe-qh-0wG1Idg4ezE0PM", 
+      "msgtype":"template",
+      "templateId": "gp6CymJZj890Yzd-J7sLYzGgqnaBfZBwj479799aaxE",
+      "url":"http://weixin.qq.com/download",
+      "data":{
+        "first": {
+          "value":"恭喜您中奖！",
+          "color":"#173177"
+        },
+        "program": {
+          "value":"贺岁迎春天天刮刮乐！",
+          "color":"#173177"
+        },
+        "result": {
+          "value": "三等奖",
+          "color":"#173177"
+        },
+        "remark": {
+          "value": "请点击消息领取奖券",
+          "color":"#173177"
+        }
+      }
+    }, function () {
+      it('should be ok', function(done) {
+        console.log(this.res.body);
+        done();
+      });
+    });
+  });
 });
 
 describe('# WXMessage', function() {

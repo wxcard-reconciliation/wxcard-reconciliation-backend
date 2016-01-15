@@ -52,6 +52,8 @@ module.exports = function(Wxmessage) {
   Wxmessage.send = function (msg, next) {
     if(msg.msgtype === 'wxcard') {
       Wxmessage.app.wechat.sendCard(msg.touser, msg.card, next);
+    } else if(msg.msgtype === 'template') {
+      Wxmessage.app.wechat.sendTemplate(msg.touser, msg.templateId, msg.url, msg.data, next);
     }
   };
   
