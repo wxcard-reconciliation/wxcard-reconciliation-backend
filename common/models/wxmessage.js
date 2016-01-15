@@ -53,7 +53,7 @@ module.exports = function(Wxmessage) {
     if(msg.msgtype === 'wxcard') {
       Wxmessage.app.wechat.sendCard(msg.touser, msg.card, next);
     } else if(msg.msgtype === 'template') {
-      Wxmessage.app.wechat.sendTemplate(msg.touser, msg.templateId, msg.url, msg.data, next);
+      Wxmessage.app.wechat.sendTemplate(msg.touser, msg.templateId, msg.url, "#173177", msg.data, next);
     }
   };
   
