@@ -89,6 +89,7 @@ module.exports = function(Cardevent) {
   Cardevent.user_consume_card = function (msg, next) {
     msg.UserCardCode = format_code(msg.UserCardCode.toString());
     msg.status = 'consumed';
+    msg.cancelTime = msg.CreateTime;
     
     Cardevent.cancelBy(msg, function (err, msg) {
       Cardevent.updateCode(msg, next);
