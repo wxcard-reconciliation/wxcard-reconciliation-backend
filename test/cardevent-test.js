@@ -32,8 +32,6 @@ describe('# Cardevent By Cashier', function() {
   
   describe.only('## Statistic City', function() {
     var filter = {
-      target: 'wxclient.city',
-      order: ['wxclient.city DESC'],
       where:{
         // "wxclient.city": "苏州",
         CardId: {$in: [
@@ -42,13 +40,13 @@ describe('# Cardevent By Cashier', function() {
           'pAtUNsyFRkWSW8D92mnqKyvNJFVA'
         ]}
       },
-      limit: 10,
+      limit: 30,
       skip: 0
     }
     var qs = querystring.stringify({filter: JSON.stringify(filter)})
     lt.describe.whenCalledRemotely('GET', '/api/cardevents/statcity?'+qs, function () {
       it('should success', function(done) {
-        console.log(this.res.body);
+        console.log(this.res.body.length);
         done();
       });
     });

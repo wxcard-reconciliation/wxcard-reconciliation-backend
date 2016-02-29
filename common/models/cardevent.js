@@ -133,7 +133,7 @@ module.exports = function(Cardevent) {
     var connector = Model.getDataSource().connector
     var collection = connector.collection(Model.modelName)
     // console.log(JSON.stringify(where));
-    var project = {city: "$wxclient.city"};
+    var project = {city: {$ifNull:["$wxclient.city", ""]}};
     var group = {_id: "$city", count: {$sum: 1}};
     for (var i = 0; i < where.CardId.$in.length; i++) {
       var isCard = {$eq: [where.CardId.$in[i], "$card.id"]};
@@ -151,7 +151,10 @@ module.exports = function(Cardevent) {
     collection.aggregate([
       { $match: where },
       { $project: project },
-      { $group: group }
+      { $group: group },
+      { $sort: {count: -1}},
+      { $skip: filter.skip || 0},
+      { $limit: filter.limit || 10}
     ], next);    
   }
   
