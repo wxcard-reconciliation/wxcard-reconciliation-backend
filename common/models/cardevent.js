@@ -127,4 +127,42 @@ module.exports = function(Cardevent) {
     next();
   });
   
+  Cardevent.statcity = function (filter, next) {
+    var where = filter.where || {};
+    var Model = Cardevent;
+    var connector = Model.getDataSource().connector
+    var collection = connector.collection(Model.modelName)
+    // console.log(JSON.stringify(where));
+    var project = {city: "$wxclient.city"};
+    var group = {_id: "$city", count: {$sum: 1}};
+    for (var i = 0; i < where.CardId.$in.length; i++) {
+      var isCard = {$eq: [where.CardId.$in[i], "$card.id"]};
+      var consumed = "consumed_card"+i
+      project[consumed] = {$cond: [{$and: [isCard, {$eq: ["$status", "consumed"]}]}, 1, 0]};
+      group[consumed] = {$sum: "$"+consumed};
+      var donated = "donated_card"+i
+      project[donated] = {$cond: [{$and: [isCard, {$eq: ["$status", "donated"]}]}, 1, 0]};
+      group[donated] = {$sum: "$"+donated};
+      var count = "count_card"+i
+      project[count] = {$cond: [isCard, 1, 0]};
+      group[count] = {$sum: "$"+count};
+    }
+    // console.log(project);
+    collection.aggregate([
+      { $match: where },
+      { $project: project },
+      { $group: group }
+    ], next);    
+  }
+  
+  Cardevent.remoteMethod(
+    'statcity',
+    {
+      accepts: {arg: 'filter', type: 'object', http: { source: 'query' }},
+      returns: {arg: 'data', type: 'array', root: true},
+      http: {path: '/statcity', verb: 'GET'},
+      description: ["statistic card event such as got/consumed of city"]
+    }
+  );
+  
 };

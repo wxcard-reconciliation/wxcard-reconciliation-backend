@@ -259,7 +259,7 @@ describe('# WXMessage SEND', function() {
 
 describe('# WXMessage', function() {
   
-  describe.only('## Consume By Mobile Helper', function() {
+  describe('## Consume By Mobile Helper', function() {
     
     lt.describe.whenCalledRemotely('POST', '/api/wxmessages', {
       "MsgType": "event",
