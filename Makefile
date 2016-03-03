@@ -6,4 +6,7 @@ bin :
 test:
 	npm test
 	
-.PHONY : bin test
+patch:
+	mongo wxcard test/patch/*.js
+	
+.PHONY : bin test patch

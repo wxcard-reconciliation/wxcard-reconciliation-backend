@@ -168,4 +168,41 @@ module.exports = function(Cardevent) {
     }
   );
   
+  
+  Cardevent.statpoi = function (filter, next) {
+    var where = filter.where || {};
+    var Model = Cardevent;
+    var connector = Model.getDataSource().connector
+    var collection = connector.collection(Model.modelName)
+    var project = {branch_name: "$cancelBy.poi.branch_name", city: "$cancelBy.poi.city"};
+    var group = {_id: {"name": "$branch_name", city: "$city"}, count: {$sum: 1}};
+    for (var i = 0; i < where.CardId.$in.length; i++) {
+      var isCard = {$eq: [where.CardId.$in[i], "$card.id"]};
+      var count = "count_card"+i
+      project[count] = {$cond: [isCard, 1, 0]};
+      group[count] = {$sum: "$"+count};
+    }
+    // console.log(project);
+    where.status = 'consumed';
+    // console.log(JSON.stringify(where));
+    collection.aggregate([
+      { $match: where },
+      { $project: project },
+      { $group: group },
+      { $sort: {count: -1}},
+      { $skip: filter.skip || 0},
+      { $limit: filter.limit || 50}
+    ], next); 
+  }
+  
+  Cardevent.remoteMethod(
+    'statpoi',
+    {
+      accepts: {arg: 'filter', type: 'object', http: { source: 'query' }},
+      returns: {arg: 'data', type: 'array', root: true},
+      http: {path: '/statpoi', verb: 'GET'},
+      description: ["statistic card event consumed of poi"]
+    }
+  );
+  
 };
