@@ -51,7 +51,7 @@ describe('# Cardevent By Cashier', function() {
     });
   });
   
-  describe.only('## Statistic Branch', function() {
+  describe('## Statistic Branch', function() {
     var filter = {
       where:{
         CardId: {$in: [

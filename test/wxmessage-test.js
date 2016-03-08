@@ -285,7 +285,3 @@ describe('# WXMessage', function() {
   });
   
 });
-
-// {"touser":"oAtUNs6VppTuS5ymBbtpPKMw85p8","msgtype":"wxcard","card":{"card_id":"pAtUNsyFRkWSW8D92mnqKyvNJFVA"}}
-//
-// {"touser":"oAtUNs_WhBwy3QiftzLuk6aihKlU","msgtype":"template","templateId":"MF7Bl1ecFxCV41dPigiLIp_tQBjPZ_VbzHC5zvDVVPs","data":{"first": {"value":"恭喜您中奖！","color":"#173177"},"program": {"value":"贺岁迎春天天刮刮乐！","color":"#173177"},"result": {"value": "三等奖","color":"#173177"},"remark": {"value": "请到在公众菜单->促销活动->天堂刮刮卡中领取","color":"#173177"}}}

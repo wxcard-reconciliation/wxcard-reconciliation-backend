@@ -63,7 +63,7 @@
   },
   "wxaccesstoken": {
     "dataSource": "mysql",
-    "public": false
+    "public": true
   },
   "poi": {
     "dataSource": "mongodb",
