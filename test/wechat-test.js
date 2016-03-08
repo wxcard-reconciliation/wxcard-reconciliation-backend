@@ -2,6 +2,10 @@ var WechatAPI = require('wechat-api');
 // var api = new WechatAPI('wx6e03557e5813778c', '57b0470ca6aff1b7d3409d84778b6d82');
 var api = new WechatAPI(process.env.WX_APPID, process.env.WX_APPSECRET);
 
+var WechatOAuth = require('wechat-oauth');
+var oauth = new WechatOAuth('wxf9856b62841d1cf4', '1eb5aea567b9527e75f20043f03583d0');
+// var oauth = new WechatOAuth(process.env.WX_APPID, process.env.WX_APPSECRET);
+
 var assert = require('assert');
 
 describe('Wechat API', function() {
@@ -80,5 +84,12 @@ describe('# Create QR', function() {
       console.log(url);
       done(err);
     });
+  });
+});
+
+describe('# OAuth getAuthorizeURL', function() {
+  it('should ok', function() {
+    var url = oauth.getAuthorizeURL('http://zsywx.aceweet.com/app/getcard.html');
+    console.log(url);
   });
 });

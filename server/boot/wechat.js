@@ -1,4 +1,5 @@
 var WechatAPI = require('wechat-api');
+var OAuth = require('wechat-oauth');
 
 module.exports = function(app) {
   /*
@@ -56,5 +57,19 @@ module.exports = function(app) {
       }
       else next();
     });
-  })
+  });
+  
+  app.oauth = new OAuth(appid, appsecret, function getAccessToken(openid, next) {
+    app.models.wxclient.findById(openid, function (err, instance) {
+      if(err) return next(err);
+      next(null, instance.accesstoken);
+    });
+  }, function saveAccessToken(openid, token, next) {
+    app.models.wxclient.findById(openid, function (err, instance) {
+      if(err) return next(err);
+      instance.accesstoken = token;
+      instance.save(next);
+    });
+  });
+  
 };
