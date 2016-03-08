@@ -5,7 +5,7 @@ var querystring = require('querystring')
 
 lt.beforeEach.withApp(app);
 
-describe('# Wechat JSSDK API', function() {
+describe.only('# Wechat JSSDK API', function() {
   
   describe('## Get JS Config', function() {
     var param = {
@@ -21,7 +21,7 @@ describe('# Wechat JSSDK API', function() {
     });    
   });
   
-  describe.only('## Get JS CardExt', function() {
+  describe('## Get JS CardExt', function() {
     var param = {
       card_id: "pGsPwt8rfPfl8A7DBrhVTlUdYPHQ"
     }
@@ -29,7 +29,7 @@ describe('# Wechat JSSDK API', function() {
     lt.describe.whenCalledRemotely('GET', '/api/wxaccesstokens/getcardext?'+qs, function () {
       it('should success', function(done) {
         console.log(this.res.body);
-        done();
+        setTimeout(done, 1000);
       });
     });
   });

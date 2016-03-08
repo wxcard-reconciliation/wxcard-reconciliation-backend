@@ -20,6 +20,22 @@
     "time": {
       "type": "number",
       "required": true
+    },
+    "jsapi_ticket": {
+      "type": "string",
+      "required": false
+    },
+    "jsapi_time": {
+      "type": "number",
+      "required": false
+    },
+    "wx_card_ticket": {
+      "type": "string",
+      "required": false
+    },
+    "wx_card_time": {
+      "type": "number",
+      "required": false
     }
   },
   "validations": [],
