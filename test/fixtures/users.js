@@ -74,5 +74,60 @@ module.exports = {
       "telephone": "66083272",
       "update_status": 0
     }
+  },
+  consumer: {
+    "job": "加油站收银员",
+    "name": "杨晓黎",
+    "phone": "13775399153",
+    "picture": "http://wx.qlogo.cn/mmopen/ajNVdqHZLLAjzsmJF61rAwWNe0duCIn1vxMWyeHrjDC5WjCXWicmUfooW9N5faBYzpOmgeSypZU1c7xEicFHzejl7f4QfaxxNn3RtfhYoZGlo/0",
+    "username": "13775399153",
+    "password": "$2a$10$7syQTq1KkkBZinTbhcyq8eH0UzrgesJjy3jRsToB9MZT2uExcTasu",
+    "email": "13775399153@petrojs.cn",
+    "status": "active",
+    "created": new Date(1452568823989),
+    "lastUpdated": new Date(1452568823989),
+    "wxclient": {
+      "username": "yang530113745",
+      "id": "oAtUNs-juYeMibTTzKuA63igEkQ8",
+      "city": "",
+      "country": "",
+      "groupid": 0,
+      "headimgurl": "http://wx.qlogo.cn/mmopen/ajNVdqHZLLAjzsmJF61rAwWNe0duCIn1vxMWyeHrjDC5WjCXWicmUfooW9N5faBYzpOmgeSypZU1c7xEicFHzejl7f4QfaxxNn3RtfhYoZGlo/0",
+      "language": "zh_CN",
+      "nickname": "杨晓黎",
+      "province": "",
+      "remark": "",
+      "sex": 0,
+      "subscribe": 1,
+      "subscribe_time": 1435391683
+    },
+    "poi": {
+      "id": "5693da4cbcf1e375216c3b38",
+      "sid": "",
+      "business_name": "中国石油",
+      "branch_name": "洪武加油站",
+      "address": "洪武路东侧二圣路北侧",
+      "telephone": "0511-87230739",
+      "categories": [
+        "汽车,加油站"
+      ],
+      "city": "镇江市",
+      "province": "江苏省",
+      "offset_type": 1,
+      "longitude": 119.15259552000000554,
+      "latitude": 31.93684768680000019,
+      "photo_list": [
+
+      ],
+      "introduction": "",
+      "recommend": "",
+      "special": "",
+      "open_time": "",
+      "avg_price": 0,
+      "poi_id": "402493421",
+      "available_state": 2,
+      "district": "句容市",
+      "update_status": 0
+    }
   }
 }

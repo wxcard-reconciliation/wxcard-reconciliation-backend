@@ -49,3 +49,16 @@ describe('# Cashier User', function() {
     });    
   });
 });
+
+describe('# Consumer User', function() {
+  
+  describe.only('## Create new Consumer', function() {
+    this.timeout(5000);
+    lt.describe.whenCalledRemotely('POST', '/api/accounts', users.consumer, function () {
+      it('should success', function(done) {
+        // console.log(this.res.body);
+        setTimeout(done, 2000);
+      });
+    });
+  });
+});

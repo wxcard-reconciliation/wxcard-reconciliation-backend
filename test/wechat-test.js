@@ -93,3 +93,12 @@ describe('# OAuth getAuthorizeURL', function() {
     console.log(url);
   });
 });
+
+describe('# Add consumer', function() {
+  it('should ok', function(done) {
+    api.addConsumer('zj13770082887', '229011313', function (err, result) {
+      console.log(arguments);
+      done();
+    });
+  });
+});
