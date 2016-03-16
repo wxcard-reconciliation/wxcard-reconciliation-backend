@@ -67,8 +67,12 @@ module.exports = function(app) {
   }, function saveAccessToken(openid, token, next) {
     app.models.wxclient.findById(openid, function (err, instance) {
       if(err) return next(err);
-      instance.accesstoken = token;
-      instance.save(next);
+      if(instance) {
+        instance.accesstoken = token;
+        instance.save(next);
+      } else {
+        app.models.wxclient.create({id: openid, subscribe:0, accesstoken: token}, next);
+      }
     });
   });
   

@@ -18,8 +18,8 @@ describe('# Wechat JSSDK API', function() {
     });    
   });
   
-  describe('## Get User By code', function() {
-    var qs = querystring.stringify({code: '04192f2bcecb59d3e0477bc1fef17d8y'});
+  describe.only('## Get User By code', function() {
+    var qs = querystring.stringify({code: '0012594289f4988349eba279fd3b998m'});
     lt.describe.whenCalledRemotely('GET', '/api/wxaccesstokens/getuserbycode?'+qs, function () {
       it('should success', function(done) {
         console.log(this.res.body);
