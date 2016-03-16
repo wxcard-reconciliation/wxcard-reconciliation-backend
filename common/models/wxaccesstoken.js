@@ -22,7 +22,8 @@ module.exports = function(Wxaccesstoken) {
       if (err) {
         return next(err);
       }
-      that.getUser({openid: result.data.openid, lang: 'zh_CN'}, next);
+      Wxaccesstoken.app.models.wxclient.fetchUser(result.data.openid, next);
+      // that.getUser({openid: result.data.openid, lang: 'zh_CN'}, next);
     });
   };
   

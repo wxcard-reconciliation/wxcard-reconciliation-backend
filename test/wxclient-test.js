@@ -23,6 +23,15 @@ describe('# WXClient', function() {
     });   
   });
   
+  describe('## FindById', function() {
+    var id = 'oAtUNs9dpHXxvFd6pSGL1tUqDDpk';
+    lt.describe.whenCalledRemotely('GET', '/api/wxclients/'+id, function () {
+      it('should success', function(done) {
+        console.log(this.res.body);
+        done();
+      });
+    })
+  });
 });
 
 describe('## WXClient Sync2', function() {

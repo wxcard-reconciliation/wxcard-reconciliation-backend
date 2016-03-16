@@ -6,6 +6,7 @@
     "validateUpsert": true
   },
   "properties": {},
+  "hidden": ["accesstoken"],
   "validations": [],
   "relations": {},
   "acls": [
