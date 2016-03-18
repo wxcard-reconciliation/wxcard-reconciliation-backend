@@ -13,7 +13,7 @@ describe('Campaign', function() {
   
   lt.beforeEach.givenLoggedInUser(users.cashier);
   
-  describe('# Create', function() {
+  describe.only('# Create', function() {
     lt.describe.whenCalledRemotely('POST', '/api/campaigns', campaigns[0], function () {
       it('should success', function(done) {
         console.log(this.res.body)
@@ -22,7 +22,7 @@ describe('Campaign', function() {
     });
   });
   
-  describe.only('# Find with pois', function() {
+  describe('# Find with pois', function() {
     var qs = querystring.stringify({filter: JSON.stringify({
       include: ['pois']
     })});
