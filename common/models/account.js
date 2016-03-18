@@ -1,5 +1,13 @@
 module.exports = function(Account) {
   
+  Account.observe('before save', function (ctx, next) {
+    if(ctx.isNewInstance && ctx.instance) {
+      ctx.instance.created = new Date();
+      ctx.instance.lastUpdated = new Date();
+    }
+    next();
+  });
+  
   Account.createConsumer  = function (ctx, next) {
     next = next || function () {};
     var username = ctx.instance.wxclient && ctx.instance.wxclient.username;
