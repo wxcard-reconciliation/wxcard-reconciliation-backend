@@ -1,0 +1,19 @@
+{
+  "name": "campaign",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "cards": {
+      "type": "hasMany",
+      "model": "card",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

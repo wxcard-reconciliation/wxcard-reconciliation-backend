@@ -5,8 +5,10 @@
   "options": {
     "validateUpsert": true
   },
+  "hidden": [
+    "accesstoken"
+  ],
   "properties": {},
-  "hidden": ["accesstoken"],
   "validations": [],
   "relations": {},
   "acls": [

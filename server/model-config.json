@@ -88,5 +88,9 @@
   "checkin": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "campaign": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }
