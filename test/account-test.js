@@ -37,7 +37,6 @@ describe('# Administrator User', function() {
 
 describe('# Cashier User', function() {
   
-  lt.beforeEach.withUserModel('account');
   lt.beforeEach.givenLoggedInUser(users.cashier);
 
   describe('## FindById', function() {
@@ -52,11 +51,25 @@ describe('# Cashier User', function() {
 
 describe('# Consumer User', function() {
   
+  this.timeout(5000);
+
   describe('## Create new Consumer', function() {
-    this.timeout(5000);
     lt.describe.whenCalledRemotely('POST', '/api/accounts', users.consumer, function () {
       it('should success', function(done) {
         // console.log(this.res.body);
+        setTimeout(done, 2000);
+      });
+    });
+  });
+  
+  describe.only('## Add Consumer', function() {
+    lt.beforeEach.givenLoggedInUser(users.administrator);
+    lt.describe.whenCalledRemotely('POST', '/api/accounts/addConsumer', {
+      username: "13915922954",
+      locationId: "279521991"
+    }, function () {
+      it('should success', function(done) {
+        console.log(this.res.body);
         setTimeout(done, 2000);
       });
     });

@@ -13,7 +13,7 @@ describe('Campaign', function() {
   
   lt.beforeEach.givenLoggedInUser(users.cashier);
   
-  describe.only('# Create', function() {
+  describe('# Create', function() {
     lt.describe.whenCalledRemotely('POST', '/api/campaigns', campaigns[0], function () {
       it('should success', function(done) {
         console.log(this.res.body)
