@@ -62,7 +62,7 @@ describe('# Consumer User', function() {
     });
   });
   
-  describe.only('## Add Consumer', function() {
+  describe('## Add Consumer', function() {
     lt.beforeEach.givenLoggedInUser(users.administrator);
     lt.describe.whenCalledRemotely('POST', '/api/accounts/addConsumer', {
       username: "13915922954",

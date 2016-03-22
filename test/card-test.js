@@ -7,6 +7,7 @@ lt.beforeEach.withApp(app);
 lt.beforeEach.withUserModel('account');
 
 var users = require('./fixtures/users');
+var cards = require('./fixtures/cards');
 
 describe('# Card', function() {
   
@@ -65,6 +66,17 @@ describe('# Card', function() {
     lt.describe.whenCalledRemotely('POST', '/api/cards/check', {
       code: '430218938436'
     }, function () {
+      it('should success', function(done) {
+        console.log(this.res.body);
+        done()
+      });
+    })
+  });
+  
+  describe.only('## Create Card', function() {
+    this.timeout(15000)
+    console.log(cards[0]);
+    lt.describe.whenCalledRemotely('POST', '/api/cards/createCard', cards[0], function () {
       it('should success', function(done) {
         console.log(this.res.body);
         done()

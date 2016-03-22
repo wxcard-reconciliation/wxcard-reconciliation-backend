@@ -133,4 +133,15 @@ module.exports = function(Card) {
     }
   );
   
+  Card.createCard = function (card, next) {
+    Card.app.wechat.createCard(card, next);
+  }
+
+  Card.remoteMethod(
+    'createCard',
+    {
+      accepts: {arg: 'card', type: 'object', http: {source: 'body'}},
+      returns: {arg: 'data', type: 'object', root: true}
+    }
+  );
 };
