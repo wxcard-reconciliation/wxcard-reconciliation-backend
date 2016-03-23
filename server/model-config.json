@@ -92,5 +92,9 @@
   "campaign": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "campaignclient": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }
