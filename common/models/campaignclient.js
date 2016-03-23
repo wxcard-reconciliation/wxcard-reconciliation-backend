@@ -1,15 +1,15 @@
 module.exports = function(Campaignclient) {
 
   Campaignclient.observe('before save', function (ctx, next) {
-    if(ctx.data) {
-      ctx.data.updated = new Date();
-      if(!ctx.data.created) ctx.data.created = ctx.data.updated;
+    if(ctx.instance) {
+      ctx.instance.updated = new Date();
+      if(!ctx.instance.created) ctx.instance.created = ctx.instance.updated;
       
-      if(ctx.data.wxclient) return next();
-      Campaignclient.app.models.wxclient.fetchUser(ctx.data.wxclientId, function (err, user) {
+      if(ctx.instance.wxclient) return next();
+      Campaignclient.app.models.wxclient.fetchUser(ctx.instance.wxclientId, function (err, user) {
         if(err) return next(err);
         delete user.accesstoken;
-        ctx.data.wxclient = user || {subscribe: 0, id: ctx.data.wxclientId};
+        ctx.instance.wxclient = user || {subscribe: 0, id: ctx.instance.wxclientId};
         next();
       });
     } else {

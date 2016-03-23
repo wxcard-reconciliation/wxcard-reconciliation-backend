@@ -8,12 +8,10 @@
   "properties": {
     "campaignId": {
       "type": "string",
-      "id": 1,
       "required": true
     },
     "wxclientId": {
       "type": "string",
-      "id": 2,
       "required": true
     }
   },
