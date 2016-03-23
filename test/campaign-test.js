@@ -40,10 +40,11 @@ describe.only('# Client', function() {
   lt.describe.whenCalledRemotely('PUT', '/api/campaignclients', {
     campaignId: '56ee52c08f264bc6741baf02',
     wxclientId: 'oAtUNs_WhBwy3QiftzLuk6aihKlU'
+    // wxclientId: 'oAtUNs---j6-4mULzspdC17qO81U'
   }, function () {
     it('should success', function(done) {
-      console.log(this.res.body)
-      done();
+      console.log(this.res.body);
+      setTimeout(done, 1000);
     });
   });
 });

@@ -2,10 +2,7 @@ module.exports = function(Campaignclient) {
 
   Campaignclient.observe('before save', function (ctx, next) {
     if(ctx.instance) {
-      ctx.instance.updated = new Date();
-      if(!ctx.instance.created) ctx.instance.created = ctx.instance.updated;
-      
-      if(ctx.instance.wxclient) return next();
+      ctx.instance.created = new Date();
       Campaignclient.app.models.wxclient.fetchUser(ctx.instance.wxclientId, function (err, user) {
         if(err) return next(err);
         delete user.accesstoken;
