@@ -12,6 +12,11 @@
       "type": "hasMany",
       "model": "card",
       "foreignKey": ""
+    },
+    "campaignclients": {
+      "type": "hasMany",
+      "model": "campaignclient",
+      "foreignKey": ""
     }
   },
   "acls": [],
