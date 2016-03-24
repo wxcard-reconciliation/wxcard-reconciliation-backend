@@ -75,5 +75,8 @@ module.exports = [
         "share_friends": false
       }
     }
+  },
+  {
+    "card_id": ""
   }
 ]

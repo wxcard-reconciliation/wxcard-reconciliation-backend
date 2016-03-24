@@ -144,4 +144,17 @@ module.exports = function(Card) {
       returns: {arg: 'data', type: 'object', root: true}
     }
   );
+  
+  Card.updateCard = function (card, next) {
+    var type = card.card_typ.toLowerCase();
+    Card.app.wechat.updateCard(card.id, type, card[type], next);
+  }
+
+  Card.remoteMethod(
+    'updateCard',
+    {
+      accepts: {arg: 'card', type: 'object', http: {source: 'body'}},
+      returns: {arg: 'data', type: 'object', root: true}
+    }
+  );
 };
