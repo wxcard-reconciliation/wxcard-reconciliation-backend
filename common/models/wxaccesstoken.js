@@ -2,7 +2,7 @@ module.exports = function(Wxaccesstoken) {
 
   Wxaccesstoken.getOAuthAccessToken = function (code, next) {
     Wxaccesstoken.app.oauth.getAccessToken(code, function (err, accessToken) {
-      next(err, accessToken.data);
+      next(err, accessToken && accessToken.data || {});
     });
   };
   
