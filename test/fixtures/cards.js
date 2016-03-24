@@ -80,7 +80,9 @@ module.exports = [
     "card_id": "pAtUNs9CBe-kiYbULsjXINQv7Ou8",
     "card_typ": "CASH",
     "cash": {
-      "location_id_list": [227049379]
+      "base_info": {
+        "location_id_list": [231841886]
+      }
     }
   }
 ]

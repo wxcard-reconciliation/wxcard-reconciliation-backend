@@ -147,7 +147,7 @@ module.exports = function(Card) {
   
   Card.updateCard = function (card, next) {
     var type = card.card_typ.toLowerCase();
-    Card.app.wechat.updateCard(card.id, type, card[type], next);
+    Card.app.wechat.updateCard(card.card_id, type, card[type], next);
   }
 
   Card.remoteMethod(
