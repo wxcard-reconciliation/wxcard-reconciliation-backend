@@ -34,9 +34,15 @@ describe('# Cardevent By Cashier', function() {
     var filter = {
       where:{
         CardId: {$in: [
-          'pAtUNs2kaIzJjl6ZXUO-fMP_KabQ',
-          'pAtUNs5y63pZFOCoOD6V8pg4bMQk',
-          'pAtUNsyFRkWSW8D92mnqKyvNJFVA'
+          'pAtUNsyggXkmG15LTyoEPDGZWPrA',
+          'pAtUNs941xXpR6s6FwV22ygbnZFk',
+          'pAtUNswA_P0V5tDJKeKv0P7EqF5I',
+          'pAtUNs1sa1uyTOpAgvflCDBT67wc',
+          'pAtUNs33uwFIOrbw6BVy23yYBLZo',
+          'pAtUNs9RpArHsBJNsMIOkKOcvxbo',
+          'pAtUNs7xMlcsH77tFiZYJEPz-gH4',
+          'pAtUNs7zY1vW_JDYW6jln-hWWYc0',
+          'pAtUNsxoq4aEMV2shSjBMKeRHgsA'
         ]}
       },
       limit: 30,
@@ -45,7 +51,7 @@ describe('# Cardevent By Cashier', function() {
     var qs = querystring.stringify({filter: JSON.stringify(filter)})
     lt.describe.whenCalledRemotely('GET', '/api/cardevents/statcity?'+qs, function () {
       it('should success', function(done) {
-        console.log(this.res.body.length);
+        console.log(this.res.body);
         done();
       });
     });
@@ -55,9 +61,15 @@ describe('# Cardevent By Cashier', function() {
     var filter = {
       where:{
         CardId: {$in: [
-          'pAtUNs2kaIzJjl6ZXUO-fMP_KabQ',
-          'pAtUNs5y63pZFOCoOD6V8pg4bMQk',
-          'pAtUNsyFRkWSW8D92mnqKyvNJFVA'
+          'pAtUNsyggXkmG15LTyoEPDGZWPrA',
+          'pAtUNs941xXpR6s6FwV22ygbnZFk',
+          'pAtUNswA_P0V5tDJKeKv0P7EqF5I',
+          'pAtUNs1sa1uyTOpAgvflCDBT67wc',
+          'pAtUNs33uwFIOrbw6BVy23yYBLZo',
+          'pAtUNs9RpArHsBJNsMIOkKOcvxbo',
+          'pAtUNs7xMlcsH77tFiZYJEPz-gH4',
+          'pAtUNs7zY1vW_JDYW6jln-hWWYc0',
+          'pAtUNsxoq4aEMV2shSjBMKeRHgsA'
         ]}
       },
       limit: 50,

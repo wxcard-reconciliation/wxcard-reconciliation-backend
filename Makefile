@@ -7,6 +7,6 @@ test:
 	npm test
 	
 patch:
-	mongo wxcard test/patch/*.js
+	mongo wxcard test/patch/account_wxclient_incorrect.js
 	
 .PHONY : bin test patch

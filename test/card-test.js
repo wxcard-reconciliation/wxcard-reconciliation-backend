@@ -83,7 +83,7 @@ describe('# Card', function() {
     })
   });
 
-  describe.only('## Update Card', function() {
+  describe('## Update Card', function() {
     this.timeout(15000)
     lt.describe.whenCalledRemotely('POST', '/api/cards/updateCard', cards[1], function () {
       it('should success', function(done) {
