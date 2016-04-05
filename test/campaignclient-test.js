@@ -17,7 +17,7 @@ describe('Campaign Client', function() {
       where:{
         
       },
-      limit: 140,
+      limit: 14,
       skip: 0
     }
     var qs = querystring.stringify({filter: JSON.stringify(filter)})

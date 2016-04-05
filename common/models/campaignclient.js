@@ -23,11 +23,11 @@ module.exports = function(Campaignclient) {
     var cities = ['南京', '苏州', '常州', '宿迁', '镇江', '淮安', '南通', '无锡', '盐城', '徐州', '泰州', '连云港', '扬州'];
     var project = {city: {$ifNull:["$wxclient.city", ""]}, openid: {$ifNull:["$wxclient.id", ""]}};
     var group = {_id: {
-      $cond: {
-        if: { $gt: [ { $size: { $setIntersection: [ ["$city"], cities ] } }, 0 ]},
-        then: "$city",
-        else: "其他",
-      }
+      $cond: [
+        { $gt: [ { $size: { $setIntersection: [ ["$city"], cities ] } }, 0 ]},
+        "$city",
+        "其他",
+      ]
     }, clients: {$addToSet: "$openid"}, count: {$sum: 1}};
     where.created = {$gte: new Date(1458744758831)};
     // console.log(project);
